@@ -4,37 +4,76 @@ import 'package:gc_coupons/core/constants/app_colors.dart';
 import 'package:gc_coupons/core/constants/app_strings.dart';
 import 'package:gc_coupons/core/constants/size_config.dart';
 
-class HomeScreen extends StatelessWidget {
+import 'widgets/build_app_bar.dart';
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(),
-      body: HomeView(),
-    );
-  }
-
-  AppBar buildAppBar() {
-    return AppBar(
-      backgroundColor: AppColors.appBarColor,
-      leading: IconButton(
-        icon:  const Icon(
-          Icons.menu_outlined,
-          size: 30,
-          color: AppColors.kBlackColor,
-        ),
-        onPressed: () {},
+      key: _scaffoldKey,
+      appBar: buildAppBar(
+        onPressed: () => _scaffoldKey.currentState?.openDrawer(),
       ),
-      elevation: 5,
-      title: Text(
-        AppStrings.appName,
-        style: TextStyle(
-          color: AppColors.appNameColor,
-          fontSize: AppFonts.fontSize24,
-          fontWeight: FontWeight.w700,
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            ListTile(
+              title: Text(
+                'Home',
+                style: TextStyle(
+                  color: AppColors.kBlackColor,
+                  fontSize: AppFonts.fontSize16,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text(
+                'Categories',
+                style: TextStyle(
+                  color: AppColors.kBlackColor,
+                  fontSize: AppFonts.fontSize16,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text(
+                'My Coupons',
+                style: TextStyle(
+                  color: AppColors.kBlackColor,
+                  fontSize: AppFonts.fontSize16,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text(
+                'Settings',
+                style: TextStyle(
+                  color: AppColors.kBlackColor,
+                  fontSize: AppFonts.fontSize16,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              onTap: () {},
+            ),
+          ],
         ),
       ),
+      body: const HomeView(),
     );
   }
 }
