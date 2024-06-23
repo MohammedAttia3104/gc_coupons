@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 abstract class AppFonts {
   static double fontSize12 = 12.0.sp;
   static double fontSize14 = 14.0.sp;
+  static double fontSize24 = 24.0.sp;
 }
 
 abstract class AppPadding {

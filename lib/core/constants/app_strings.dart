@@ -1,5 +1,5 @@
 abstract class AppStrings {
-  static const String appName = 'GC Coupons';
+  static const String appName = 'GC COUPONS';
   static const String home = 'Home';
   static const String allStores = 'All Stores';
   static const String allCategories = 'All Categories';
