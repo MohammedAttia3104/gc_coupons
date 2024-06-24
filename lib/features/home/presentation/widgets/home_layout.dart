@@ -16,8 +16,15 @@ class HomeLayOut extends StatelessWidget {
           option: BubbleBarOptions(
             barStyle: BubbleBarStyle.horizontal,
             bubbleFillStyle: BubbleFillStyle.fill,
+            opacity: 0.8,
+            padding: EdgeInsets.only(
+              top: 10.h,
+              bottom: 10.h,
+              left: 10.w,
+              right: 10.w,
+            ),
           ),
-          iconSpace: 12.w,
+          //iconSpace: 10,
           elevation: 2.0,
           items: List.generate(
             cubit.items.length,
@@ -27,12 +34,15 @@ class HomeLayOut extends StatelessWidget {
                   cubit.items[index].icon,
                   color: cubit.items[index].notSelectedIconColor,
                 ),
-                title: Text(
-                  cubit.items[index].title,
-                  style: TextStyle(
-                    color: cubit.items[index].selectedIconColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.bold,
+                title: FittedBox(
+                  child: Text(
+                    cubit.items[index].title,
+                    //textAlign: TextAlign.start,
+                    style: TextStyle(
+                      color: cubit.items[index].selectedIconColor,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 backgroundColor: cubit.items[index].backgroundColor,
@@ -42,9 +52,8 @@ class HomeLayOut extends StatelessWidget {
                 ),
               );
             },
+
           ),
-          fabLocation: StylishBarFabLocation.end,
-          hasNotch: false,
           currentIndex: cubit.selectedIndex,
           onTap: cubit.updateIndex,
         );

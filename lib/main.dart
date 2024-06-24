@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (_, child) {
         return BlocProvider<InternetConnectionCubit>(
-          create: (_) => InternetConnectionCubit(),
+          create: (_) => InternetConnectionCubit()..monitorInternetConnection(),
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             home: child,

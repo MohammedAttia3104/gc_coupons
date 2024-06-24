@@ -8,11 +8,18 @@ abstract class AppStyles {
     fontSize: AppFonts.fontSize14,
     fontWeight: FontWeight.w700,
   );
+  static TextStyle style12Nor = TextStyle(
+    color: AppColors.kBlackColor,
+    fontSize: AppFonts.fontSize12,
+  );
   static TextStyle drawerTabStyle = TextStyle(
     color: AppColors.kBlackColor,
     fontSize: AppFonts.fontSize16,
     fontWeight: FontWeight.w700,
   );
 
-
+  static TextStyle noConnectionStyle = TextStyle(
+    fontSize: AppFonts.fontSize20,
+    color: AppColors.showDealBtnColor,
+  );
 }

@@ -26,4 +26,8 @@ abstract class AppStrings {
   static const String advertiseWithUsTab = 'Advertise with us';
   static const String contactUsTab = 'Contact Us';
   static const String privacyPolicyTab = 'Privacy Policy';
+
+  static const String noInternetConnection = 'No Internet Connection';
+  static const String noConnectionDescription = 'Try Connecting Your Device to the Internet';
+  static const String retry = 'Retry';
 }

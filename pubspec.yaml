@@ -37,6 +37,8 @@ dependencies:
   fancy_shimmer_image: ^2.0.3
   # check internet connection
   connectivity_plus: ^6.0.3
+  # lottie animations
+  lottie: ^3.1.2
 
 
 dev_dependencies:
@@ -54,11 +56,9 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/lottie/no_connection.json
 
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -13,20 +13,14 @@ class InternetConnectionCubit extends Cubit<InternetConnectionState> {
   void monitorInternetConnection() {
     _subscription = Connectivity()
         .onConnectivityChanged
-        .listen((ConnectivityResult result) {
-          switch (result) {
-            case ConnectivityResult.wifi:
-            case ConnectivityResult.mobile:
-              emit(InternetConnectionConnected());
-              break;
-            case ConnectivityResult.none:
-              emit(InternetConnectionDisconnected());
-              break;
-            default:
-              emit(InternetConnectionDisconnected());
-              break;
-          }
-        } as void Function(List<ConnectivityResult> event)?);
+        .listen((List<ConnectivityResult> result) {
+      if (result.contains(ConnectivityResult.wifi) ||
+          result.contains(ConnectivityResult.mobile)) {
+        emit(InternetConnectionConnected());
+      } else {
+        emit(InternetConnectionDisconnected());
+      }
+    });
   }
 
   @override
