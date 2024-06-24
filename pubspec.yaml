@@ -35,6 +35,8 @@ dependencies:
   flutter_screenutil: ^5.9.3
   # for image caching
   fancy_shimmer_image: ^2.0.3
+  # check internet connection
+  connectivity_plus: ^6.0.3
 
 
 dev_dependencies:
@@ -43,8 +45,8 @@ dev_dependencies:
 
   flutter_lints: ^3.0.0
   # for code generation
-  build_runner: ^2.1.4
-  hive_generator: ^1.1.0
+  build_runner: ^2.4.11
+  hive_generator: ^2.0.1
 
 flutter:
 
