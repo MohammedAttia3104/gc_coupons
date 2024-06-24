@@ -39,7 +39,7 @@ class CustomFancyShimmerImage extends StatelessWidget {
                 BoxShadow(
                   color: AppColors.kGreyColor.withOpacity(0.6),
                   spreadRadius: 1,
-                  blurRadius: 5,
+                  blurRadius: 3,
                   offset: const Offset(0, 3), // changes position of shadow
                 ),
               ],

@@ -8,6 +8,7 @@ import 'package:gc_coupons/core/constants/size_config.dart';
 import 'package:gc_coupons/core/widgets/custom_fancy_shimmer_image.dart';
 import 'package:gc_coupons/core/widgets/section_rounded_button.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/grid_item.dart';
+import 'package:gc_coupons/features/home/presentation/widgets/popular_grid_view.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/popular_stores_bar.dart';
 
 class HomeView extends StatelessWidget {
@@ -27,22 +28,7 @@ class HomeView extends StatelessWidget {
             SizedBox(
               height: AppPadding.padding14h,
             ),
-            SizedBox(
-              height: 200.h,
-              child: GridView.count(
-                crossAxisCount: 2,
-                shrinkWrap: true,
-                physics: const BouncingScrollPhysics(),
-                mainAxisSpacing: 10.h,
-                crossAxisSpacing: 10.w,
-                padding: EdgeInsets.only(left: 5.w),
-                scrollDirection: Axis.horizontal,
-                children: List.generate(
-                  20,
-                  (index) => const GridItem(),
-                ),
-              ),
-            ),
+            const PopularGridView(),
           ],
         ),
       ),
