@@ -16,3 +16,7 @@ abstract class AppPadding {
   static double padding8w = 8.0.w;
   static double padding14w = 14.0.w;
 }
+
+abstract class AppConstantSizes {
+  static const double kDrawerIconSize = 30.0;
+}

@@ -22,8 +22,8 @@ abstract class AppStrings {
 
   // Drawer Tabs
   static const String homeTab = 'Home';
-  static const String browseCategories = 'Browse Categories';
-  static const String advertiseWithUs = 'Advertise with us';
-  static const String contactUs = 'Contact Us';
-  static const String privacyPolicy = 'Privacy Policy';
+  static const String browseCategoriesTab = 'Browse Categories';
+  static const String advertiseWithUsTab = 'Advertise with us';
+  static const String contactUsTab = 'Contact Us';
+  static const String privacyPolicyTab = 'Privacy Policy';
 }
