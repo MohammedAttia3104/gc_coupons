@@ -46,6 +46,17 @@ class CustomFancyShimmerImage extends StatelessWidget {
             ),
           );
         },
+        boxDecoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.r),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.kGreyColor.withOpacity(0.6),
+              spreadRadius: 1,
+              blurRadius: 3,
+              offset: const Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
       ),
     );
   }

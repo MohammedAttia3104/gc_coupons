@@ -8,11 +8,14 @@ abstract class PopularStoresRemoteDataSource {
   Future<List<StoreModel>> getPopularStores();
 }
 
-class PopularStoresRemoteDataSourceImpl implements PopularStoresRemoteDataSource {
+class PopularStoresRemoteDataSourceImpl
+    implements PopularStoresRemoteDataSource {
   @override
   Future<List<StoreModel>> getPopularStores() async {
-    Response response =
-        await Dio().get(ApiConstants.baseUrl + ApiConstants.popularStores);
+    var response = await Dio().get(ApiConstants.popularStores,
+        options: Options(headers: {
+          'Authorization': 'mp0aSI6ImFhN2Y4ZDBhOTVjIiwic2Nvc',
+        }));
     if (response.statusCode == 200) {
       List<StoreModel> stores = (response.data as List)
           .map((store) => StoreModel.fromJson(store))
