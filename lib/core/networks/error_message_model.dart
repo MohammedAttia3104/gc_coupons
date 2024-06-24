@@ -3,4 +3,6 @@ class ErrorMessageModel{
   final String? code;
 
   ErrorMessageModel({required this.message, this.code});
+
+
 }
