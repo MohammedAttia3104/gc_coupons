@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
               body: BlocBuilder<BottomNavBarCubit, BottomNavBarState>(
                 builder: (context, state) {
                   return PageView(
-                    allowImplicitScrolling: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     controller:
                         BlocProvider.of<BottomNavBarCubit>(context).controller,
                     children: const [

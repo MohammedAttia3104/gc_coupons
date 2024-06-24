@@ -12,6 +12,16 @@ abstract class AppStyles {
     color: AppColors.kBlackColor,
     fontSize: AppFonts.fontSize12,
   );
+  static TextStyle style18Bold = TextStyle(
+    color: AppColors.kBlackColor,
+    fontSize: AppFonts.fontSize18,
+    fontWeight: FontWeight.w700,
+  );
+  static TextStyle style20Bold = TextStyle(
+    color: AppColors.kBlackColor,
+    fontSize: AppFonts.fontSize20,
+    fontWeight: FontWeight.w700,
+  );
   static TextStyle drawerTabStyle = TextStyle(
     color: AppColors.kBlackColor,
     fontSize: AppFonts.fontSize16,
