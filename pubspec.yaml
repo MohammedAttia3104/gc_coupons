@@ -27,6 +27,8 @@ dependencies:
   flutter_bloc: ^8.1.6
   # service locator
   get_it: ^7.7.0
+  # for functional programming
+  dartz: ^0.10.1
   # for caching and local data storage
   shared_preferences: ^2.2.3
   hive: ^2.2.3

@@ -28,6 +28,7 @@ class StoreModel extends Equatable {
     );
   }
 
+  @override
   List<Object> get props => [
         storeId,
         storeUrl,
