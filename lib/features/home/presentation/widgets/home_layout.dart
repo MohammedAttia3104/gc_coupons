@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gc_coupons/features/home/presentation/controllers/bottom_nav_bar_cubit.dart';
+import 'package:gc_coupons/features/home/presentation/controllers/bottom_nav_bar_cubit/bottom_nav_bar_cubit.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

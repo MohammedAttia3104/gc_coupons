@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gc_coupons/core/networks/network_connection_cubit/internet_connection_cubit.dart';
 import 'package:gc_coupons/core/networks/no_inetrnet_connection_screen.dart';
-import 'package:gc_coupons/features/home/presentation/controllers/bottom_nav_bar_cubit.dart';
+import 'package:gc_coupons/features/home/presentation/controllers/bottom_nav_bar_cubit/bottom_nav_bar_cubit.dart';
 import 'package:gc_coupons/features/home/presentation/home_view.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/app_drawer_view.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/home_layout.dart';

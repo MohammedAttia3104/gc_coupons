@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
-import 'package:gc_coupons/features/home/data/datasources/popular_stores_data_source.dart';
+import 'package:gc_coupons/features/home/data/data_sources/popular_stores_data_source.dart';
 import 'package:gc_coupons/features/home/models/store_model.dart';
 
-abstract class PopularStoreRepository {
+abstract class PopularStoresRepository {
   Future<Either<String, List<StoreModel>>> getPopularStores();
 }
 
-class PopularStoresRepositoryImpl implements PopularStoreRepository {
+class PopularStoresRepositoryImpl implements PopularStoresRepository {
   PopularStoresRemoteDataSource popularStoresDataSource;
 
   PopularStoresRepositoryImpl(this.popularStoresDataSource);
