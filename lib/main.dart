@@ -5,9 +5,17 @@ import 'package:gc_coupons/core/my_bloc_observer.dart';
 import 'package:gc_coupons/core/networks/network_connection_cubit/internet_connection_cubit.dart';
 import 'package:gc_coupons/core/services/service_locator.dart';
 import 'package:gc_coupons/features/home/presentation/home_screen.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 
-void main() {
+import 'features/home/models/store_model.dart';
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
+  Hive.initFlutter();
+  Hive.registerAdapter(StoreModelAdapter());
+  await Hive.openBox<StoreModel>('gc_coupons');
   ServiceLocator().init();
   runApp(const MyApp());
 }

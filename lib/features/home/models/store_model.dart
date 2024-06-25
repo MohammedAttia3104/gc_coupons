@@ -1,11 +1,21 @@
 import 'package:equatable/equatable.dart';
+import 'package:hive/hive.dart';
 
+part 'store_model.g.dart';
+
+@HiveType(typeId: 0)
 class StoreModel extends Equatable {
+  @HiveField(0)
   final String storeId;
+  @HiveField(1)
   final String storeUrl;
+  @HiveField(2)
   final String storeName;
+  @HiveField(3)
   final String slug;
+  @HiveField(4)
   final String count;
+  @HiveField(5)
   final String storeImage;
 
   const StoreModel({
