@@ -1,0 +1,1 @@
+ const String kPopularStoresBox = 'gc_coupons_popular_stores';

@@ -10,6 +10,7 @@ import 'package:gc_coupons/core/widgets/section_rounded_button.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/grid_item.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/popular_grid_view.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/popular_stores_bar.dart';
+import 'package:gc_coupons/features/home/presentation/widgets/trending_bar.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -29,6 +30,10 @@ class HomeView extends StatelessWidget {
               height: AppPadding.padding14h,
             ),
             const PopularGridView(),
+            SizedBox(
+              height: AppPadding.padding30h,
+            ),
+            const TrendingBar(),
           ],
         ),
       ),

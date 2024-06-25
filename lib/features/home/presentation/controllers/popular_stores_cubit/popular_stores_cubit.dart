@@ -15,7 +15,7 @@ class PopularStoresCubit extends Cubit<PopularStoresState> {
   //object of the store model
   static PopularStoresCubit get(context) => BlocProvider.of(context);
 
-  List<StoreModel> stores = [];
+  List<StoreModel>? stores;
 
   void getPopularStores() async {
     emit(PopularStoresLoading());
