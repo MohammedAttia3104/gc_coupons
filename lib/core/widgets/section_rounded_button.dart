@@ -3,17 +3,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gc_coupons/core/constants/app_colors.dart';
 import 'package:gc_coupons/core/constants/app_strings.dart';
 import 'package:gc_coupons/core/constants/app_styles.dart';
+import 'package:gc_coupons/core/constants/size_config.dart';
 
 class SectionRoundedButton extends StatelessWidget {
   final Widget? icon;
   final String title;
   final Function() onTap;
+  final Color? backgroundColor;
+  final Color? titleColor;
+  final double? borderRadius;
+  final double? titleSize;
 
   const SectionRoundedButton({
     super.key,
     this.icon,
     required this.title,
     required this.onTap,
+    this.backgroundColor,
+    this.borderRadius,
+    this.titleColor,
+    this.titleSize,
   });
 
   @override
@@ -23,8 +32,8 @@ class SectionRoundedButton extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
         decoration: BoxDecoration(
-          color: AppColors.offWhiteColor,
-          borderRadius: BorderRadius.circular(25.r),
+          color: backgroundColor ?? AppColors.offWhiteColor,
+          borderRadius: BorderRadius.circular(borderRadius ?? 25.r),
           boxShadow: [
             BoxShadow(
               color: AppColors.kGreyColor.withOpacity(0.5),
@@ -38,18 +47,20 @@ class SectionRoundedButton extends StatelessWidget {
           children: [
             Text(
               title,
-              style: AppStyles.style14Bold.copyWith(
-                color: AppColors.kBlackColor,
+              style: TextStyle(
+                color: titleColor ?? AppColors.kBlackColor,
+                fontSize: titleSize ?? AppFonts.fontSize14,
+                fontWeight: FontWeight.w700,
               ),
             ),
             SizedBox(
               width: 5.w,
             ),
-            icon ??
+            icon != null ?
                 const Icon(
                   Icons.search,
                   color: AppColors.kBlackColor,
-                ),
+                ) : const SizedBox.shrink(),
           ],
         ),
       ),

@@ -43,8 +43,9 @@ dependencies:
   lottie: ^3.1.2
   # check equality
   equatable: ^2.0.5
-  #
-  path_provider: ^2.1.3
+  # svg images
+  flutter_svg: ^2.0.10+1
+
 
 
 dev_dependencies:
@@ -64,6 +65,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/lottie/no_connection.json
+    - assets/icons/share-nodes-solid.svg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

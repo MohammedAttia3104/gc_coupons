@@ -17,6 +17,7 @@ class PopularStoresBar extends StatelessWidget {
         const Spacer(),
         SectionRoundedButton(
           title: AppStrings.searchStores,
+          icon: const Icon(Icons.search,),
           onTap: () {},
         ),
       ],

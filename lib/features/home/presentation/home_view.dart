@@ -1,16 +1,20 @@
+import 'package:awesome_icons/awesome_icons.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gc_coupons/core/constants/app_colors.dart';
 import 'package:gc_coupons/core/constants/app_strings.dart';
 import 'package:gc_coupons/core/constants/app_styles.dart';
 import 'package:gc_coupons/core/constants/size_config.dart';
 import 'package:gc_coupons/core/widgets/custom_fancy_shimmer_image.dart';
+import 'package:gc_coupons/core/widgets/custom_rounded_button.dart';
 import 'package:gc_coupons/core/widgets/section_rounded_button.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/grid_item.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/popular_grid_view.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/popular_stores_bar.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/trending_bar.dart';
+import 'package:gc_coupons/features/home/presentation/widgets/trending_coupon_item.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -34,6 +38,10 @@ class HomeView extends StatelessWidget {
               height: AppPadding.padding30h,
             ),
             const TrendingBar(),
+            SizedBox(
+              height: AppPadding.padding14h,
+            ),
+            const TrendingCouponItem(),
           ],
         ),
       ),

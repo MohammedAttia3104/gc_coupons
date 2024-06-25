@@ -17,7 +17,6 @@ class TrendingBar extends StatelessWidget {
         const Spacer(),
         SectionRoundedButton(
           title: AppStrings.allCategories,
-          icon: const SizedBox.shrink(),
           onTap: () {},
         ),
       ],

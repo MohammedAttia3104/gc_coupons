@@ -34,7 +34,7 @@ class CustomFancyShimmerImage extends StatelessWidget {
                 image: imageProvider,
                 fit: BoxFit.cover,
               ),
-              borderRadius: BorderRadius.circular(10.r),
+              borderRadius: BorderRadius.circular(20.r),
               boxShadow: [
                 BoxShadow(
                   color: AppColors.kGreyColor.withOpacity(0.6),
@@ -47,7 +47,7 @@ class CustomFancyShimmerImage extends StatelessWidget {
           );
         },
         boxDecoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.r),
+          borderRadius: BorderRadius.circular(20.r),
           boxShadow: [
             BoxShadow(
               color: AppColors.kGreyColor.withOpacity(0.6),
