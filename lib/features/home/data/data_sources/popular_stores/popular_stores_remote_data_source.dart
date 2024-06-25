@@ -12,7 +12,7 @@ class PopularStoresRemoteDataSourceImpl
     implements PopularStoresRemoteDataSource {
   @override
   Future<List<StoreModel>> getPopularStores() async {
-    var response = await Dio().get(ApiConstants.popularStores,
+    var response = await Dio().get(ApiConstants.popularStoresPath,
         options: Options(headers: {
           'Authorization': 'mp0aSI6ImFhN2Y4ZDBhOTVjIiwic2Nvc',
         }));

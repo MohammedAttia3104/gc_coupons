@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 part 'trending_model.g.dart';
 
 @HiveType(typeId: 1)
-class TrendingCoupon {
+class TrendingCouponsModel {
   @HiveField(0)
   final int couponId;
   @HiveField(1)
@@ -33,7 +33,7 @@ class TrendingCoupon {
   @HiveField(13)
   final String couponCode;
 
-  TrendingCoupon({
+  TrendingCouponsModel({
     required this.couponId,
     required this.couponDesc,
     required this.title,
@@ -50,7 +50,7 @@ class TrendingCoupon {
     required this.couponCode,
   });
 
-  factory TrendingCoupon.fromJson(Map<String, dynamic> json) {
+  factory TrendingCouponsModel.fromJson(Map<String, dynamic> json) {
     final List<int> categoryIds = [];
     if (json['category_id'] is String) {
       categoryIds.add(int.parse(json['category_id']));
@@ -58,7 +58,7 @@ class TrendingCoupon {
       categoryIds
           .addAll(json['category_id'].map((id) => int.parse(id)).toList());
     }
-    return TrendingCoupon(
+    return TrendingCouponsModel(
       couponId: json['coupon_id'],
       couponDesc: json['coupon_desc'],
       title: json['title'],

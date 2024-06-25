@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:gc_coupons/core/errors/failure.dart';
-import 'package:gc_coupons/features/home/data/data_sources/popular_stores_data_source.dart';
-import 'package:gc_coupons/features/home/data/data_sources/popular_stores_local_data_source.dart';
+import 'package:gc_coupons/features/home/data/data_sources/popular_stores/popular_stores_remote_data_source.dart';
+import 'package:gc_coupons/features/home/data/data_sources/popular_stores/popular_stores_local_data_source.dart';
 import 'package:gc_coupons/features/home/models/store_model.dart';
 
 abstract class PopularStoresRepository {
