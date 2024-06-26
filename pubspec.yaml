@@ -45,6 +45,8 @@ dependencies:
   equatable: ^2.0.5
   # svg images
   flutter_svg: ^2.0.10+1
+  # for sharing
+  share_plus: ^9.0.0
 
 
 

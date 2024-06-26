@@ -13,6 +13,7 @@ class SectionRoundedButton extends StatelessWidget {
   final Color? titleColor;
   final double? borderRadius;
   final double? titleSize;
+  final double? buttonWidth;
 
   const SectionRoundedButton({
     super.key,
@@ -23,6 +24,7 @@ class SectionRoundedButton extends StatelessWidget {
     this.borderRadius,
     this.titleColor,
     this.titleSize,
+    this.buttonWidth,
   });
 
   @override
@@ -30,6 +32,7 @@ class SectionRoundedButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        width: buttonWidth,
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
         decoration: BoxDecoration(
           color: backgroundColor ?? AppColors.offWhiteColor,
@@ -44,6 +47,7 @@ class SectionRoundedButton extends StatelessWidget {
           ],
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               title,
@@ -53,14 +57,10 @@ class SectionRoundedButton extends StatelessWidget {
                 fontWeight: FontWeight.w700,
               ),
             ),
-            SizedBox(
-              width: 5.w,
-            ),
-            icon != null ?
-                const Icon(
-                  Icons.search,
-                  color: AppColors.kBlackColor,
-                ) : const SizedBox.shrink(),
+            icon != null ? SizedBox(width: 5.w) : const SizedBox.shrink(),
+            icon != null
+                ? const Icon(Icons.search, color: AppColors.kBlackColor)
+                : const SizedBox.shrink(),
           ],
         ),
       ),
