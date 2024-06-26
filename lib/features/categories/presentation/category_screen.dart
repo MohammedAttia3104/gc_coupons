@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gc_coupons/core/constants/app_colors.dart';
 import 'package:gc_coupons/core/constants/app_strings.dart';
-import 'package:gc_coupons/features/categories/presentation/widgets/category_single_item.dart';
+import 'package:gc_coupons/features/categories/presentation/widgets/category_grid_view.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/app_drawer_view.dart';
 
 class CategoryScreen extends StatefulWidget {
@@ -36,22 +35,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         shadowColor: AppColors.kBlackColor,
       ),
       drawer: const AppDrawerView(),
-      body: GridView.builder(
-        padding: EdgeInsets.all(14.h),
-        scrollDirection: Axis.vertical,
-        physics: const AlwaysScrollableScrollPhysics(),
-        shrinkWrap: true,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          //childAspectRatio: 1.5,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-        ),
-        itemBuilder: (context, index) {
-          return const CategorySingleItem();
-        },
-        itemCount: 40,
-      ),
+      body: const CategoryGridView(),
     );
   }
 }

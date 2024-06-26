@@ -1,9 +1,7 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gc_coupons/features/home/data/repositories/trending_coupons_repository.dart';
 import 'package:gc_coupons/features/home/models/trending_model.dart';
-import 'package:meta/meta.dart';
 
 part 'trending_coupons_state.dart';
 
@@ -21,13 +19,11 @@ class TrendingCouponsCubit extends Cubit<TrendingCouponsState> {
     emit(TrendingCouponsLoading());
     final result = await trendingCouponsRepository.getTrendingCoupons();
     result.fold(
-          (error) {
-        print('Error loading trending coupons: ${error.message}');
+      (error) {
         emit(TrendingCouponsError(error.message));
       },
-          (trendingCoupons) {
+      (trendingCoupons) {
         emit(TrendingCouponsLoaded(trendingCoupons));
-        debugPrint('Trending Coupons: ${trendingCoupons.toList()}');
       },
     );
   }

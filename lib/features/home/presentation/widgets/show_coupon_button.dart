@@ -17,6 +17,8 @@ class ShowCouponButton extends StatelessWidget {
       borderRadius: 10.0.r,
       buttonWidth: MediaQuery.sizeOf(context).width,
       titleColor: AppColors.kWhiteColor,
+      buttonHight: 40.h,
+      titleSize: 24.sp,
       onTap: () {},
     );
   }

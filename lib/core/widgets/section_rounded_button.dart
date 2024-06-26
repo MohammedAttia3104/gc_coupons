@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gc_coupons/core/constants/app_colors.dart';
-import 'package:gc_coupons/core/constants/app_strings.dart';
-import 'package:gc_coupons/core/constants/app_styles.dart';
 import 'package:gc_coupons/core/constants/size_config.dart';
 
 class SectionRoundedButton extends StatelessWidget {
@@ -60,6 +58,7 @@ class SectionRoundedButton extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                 ),
                 maxLines: 2,
+                textAlign: TextAlign.center,
               ),
               icon != null ? SizedBox(width: 5.w) : const SizedBox.shrink(),
               icon != null

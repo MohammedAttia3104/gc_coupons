@@ -1,7 +1,15 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gc_coupons/core/functions/extract_html_body.dart';
+import 'package:gc_coupons/core/functions/parse_html_string.dart';
+import 'package:gc_coupons/features/home/presentation/controllers/trending_coupons_cubit/trending_coupons_cubit.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:path_provider/path_provider.dart';
 
 class QuickShareButton extends StatelessWidget {
   const QuickShareButton({
@@ -10,26 +18,64 @@ class QuickShareButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Padding(
-        padding: EdgeInsets.only(right: 8.0.w),
-        child: SvgPicture.asset(
-          'assets/icons/share-nodes-solid.svg',
-          width: 30.w,
-          height: 30.h,
-        ),
-      ),
+    return BlocBuilder<TrendingCouponsCubit, TrendingCouponsState>(
+      builder: (context, state) {
+        if (state is TrendingCouponsLoaded) {
+          return GestureDetector(
+            onTap: () async {
+              // Hey! Check out this coupon on GC Coupons.
+              // Store: Carrefour UAE
+              // Description: Redeem up to 60% Off on Consoles + 15 AED Additional Discount
+              // Code: SAVING15
+              // Download the App:
+              const String appUrl =
+                  'https://play.google.com/store/apps/details?id=com.gccoupons&pcampaignid=web_share';
+              final String imagePath =
+                  await downloadImage(state.trendingCoupons[0].imageUrl);
+
+              final List<XFile> files = [XFile(imagePath)];
+              final result = await Share.shareXFiles(files,
+                  text: '''Hey! Check out this coupon on GC Coupons.\n
+                      Store: ${state.trendingCoupons[0].storeName}\n
+                      Description: ${extractHtmlBody(state.trendingCoupons[0].couponDesc)}\n
+                      Discount Code: ${state.trendingCoupons[0].couponCode}\n
+                      Download the App: $appUrl
+                      ''');
+              print(result);
+              if (result.status == ShareResultStatus.success) {
+                debugPrint('Thank you for sharing the picture!');
+              }
+            },
+            child: Container(
+              width: 50.w,
+              height: 50.h,
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+              child: SvgPicture.asset(
+                'assets/icons/share-nodes-solid.svg',
+                fit: BoxFit.contain,
+                height: 20.h,
+                width: 20.w,
+              ),
+            ),
+          );
+        }
+        return const SizedBox();
+      },
     );
   }
 }
 
-void shareFiles() async {
-  const String appUrl =
-      'https://play.google.com/store/apps/details?id=com.gccoupons&pcampaignid=web_share';
-  final List<XFile> files = [XFile('path/to/your/file')];
-  final result = await Share.shareXFiles(files, text: 'Check out this file!');
-  if (result.status == ShareResultStatus.success) {
-    debugPrint('Thank you for sharing the picture!');
-  }
+Future<String> downloadImage(String url) async {
+  final Dio dio = Dio();
+
+  // Get the application documents directory.
+  final Directory directory = await getApplicationDocumentsDirectory();
+
+  // Build the local file path.
+  final String filePath = '${directory.path}/${url.split('/').last}';
+
+  // Download the file.
+  await dio.download(url, filePath);
+
+  return filePath;
 }

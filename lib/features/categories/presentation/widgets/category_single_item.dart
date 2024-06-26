@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gc_coupons/core/constants/app_colors.dart';
+import 'package:gc_coupons/core/functions/get_string_semicolon.dart';
 import 'package:gc_coupons/core/widgets/section_rounded_button.dart';
+import 'package:gc_coupons/features/categories/models/category_model.dart';
 
 class CategorySingleItem extends StatelessWidget {
+  final CategoryModel model;
+
   const CategorySingleItem({
     super.key,
+    required this.model,
   });
 
   @override
   Widget build(BuildContext context) {
+
     return GestureDetector(
       onTap: () {},
       child: SizedBox(
@@ -48,7 +54,7 @@ class CategorySingleItem extends StatelessWidget {
                     height: 5.h,
                   ),
                   SectionRoundedButton(
-                    title: 'Accessories',
+                    title: getMessageForSemicolon(model.name ?? ''),
                     onTap: () {},
                     backgroundColor: AppColors.kWhiteColor,
                     titleColor: AppColors.kBlackColor,

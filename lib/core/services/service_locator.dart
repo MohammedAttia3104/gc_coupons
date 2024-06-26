@@ -1,3 +1,6 @@
+import 'package:gc_coupons/features/categories/data/data_sources/category_remote_data_source.dart';
+import 'package:gc_coupons/features/categories/data/respository/category_repository.dart';
+import 'package:gc_coupons/features/categories/presentation/controllers/category_cubit.dart';
 import 'package:gc_coupons/features/home/data/data_sources/popular_stores/popular_stores_remote_data_source.dart';
 import 'package:gc_coupons/features/home/data/data_sources/popular_stores/popular_stores_local_data_source.dart';
 import 'package:gc_coupons/features/home/data/data_sources/trending_coupons/trending_coupons_local_data_source.dart';
@@ -36,5 +39,14 @@ class ServiceLocator {
             ));
 
     sl.registerFactory<TrendingCouponsCubit>(() => TrendingCouponsCubit(sl()));
+
+
+    //Categories
+    sl.registerLazySingleton<CategoryRemoteDataSource>(
+        () => CategoryRemoteDataSourceImpl());
+
+    sl.registerLazySingleton<CategoryRepository>(
+        () => CategoryRepositoryImpl(sl()));
+    sl.registerFactory<CategoryCubit>(() => CategoryCubit(sl()));
   }
 }

@@ -27,7 +27,7 @@ class PopularGridView extends StatelessWidget {
                 physics: const AlwaysScrollableScrollPhysics(),
                 mainAxisSpacing: 10.h,
                 crossAxisSpacing: 10.w,
-                padding: EdgeInsets.only(left: 5.w,bottom: 5.h),
+                padding: EdgeInsets.only(left: 5.w, bottom: 5.h),
                 scrollDirection: Axis.horizontal,
                 children: List.generate(
                   state.stores.length,
@@ -42,7 +42,7 @@ class PopularGridView extends StatelessWidget {
             );
           } else {
             ///Todo : Needed to Handel
-            return const SizedBox.shrink();
+            return Container();
           }
         },
       ),

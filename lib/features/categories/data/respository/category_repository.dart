@@ -8,7 +8,7 @@ abstract class CategoryRepository {
 }
 
 class CategoryRepositoryImpl implements CategoryRepository {
-  CategoryRemoteDataSource _categoryRemoteDataSource;
+  final CategoryRemoteDataSource _categoryRemoteDataSource;
 
   CategoryRepositoryImpl(this._categoryRemoteDataSource);
 

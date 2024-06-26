@@ -20,8 +20,8 @@ class TrendingCouponsModel {
   final String storeName;
   @HiveField(7)
   final String storeUrl;
-  // @HiveField(8)
-  // final String categoryId;
+  @HiveField(8)
+  final String categoryId;
   @HiveField(9)
   final String expire;
   @HiveField(10)
@@ -42,7 +42,7 @@ class TrendingCouponsModel {
     required this.imageUrl,
     required this.storeName,
     required this.storeUrl,
-   // required this.categoryId,
+    required this.categoryId,
     required this.expire,
     required this.ctype,
     this.exclusive,
@@ -51,16 +51,16 @@ class TrendingCouponsModel {
   });
 
   factory TrendingCouponsModel.fromJson(Map<String, dynamic> json) {
-    // print('JSON data: $json');
-    // dynamic categoryId;
-    // if (json["category_id"] is List) {
-    //   categoryId = json["category_id"].join(",");
-    // } else if (json["category_id"] is String) {
-    //   categoryId = json["category_id"];
-    // } else {
-    //   categoryId =
-    //       "default_value"; // replace "default_value" with your desired default value
-    // }
+    print('JSON data: $json');
+    dynamic categoryId;
+    if (json["category_id"] is List) {
+      categoryId = json["category_id"].join(",");
+    } else if (json["category_id"] is String) {
+      categoryId = json["category_id"];
+    } else {
+      categoryId =
+          "default_value"; // replace "default_value" with your desired default value
+    }
 
     return TrendingCouponsModel(
       couponId: json["coupon_id"] as String,
@@ -71,7 +71,7 @@ class TrendingCouponsModel {
       imageUrl: json["image_url"] as String,
       storeName: json["store_name"] as String,
       storeUrl: json["store_url"] as String,
-      // categoryId: categoryId,
+       categoryId: categoryId,
       expire: json["expire"] as String,
       ctype: json["ctype"] as String,
       exclusive: json["exclusive"] ?? '0' as String?,

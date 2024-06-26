@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gc_coupons/core/constants/app_colors.dart';
-import 'package:gc_coupons/core/constants/app_strings.dart';
-import 'package:gc_coupons/core/constants/app_styles.dart';
 
 class CustomRoundedButton extends StatelessWidget {
   final Function()? onPressed;

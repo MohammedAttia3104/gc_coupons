@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:gc_coupons/core/errors/exceptions.dart';
 import 'package:gc_coupons/core/networks/api_constants.dart';
@@ -15,8 +17,13 @@ class CategoryRemoteDataSourceImpl implements CategoryRemoteDataSource {
         options: Options(headers: {
           'Authorization': 'mp0aSI6ImFhN2Y4ZDBhOTVjIiwic2Nvc',
         }));
+    print(response.data);
     if (response.statusCode == 200) {
-      List<CategoryModel> categories = (response.data as List)
+      var data = response.data;
+      if (data is String) {
+        data = jsonDecode(data);
+      }
+      List<CategoryModel> categories = (data as List)
           .map((category) => CategoryModel.fromJson(category))
           .toList();
       return categories;

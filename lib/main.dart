@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gc_coupons/core/my_bloc_observer.dart';
 import 'package:gc_coupons/core/networks/network_connection_cubit/internet_connection_cubit.dart';
+import 'package:gc_coupons/core/routers/app_router.dart';
+import 'package:gc_coupons/core/routers/routes.dart';
 import 'package:gc_coupons/core/services/service_locator.dart';
-import 'package:gc_coupons/features/categories/presentation/category_screen.dart';
 import 'package:gc_coupons/features/home/presentation/home_screen.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -39,11 +40,13 @@ class MyApp extends StatelessWidget {
           create: (_) => InternetConnectionCubit()..monitorInternetConnection(),
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
+            onGenerateRoute: AppRouter.generateRoute,
+            initialRoute: Routes.homeScreen,
             home: child,
           ),
         );
       },
-      child: const CategoryScreen(),
+      child: const HomeScreen(),
     );
   }
 }

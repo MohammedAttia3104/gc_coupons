@@ -47,6 +47,11 @@ dependencies:
   flutter_svg: ^2.0.10+1
   # for sharing
   share_plus: ^9.0.0
+  # convert from HTML to Json
+  html_unescape: ^2.0.0
+  path_provider: ^2.0.5
+  html: ^0.15.4
+
 
 
 
@@ -68,6 +73,7 @@ flutter:
   assets:
     - assets/lottie/
     - assets/icons/
+    - assets/icons/share-nodes-solid.svg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
