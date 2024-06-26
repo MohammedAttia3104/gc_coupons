@@ -14,6 +14,9 @@ class PopularGridView extends StatelessWidget {
     return BlocProvider<PopularStoresCubit>(
       create: (_) => sl<PopularStoresCubit>()..getPopularStores(),
       child: BlocBuilder<PopularStoresCubit, PopularStoresState>(
+        buildWhen: (previous, current) {
+          return current is PopularStoresLoaded;
+        },
         builder: (context, state) {
           if (state is PopularStoresLoaded) {
             return SizedBox(

@@ -6,10 +6,14 @@ import 'package:gc_coupons/core/constants/app_styles.dart';
 import 'package:gc_coupons/core/constants/size_config.dart';
 import 'package:gc_coupons/core/widgets/custom_fancy_shimmer_image.dart';
 import 'package:gc_coupons/core/widgets/section_rounded_button.dart';
+import 'package:gc_coupons/features/home/models/trending_model.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/quick_share_button.dart';
+import 'package:gc_coupons/features/home/presentation/widgets/show_coupon_button.dart';
 
 class TrendingCouponItem extends StatelessWidget {
-  const TrendingCouponItem({super.key});
+  final TrendingCouponsModel model;
+
+  const TrendingCouponItem({super.key, required this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +39,7 @@ class TrendingCouponItem extends StatelessWidget {
           child: Row(
             children: [
               CustomFancyShimmerImage(
-                imageUrl:
-                    'https://kidlingoo.com/wp-content/uploads/flowers_name_in_english.jpg',
+                imageUrl: model.imageUrl,
                 onTap: () {},
               ),
               SizedBox(
@@ -47,7 +50,7 @@ class TrendingCouponItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      'Redeem up to 60% Off on Consoles + 15 AED Additional Discount',
+                      model.title,
                       maxLines: 2,
                       style: AppStyles.style14Bold.copyWith(
                         color: AppColors.kBlackColor,
@@ -79,14 +82,7 @@ class TrendingCouponItem extends StatelessWidget {
         SizedBox(
           height: AppPadding.padding8h,
         ),
-        SectionRoundedButton(
-          title: AppStrings.showCoupon,
-          backgroundColor: AppColors.showDealBtnColor,
-          borderRadius: 10.0.r,
-          buttonWidth: MediaQuery.sizeOf(context).width,
-          titleColor: AppColors.kWhiteColor,
-          onTap: () {},
-        ),
+        const ShowCouponButton(),
       ],
     );
   }

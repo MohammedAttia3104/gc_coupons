@@ -18,11 +18,14 @@ class TrendingCouponsRemoteDataSourceImpl
         },
       ),
     );
+
+
     if (response.statusCode == 200) {
       List<TrendingCouponsModel> trendingCoupons;
       trendingCoupons = (response.data as List).map((trendingCoupon) {
         return TrendingCouponsModel.fromJson(trendingCoupon);
       }).toList();
+      print('result $trendingCoupons');
       return trendingCoupons;
     } else {
       throw Exception('Server Error');

@@ -5,44 +5,44 @@ part 'trending_model.g.dart';
 @HiveType(typeId: 1)
 class TrendingCouponsModel {
   @HiveField(0)
-  final int couponId;
+  final String couponId;
   @HiveField(1)
-  final String couponDesc;
-  @HiveField(2)
   final String title;
+  @HiveField(2)
+  final String couponDesc;
   @HiveField(3)
-  final DateTime date;
+  final String date;
   @HiveField(4)
-  final int storeId;
+  final String storeId;
   @HiveField(5)
   final String imageUrl;
   @HiveField(6)
   final String storeName;
   @HiveField(7)
   final String storeUrl;
-  @HiveField(8)
-  final List<int> categoryIds;
+  // @HiveField(8)
+  // final String categoryId;
   @HiveField(9)
-  final DateTime expire;
+  final String expire;
   @HiveField(10)
-  final int ctype;
+  final String ctype;
   @HiveField(11)
-  final int? exclusive;
+  final String? exclusive;
   @HiveField(12)
-  final int used;
+  final String used;
   @HiveField(13)
   final String couponCode;
 
   TrendingCouponsModel({
     required this.couponId,
-    required this.couponDesc,
     required this.title,
+    required this.couponDesc,
     required this.date,
     required this.storeId,
     required this.imageUrl,
     required this.storeName,
     required this.storeUrl,
-    required this.categoryIds,
+   // required this.categoryId,
     required this.expire,
     required this.ctype,
     this.exclusive,
@@ -51,28 +51,32 @@ class TrendingCouponsModel {
   });
 
   factory TrendingCouponsModel.fromJson(Map<String, dynamic> json) {
-    final List<int> categoryIds = [];
-    if (json['category_id'] is String) {
-      categoryIds.add(int.parse(json['category_id']));
-    } else if (json['category_id'] is List) {
-      categoryIds
-          .addAll(json['category_id'].map((id) => int.parse(id)).toList());
-    }
+    // print('JSON data: $json');
+    // dynamic categoryId;
+    // if (json["category_id"] is List) {
+    //   categoryId = json["category_id"].join(",");
+    // } else if (json["category_id"] is String) {
+    //   categoryId = json["category_id"];
+    // } else {
+    //   categoryId =
+    //       "default_value"; // replace "default_value" with your desired default value
+    // }
+
     return TrendingCouponsModel(
-      couponId: json['coupon_id'],
-      couponDesc: json['coupon_desc'],
-      title: json['title'],
-      date: DateTime.parse(json['date']),
-      storeId: json['store_id'],
-      imageUrl: json['image_url'],
-      storeName: json['store_name'],
-      storeUrl: json['store_url'],
-      categoryIds: categoryIds,
-      expire: DateTime.parse(json['expire']),
-      ctype: json['ctype'],
-      exclusive: json['exclusive'],
-      used: json['used'],
-      couponCode: json['coupon_code'],
+      couponId: json["coupon_id"] as String,
+      title: json["title"] as String,
+      couponDesc: json["coupon_desc"] as String,
+      date: json["date"] as String,
+      storeId: json["store_id"] as String,
+      imageUrl: json["image_url"] as String,
+      storeName: json["store_name"] as String,
+      storeUrl: json["store_url"] as String,
+      // categoryId: categoryId,
+      expire: json["expire"] as String,
+      ctype: json["ctype"] as String,
+      exclusive: json["exclusive"] ?? '0' as String?,
+      used: json["used"] as String,
+      couponCode: json["coupon_code"] as String,
     );
   }
 }

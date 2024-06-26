@@ -14,6 +14,7 @@ AppBar buildAppBar({required VoidCallback onPressed}) {
       ),
       onPressed: onPressed,
     ),
+    shadowColor: AppColors.kBlackColor,
     elevation: 5,
     title: Text(
       AppStrings.appName,

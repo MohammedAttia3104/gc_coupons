@@ -14,6 +14,7 @@ class SectionRoundedButton extends StatelessWidget {
   final double? borderRadius;
   final double? titleSize;
   final double? buttonWidth;
+  final double? buttonHight;
 
   const SectionRoundedButton({
     super.key,
@@ -24,7 +25,7 @@ class SectionRoundedButton extends StatelessWidget {
     this.borderRadius,
     this.titleColor,
     this.titleSize,
-    this.buttonWidth,
+    this.buttonWidth, this.buttonHight,
   });
 
   @override
@@ -33,6 +34,7 @@ class SectionRoundedButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: buttonWidth,
+        height: buttonHight,
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
         decoration: BoxDecoration(
           color: backgroundColor ?? AppColors.offWhiteColor,
@@ -46,22 +48,25 @@ class SectionRoundedButton extends StatelessWidget {
             ),
           ],
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                color: titleColor ?? AppColors.kBlackColor,
-                fontSize: titleSize ?? AppFonts.fontSize14,
-                fontWeight: FontWeight.w700,
+        child: FittedBox(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  color: titleColor ?? AppColors.kBlackColor,
+                  fontSize: titleSize ?? AppFonts.fontSize14,
+                  fontWeight: FontWeight.w700,
+                ),
+                maxLines: 2,
               ),
-            ),
-            icon != null ? SizedBox(width: 5.w) : const SizedBox.shrink(),
-            icon != null
-                ? const Icon(Icons.search, color: AppColors.kBlackColor)
-                : const SizedBox.shrink(),
-          ],
+              icon != null ? SizedBox(width: 5.w) : const SizedBox.shrink(),
+              icon != null
+                  ? const Icon(Icons.search, color: AppColors.kBlackColor)
+                  : const SizedBox.shrink(),
+            ],
+          ),
         ),
       ),
     );

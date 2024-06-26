@@ -66,8 +66,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/lottie/no_connection.json
-    - assets/icons/share-nodes-solid.svg
+    - assets/lottie/
+    - assets/icons/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -19,7 +19,7 @@ class CustomRoundedButton extends StatelessWidget {
     this.textStyle,
     required this.buttonHeight,
     required this.buttonWidth,
-    this.buttonColor,
+    this.buttonColor ,
   });
 
   @override
