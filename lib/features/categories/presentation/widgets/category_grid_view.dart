@@ -12,6 +12,9 @@ class CategoryGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CategoryCubit, CategoryState>(
+      buildWhen: (previous, current) {
+        return current is CategoryLoaded;
+      },
       builder: (context, state) {
         if (state is CategoryLoading) {
           return const Center(
@@ -36,7 +39,7 @@ class CategoryGridView extends StatelessWidget {
             },
             itemCount: state.categories.length,
           );
-        }else{
+        } else {
           return Container();
         }
       },

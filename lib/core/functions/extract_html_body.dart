@@ -4,3 +4,4 @@ String? extractHtmlBody(String htmlString) {
   var document = parse(htmlString);
   return document.body?.text;
 }
+

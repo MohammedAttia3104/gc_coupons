@@ -11,41 +11,43 @@ class PopularGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<PopularStoresCubit>(
-      create: (_) => sl<PopularStoresCubit>()..getPopularStores(),
-      child: BlocBuilder<PopularStoresCubit, PopularStoresState>(
-        buildWhen: (previous, current) {
-          return current is PopularStoresLoaded;
-        },
-        builder: (context, state) {
-          if (state is PopularStoresLoaded) {
-            return SizedBox(
-              height: 200.h,
-              child: GridView.count(
-                crossAxisCount: 2,
-                shrinkWrap: true,
-                physics: const AlwaysScrollableScrollPhysics(),
-                mainAxisSpacing: 10.h,
-                crossAxisSpacing: 10.w,
-                padding: EdgeInsets.only(left: 5.w, bottom: 5.h),
-                scrollDirection: Axis.horizontal,
-                children: List.generate(
-                  state.stores.length,
-                  (index) {
-                    return GridItem(
-                      imageUrl: state.stores[index].storeImage,
-                      onTap: () {},
-                    );
-                  },
-                ),
+    return BlocBuilder<PopularStoresCubit, PopularStoresState>(
+      buildWhen: (previous, current) {
+        return current is PopularStoresLoaded;
+      },
+      builder: (context, state) {
+        if (state is PopularStoresLoaded) {
+          return SizedBox(
+            height: 200.h,
+            child: GridView.count(
+              crossAxisCount: 2,
+              shrinkWrap: true,
+              physics: const AlwaysScrollableScrollPhysics(),
+              mainAxisSpacing: 10.h,
+              crossAxisSpacing: 10.w,
+              padding: EdgeInsets.only(left: 5.w, bottom: 5.h),
+              scrollDirection: Axis.horizontal,
+              children: List.generate(
+                state.stores.length,
+                (index) {
+                  return GridItem(
+                    imageUrl: state.stores[index].storeImage,
+                    onTap: () {},
+                  );
+                },
               ),
-            );
-          } else {
-            ///Todo : Needed to Handel
-            return Container();
-          }
-        },
-      ),
+            ),
+          );
+        } else {
+          ///Todo : Needed to Handel
+          return SizedBox(
+            height: 200.h,
+            child: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+      },
     );
   }
 }

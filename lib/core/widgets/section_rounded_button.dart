@@ -5,6 +5,7 @@ import 'package:gc_coupons/core/constants/size_config.dart';
 
 class SectionRoundedButton extends StatelessWidget {
   final Widget? icon;
+  final Widget? customWidget;
   final String title;
   final Function() onTap;
   final Color? backgroundColor;
@@ -23,7 +24,9 @@ class SectionRoundedButton extends StatelessWidget {
     this.borderRadius,
     this.titleColor,
     this.titleSize,
-    this.buttonWidth, this.buttonHight,
+    this.buttonWidth,
+    this.buttonHight,
+    this.customWidget,
   });
 
   @override
@@ -47,25 +50,26 @@ class SectionRoundedButton extends StatelessWidget {
           ],
         ),
         child: FittedBox(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                  color: titleColor ?? AppColors.kBlackColor,
-                  fontSize: titleSize ?? AppFonts.fontSize14,
-                  fontWeight: FontWeight.w700,
-                ),
-                maxLines: 2,
-                textAlign: TextAlign.center,
+          child: customWidget ??
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      color: titleColor ?? AppColors.kBlackColor,
+                      fontSize: titleSize ?? AppFonts.fontSize14,
+                      fontWeight: FontWeight.w700,
+                    ),
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                  ),
+                  icon != null ? SizedBox(width: 5.w) : const SizedBox.shrink(),
+                  icon != null
+                      ? const Icon(Icons.search, color: AppColors.kBlackColor)
+                      : const SizedBox.shrink(),
+                ],
               ),
-              icon != null ? SizedBox(width: 5.w) : const SizedBox.shrink(),
-              icon != null
-                  ? const Icon(Icons.search, color: AppColors.kBlackColor)
-                  : const SizedBox.shrink(),
-            ],
-          ),
         ),
       ),
     );
