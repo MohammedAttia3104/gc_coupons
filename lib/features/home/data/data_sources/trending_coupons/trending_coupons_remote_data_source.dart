@@ -21,7 +21,6 @@ class TrendingCouponsRemoteDataSourceImpl
         },
       ),
     );
-
     if (response.statusCode == 200) {
       List<TrendingCouponsModel> trendingCoupons;
       var data = response.data;

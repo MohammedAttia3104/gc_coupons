@@ -14,14 +14,8 @@ class CategoryCubit extends Cubit<CategoryState> {
     emit(CategoryLoading());
     final result = await categoryRepository.getCategories();
     result.fold(
-      (error) {
-        print('Error: ${error.message}');
-        emit(CategoryError(error.message));
-      },
-      (categories) {
-        print('Categories: $categories');
-        emit(CategoryLoaded(categories));
-      },
+      (error) => emit(CategoryError(error.message)),
+      (categories) => emit(CategoryLoaded(categories)),
     );
   }
 }

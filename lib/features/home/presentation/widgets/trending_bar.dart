@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gc_coupons/core/constants/app_strings.dart';
 import 'package:gc_coupons/core/constants/app_styles.dart';
-import 'package:gc_coupons/core/routers/routes.dart';
-import 'package:gc_coupons/core/widgets/section_rounded_button.dart';
+import 'package:gc_coupons/features/home/presentation/widgets/all_categories_button.dart';
 
 class TrendingBar extends StatelessWidget {
   const TrendingBar({super.key});
@@ -16,10 +15,7 @@ class TrendingBar extends StatelessWidget {
           style: AppStyles.style20Bold,
         ),
         const Spacer(),
-        SectionRoundedButton(
-          title: AppStrings.allCategories,
-          onTap: () => Navigator.pushNamed(context, Routes.allCategories),
-        ),
+        const AllCategoriesButton(),
       ],
     );
   }

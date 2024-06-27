@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gc_coupons/core/routers/routes.dart';
 import 'package:gc_coupons/core/services/service_locator.dart';
+import 'package:gc_coupons/core/widgets/slide_up_transition.dart';
 import 'package:gc_coupons/features/categories/presentation/controllers/category_cubit.dart';
 import 'package:gc_coupons/features/categories/presentation/category_screen.dart';
 import 'package:gc_coupons/features/home/presentation/home_screen.dart';
@@ -16,9 +17,11 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case Routes.allCategories:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider<CategoryCubit>(
-            create: (_) => sl<CategoryCubit>()..getCategories(),
-            child: const CategoryScreen(),
+          settings: const RouteSettings(name: Routes.allCategories),
+          builder: (_) => const SlideUpTransition(
+            curve: Curves.easeInOut,
+            duration: Duration(milliseconds: 1000 * 2),
+            child: CategoryScreen(),
           ),
         );
       // case '/showCoupon':
@@ -28,3 +31,5 @@ class AppRouter {
     }
   }
 }
+
+// settings: RouteSettings(name: Routes.homeScreen),

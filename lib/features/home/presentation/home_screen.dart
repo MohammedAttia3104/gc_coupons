@@ -3,25 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gc_coupons/core/networks/network_connection_cubit/internet_connection_cubit.dart';
 import 'package:gc_coupons/core/networks/no_inetrnet_connection_screen.dart';
 import 'package:gc_coupons/core/services/service_locator.dart';
+import 'package:gc_coupons/features/categories/presentation/controllers/category_cubit.dart';
 import 'package:gc_coupons/features/home/presentation/controllers/bottom_nav_bar_cubit/bottom_nav_bar_cubit.dart';
 import 'package:gc_coupons/features/home/presentation/controllers/popular_stores_cubit/popular_stores_cubit.dart';
 import 'package:gc_coupons/features/home/presentation/controllers/trending_coupons_cubit/trending_coupons_cubit.dart';
-import 'package:gc_coupons/features/home/presentation/home_view.dart';
-import 'package:gc_coupons/features/home/presentation/widgets/app_drawer_view.dart';
-import 'package:gc_coupons/features/home/presentation/widgets/home_layout.dart';
-import 'package:gc_coupons/features/stores/presentation/all_stores_screen.dart';
-import '../../favourites/presentation/favourites_screen.dart';
-import 'widgets/build_app_bar.dart';
+import 'package:gc_coupons/features/home/presentation/widgets/home_screen_page_view.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -50,28 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 create: (_) => sl<TrendingCouponsCubit>()..getTrendingCoupons(),
               ),
             ],
-            child: Scaffold(
-              key: _scaffoldKey,
-              appBar: buildAppBar(
-                onPressed: () => _scaffoldKey.currentState?.openDrawer(),
-              ),
-              drawer: const AppDrawerView(),
-              body: BlocBuilder<BottomNavBarCubit, BottomNavBarState>(
-                builder: (context, state) {
-                  return PageView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    controller:
-                        BlocProvider.of<BottomNavBarCubit>(context).controller,
-                    children: const [
-                      HomeView(),
-                      AllStoresScreen(),
-                      FavouritesScreen(),
-                    ],
-                  );
-                },
-              ),
-              bottomNavigationBar: const HomeLayOut(),
-            ),
+            child: const HomeScreenPageView(),
           );
         } else {
           return const SizedBox.shrink();

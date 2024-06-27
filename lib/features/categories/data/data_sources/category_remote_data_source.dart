@@ -17,7 +17,7 @@ class CategoryRemoteDataSourceImpl implements CategoryRemoteDataSource {
         options: Options(headers: {
           'Authorization': 'mp0aSI6ImFhN2Y4ZDBhOTVjIiwic2Nvc',
         }));
-    print(response.data);
+    // print(response.data);
     if (response.statusCode == 200) {
       var data = response.data;
       if (data is String) {
