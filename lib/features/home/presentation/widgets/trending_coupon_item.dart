@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gc_coupons/core/constants/app_colors.dart';
 import 'package:gc_coupons/core/constants/size_config.dart';
+import 'package:gc_coupons/core/routers/routes.dart';
 import 'package:gc_coupons/features/home/models/trending_model.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/show_coupon_button.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/trending_coupon_item_body.dart';
@@ -17,7 +18,11 @@ class TrendingCouponItem extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-
+            Navigator.pushNamed(
+              context,
+              Routes.showCouponDialog,
+              arguments: model,
+            );
           },
           child: Container(
             decoration: BoxDecoration(

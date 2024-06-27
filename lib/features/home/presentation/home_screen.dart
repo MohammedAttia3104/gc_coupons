@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gc_coupons/core/networks/network_connection_cubit/internet_connection_cubit.dart';
 import 'package:gc_coupons/core/networks/no_inetrnet_connection_screen.dart';
 import 'package:gc_coupons/core/services/service_locator.dart';
-import 'package:gc_coupons/features/categories/presentation/controllers/category_cubit.dart';
 import 'package:gc_coupons/features/home/presentation/controllers/bottom_nav_bar_cubit/bottom_nav_bar_cubit.dart';
 import 'package:gc_coupons/features/home/presentation/controllers/popular_stores_cubit/popular_stores_cubit.dart';
 import 'package:gc_coupons/features/home/presentation/controllers/trending_coupons_cubit/trending_coupons_cubit.dart';

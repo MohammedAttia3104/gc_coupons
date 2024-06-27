@@ -52,7 +52,6 @@ class SectionRoundedButton extends StatelessWidget {
         child: FittedBox(
           child: customWidget ??
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     title,

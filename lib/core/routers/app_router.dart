@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gc_coupons/core/routers/routes.dart';
-import 'package:gc_coupons/core/services/service_locator.dart';
 import 'package:gc_coupons/core/widgets/slide_up_transition.dart';
-import 'package:gc_coupons/features/categories/presentation/controllers/category_cubit.dart';
 import 'package:gc_coupons/features/categories/presentation/category_screen.dart';
 import 'package:gc_coupons/features/home/presentation/home_screen.dart';
 
