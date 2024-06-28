@@ -6,6 +6,7 @@ import 'package:gc_coupons/core/widgets/slide_up_transition.dart';
 import 'package:gc_coupons/features/categories/presentation/category_screen.dart';
 import 'package:gc_coupons/features/home/models/store_model.dart';
 import 'package:gc_coupons/features/home/presentation/home_screen.dart';
+import 'package:gc_coupons/features/store/presentation/controllers/store_coupons_cubit/store_coupons_cubit.dart';
 import 'package:gc_coupons/features/store/presentation/store_screen.dart';
 import 'package:gc_coupons/features/store/presentation/controllers/store_data_cubit/store_cubit.dart';
 
@@ -30,9 +31,17 @@ class AppRouter {
         return MaterialPageRoute(
           settings: const RouteSettings(name: Routes.storeData),
           builder: (_) {
-            return BlocProvider(
-              create: (_) =>
-                  sl<StoreCubit>()..getStoreData(int.parse(settings.arguments as String)),
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider<StoreCubit>(
+                  create: (_) => sl<StoreCubit>()
+                    ..getStoreData(int.parse(settings.arguments as String)),
+                ),
+                BlocProvider<StoreCouponsCubit>(
+                  create: (_) => sl<StoreCouponsCubit>()
+                    ..getStoreCoupons(int.parse(settings.arguments as String)),
+                ),
+              ],
               child: const SlideUpTransition(
                 curve: Curves.easeInOut,
                 duration: Duration(milliseconds: 1000 * 2),
