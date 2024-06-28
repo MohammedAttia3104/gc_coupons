@@ -48,13 +48,15 @@ class TrendingCouponItemBody extends StatelessWidget {
               ),
               Row(
                 children: [
-                  SectionRoundedButton(
-                    title: AppStrings.exclusive,
-                    backgroundColor: AppColors.greenBtnColor,
-                    titleColor: AppColors.kWhiteColor,
-                    borderRadius: 10.0.r,
-                    onTap: () {},
-                  ),
+                  model.exclusive == '0'
+                      ? const SizedBox.shrink()
+                      : SectionRoundedButton(
+                          title: AppStrings.exclusive,
+                          backgroundColor: AppColors.greenBtnColor,
+                          titleColor: AppColors.kWhiteColor,
+                          borderRadius: 10.0.r,
+                          onTap: () {},
+                        ),
                   const Spacer(),
                   TrendingCouponQuickShare(
                     index: index,

@@ -23,7 +23,7 @@ class CustomRoundedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: buttonColor ?? AppColors.showDealBtnColor,
+        backgroundColor: buttonColor ?? AppColors.showCouponBtnColor,
         minimumSize: Size(buttonWidth, buttonHeight),
       ),
       onPressed: onPressed,

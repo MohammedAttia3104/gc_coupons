@@ -62,19 +62,19 @@ class CouponModel {
     }
 
     return CouponModel(
-      couponId: json["coupon_id"] as String,
-      title: json["title"] as String,
-      couponDesc: json["coupon_desc"] as String,
-      date: json["date"] as String,
-      storeId: json["store_id"] as String,
-      imageUrl: json["image_url"] as String,
-      storeName: json["store_name"] as String,
-      storeUrl: json["store_url"] as String,
+      couponId: json["coupon_id"],
+      title: json["title"],
+      couponDesc: json["coupon_desc"],
+      date: json["date"],
+      storeId: json["store_id"],
+      imageUrl: json["image_url"],
+      storeName: json["store_name"],
+      storeUrl: json["store_url"],
       categoryId: categoryId,
-      expire: json["expire"] as String,
-      ctype: json["ctype"] as String,
-      exclusive: json["exclusive"] ?? '0' as String?,
-      used: json["used"] as String,
+      expire: json["expire"],
+      ctype: json["ctype"],
+      exclusive: json["exclusive"] ?? '0',
+      used: json["used"],
       couponCode: json["coupon_code"] ?? '0',
     );
   }

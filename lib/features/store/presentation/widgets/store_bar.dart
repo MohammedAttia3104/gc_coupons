@@ -39,15 +39,12 @@ class StoreBar extends StatelessWidget {
             SizedBox(
               width: 10.w,
             ),
-            //title
-            AutoSizeText(
+            Text(
               storeModel.storeName,
               style: TextStyle(
                 fontSize: 18.sp,
                 fontWeight: FontWeight.bold,
               ),
-              minFontSize: 10,
-              stepGranularity: 10,
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
             ),

@@ -2,6 +2,7 @@
 class Assets {
   Assets._();
 
+  static const String assetsCheck = 'assets/check.json';
   static const String assetsCoupon = 'assets/coupon.json';
   static const String assetsIconsShareNodesSolid = 'assets/icons/share-nodes-solid.svg';
   static const String assetsStoreCoupon = 'assets/store_coupon.json';

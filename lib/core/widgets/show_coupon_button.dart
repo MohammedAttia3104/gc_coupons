@@ -28,8 +28,8 @@ class ShowCouponButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SectionRoundedButton(
-      title: AppStrings.showCoupon,
-      backgroundColor: AppColors.showDealBtnColor,
+      title: showCouponTitle(couponModel),
+      backgroundColor: showCouponBackgroundColor(couponModel),
       borderRadius: 10.0.r,
       buttonWidth: MediaQuery.sizeOf(context).width,
       titleColor: AppColors.kWhiteColor,
@@ -153,5 +153,27 @@ class ShowCouponButton extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+Color showCouponBackgroundColor(CouponModel couponModel) {
+  switch (couponModel.ctype) {
+    case '1':
+      return AppColors.showCouponBtnColor;
+    case '3':
+      return AppColors.greenBtnColor;
+    default:
+      return AppColors.showCouponBtnColor;
+  }
+}
+
+String showCouponTitle(CouponModel couponModel) {
+  switch (couponModel.ctype) {
+    case '1':
+      return AppStrings.showCoupon;
+    case '3':
+      return AppStrings.getDeal;
+    default:
+      return AppStrings.showCoupon;
   }
 }

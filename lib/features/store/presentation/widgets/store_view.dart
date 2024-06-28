@@ -48,23 +48,30 @@ class StoreView extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 14.0).w,
-                      child: Row(
+                      child: Column(
                         children: [
-                          Text(
-                            AppStrings.couponsAndDealsNumber(
-                              state.storeDataModel.count,
-                            ),
-                            style: AppStyles.style18Bold,
+                          Row(
+                            children: [
+                              Text(
+                                AppStrings.couponsAndDealsNumber(
+                                  state.storeDataModel.count,
+                                ),
+                                style: AppStyles.style18Bold,
+                              ),
+                              const Spacer(),
+                              const StoreCustomDropDown(),
+                            ],
                           ),
-                          const Spacer(),
-                          const StoreCustomDropDown(),
+                          SizedBox(
+                            height: 15.h,
+                          ),
+                          const StoreCouponsListView(),
+                          SizedBox(
+                            height: 15.h,
+                          ),
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 15.h,
-                    ),
-                    const StoreCouponsListView(),
                   ],
                 ),
               ],

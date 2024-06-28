@@ -30,6 +30,6 @@ abstract class AppStyles {
 
   static TextStyle noConnectionStyle = TextStyle(
     fontSize: AppFonts.fontSize20,
-    color: AppColors.showDealBtnColor,
+    color: AppColors.showCouponBtnColor,
   );
 }

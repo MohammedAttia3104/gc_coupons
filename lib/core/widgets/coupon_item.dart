@@ -25,8 +25,8 @@ class CouponItem extends StatelessWidget {
           onTap: () {
             Navigator.pushNamed(
               context,
-              Routes.showCouponDialog,
-              arguments: model.couponId,
+              Routes.storeData,
+              arguments: model.storeId,
             );
           },
           child: Container(
