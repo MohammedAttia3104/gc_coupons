@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gc_coupons/core/constants/app_strings.dart';
 import 'package:gc_coupons/core/constants/app_styles.dart';
+import 'package:gc_coupons/core/widgets/coupon_item.dart';
 import 'package:gc_coupons/core/widgets/custom_fancy_shimmer_image.dart';
 import 'package:gc_coupons/features/store/presentation/controllers/store_data_cubit/store_cubit.dart';
 import 'package:gc_coupons/features/store/presentation/widgets/store_bar.dart';
+import 'package:gc_coupons/features/store/presentation/widgets/store_coupons_list_view.dart';
 import 'package:gc_coupons/features/store/presentation/widgets/store_custom_drop_down.dart';
 import 'package:gc_coupons/features/store/presentation/widgets/store_shop_now_container.dart';
 
@@ -62,7 +64,7 @@ class StoreView extends StatelessWidget {
                     SizedBox(
                       height: 15.h,
                     ),
-
+                    const StoreCouponsListView(),
                   ],
                 ),
               ],

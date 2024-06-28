@@ -15,7 +15,7 @@ class StoreCouponsRemoteDataSourceImpl implements StoreCouponsRemoteDataSource {
   Future<List<CouponModel>> getStoreCoupons(int storeId) async {
     Response response = await Dio().get(
       ApiConstants.storeCouponsPath,
-      queryParameters: {'store_id': storeId},
+      queryParameters: {'storeid': storeId},
       options: Options(
         headers: {
           'Authorization': 'mp0aSI6ImFhN2Y4ZDBhOTVjIiwic2Nvc',
@@ -31,9 +31,15 @@ class StoreCouponsRemoteDataSourceImpl implements StoreCouponsRemoteDataSource {
         data = unescape.convert(data);
         data = jsonDecode(data);
       }
-      debugPrint('StoreCoupons: $data');
       storeCoupons = (data as List).map((storeCoupon) {
-        return CouponModel.fromJson(storeCoupon);
+        if (storeCoupon is String) {
+          storeCoupon = jsonDecode(storeCoupon);
+        }
+        if (storeCoupon is Map<String, dynamic>) {
+          return CouponModel.fromJson(storeCoupon);
+        } else {
+          throw Exception('Unexpected coupon data format: $storeCoupon');
+        }
       }).toList();
       return storeCoupons;
     } else {

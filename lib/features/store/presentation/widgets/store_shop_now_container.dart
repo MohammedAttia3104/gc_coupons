@@ -9,6 +9,8 @@ import 'package:gc_coupons/features/store/models/store_data_model.dart';
 import 'package:gc_coupons/features/store/presentation/controllers/store_data_cubit/store_cubit.dart';
 import 'package:gc_coupons/features/store/presentation/widgets/store_bar.dart';
 
+import '../../../../core/functions/navigate_to_launched_url.dart';
+
 class StoreShopNowContainer extends StatelessWidget {
   final StoreDataModel storeDataModel;
 
@@ -64,7 +66,9 @@ class StoreShopNowContainer extends StatelessWidget {
             backgroundColor: Colors.red,
             titleColor: AppColors.kWhiteColor,
             borderRadius: 10.r,
-            onTap: () {},
+            onTap: () async {
+              return await navigateToLaunchedUrl(link: storeDataModel.storeUrl);
+            },
           ),
         ],
       ),
