@@ -33,7 +33,11 @@ class PopularGridView extends StatelessWidget {
                   return PopularStoreGridItem(
                     imageUrl: state.stores[index].storeImage,
                     onTap: () {
-                      Navigator.pushNamed(context, Routes.storeData, arguments: state.stores[index].storeId);
+                      Navigator.pushNamed(
+                        context,
+                        Routes.storeData,
+                        arguments: state.stores[index].storeId,
+                      );
                     },
                   );
                 },

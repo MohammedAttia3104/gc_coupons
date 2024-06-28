@@ -8,6 +8,7 @@ import 'package:gc_coupons/core/routers/app_router.dart';
 import 'package:gc_coupons/core/routers/routes.dart';
 import 'package:gc_coupons/core/services/service_locator.dart';
 import 'package:gc_coupons/features/categories/presentation/controllers/category_cubit.dart';
+import 'package:gc_coupons/features/home/presentation/controllers/popular_stores_cubit/popular_stores_cubit.dart';
 import 'package:gc_coupons/features/home/presentation/home_screen.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -46,6 +47,10 @@ class MyApp extends StatelessWidget {
             ),
             BlocProvider<CategoryCubit>(
               create: (_) => sl<CategoryCubit>()..getCategories(),
+
+            ),
+            BlocProvider<PopularStoresCubit>(
+              create: (_) => sl<PopularStoresCubit>()..getPopularStores(),
             ),
           ],
           child: MaterialApp(

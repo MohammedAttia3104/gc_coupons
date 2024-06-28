@@ -4,7 +4,9 @@ import 'package:gc_coupons/core/constants/app_styles.dart';
 import 'package:gc_coupons/core/widgets/section_rounded_button.dart';
 
 class PopularStoresBar extends StatelessWidget {
-  const PopularStoresBar({super.key});
+  final Widget? hideSearchButton;
+
+  const PopularStoresBar({super.key, this.hideSearchButton});
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +17,14 @@ class PopularStoresBar extends StatelessWidget {
           style: AppStyles.style20Bold,
         ),
         const Spacer(),
-        SectionRoundedButton(
-          title: AppStrings.searchStores,
-          icon: const Icon(Icons.search,),
-          onTap: () {},
-        ),
+        hideSearchButton ??
+            SectionRoundedButton(
+              title: AppStrings.searchStores,
+              icon: const Icon(
+                Icons.search,
+              ),
+              onTap: () {},
+            ),
       ],
     );
   }

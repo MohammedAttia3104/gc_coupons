@@ -4,6 +4,7 @@ import 'package:gc_coupons/core/constants/app_colors.dart';
 import 'package:gc_coupons/core/constants/app_strings.dart';
 import 'package:gc_coupons/core/constants/app_styles.dart';
 import 'package:gc_coupons/core/constants/size_config.dart';
+import 'package:gc_coupons/core/routers/routes.dart';
 import 'package:gc_coupons/core/widgets/custom_fancy_shimmer_image.dart';
 import 'package:gc_coupons/core/widgets/section_rounded_button.dart';
 import 'package:gc_coupons/features/home/models/coupon_model.dart';
@@ -26,7 +27,13 @@ class TrendingCouponItemBody extends StatelessWidget {
       children: [
         CustomFancyShimmerImage(
           imageUrl: model.imageUrl,
-          onTap: () {},
+          onTap: () {
+            return Navigator.pushNamed(
+              context,
+              Routes.storeData,
+              arguments: model.storeId,
+            );
+          },
         ),
         SizedBox(
           width: AppPadding.padding14w,

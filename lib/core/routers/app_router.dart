@@ -17,7 +17,9 @@ class AppRouter {
 
     switch (settings.name) {
       case Routes.homeScreen:
-        return MaterialPageRoute(builder: (_) => const HomeScreen());
+        return MaterialPageRoute(builder: (_) {
+          return const HomeScreen();
+        });
       case Routes.allCategories:
         return MaterialPageRoute(
           settings: const RouteSettings(name: Routes.allCategories),
