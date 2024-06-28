@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gc_coupons/core/constants/app_colors.dart';
 import 'package:gc_coupons/features/store/models/store_data_model.dart';
-import 'package:gc_coupons/features/store/presentation/controllers/store_cubit.dart';
+import 'package:gc_coupons/features/store/presentation/controllers/store_data_cubit/store_cubit.dart';
 import 'package:gc_coupons/generated/assets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 

@@ -4,15 +4,18 @@ import 'package:gc_coupons/core/constants/app_colors.dart';
 import 'package:gc_coupons/core/constants/size_config.dart';
 import 'package:gc_coupons/core/routers/routes.dart';
 import 'package:gc_coupons/features/home/models/coupon_model.dart';
-import 'package:gc_coupons/features/home/presentation/widgets/show_coupon_button.dart';
+import 'package:gc_coupons/core/widgets/show_coupon_button.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/trending_coupon_item_body.dart';
 
 class TrendingCouponItem extends StatelessWidget {
   final CouponModel model;
   final int index;
 
-  const TrendingCouponItem(
-      {super.key, required this.model, required this.index});
+  const TrendingCouponItem({
+    super.key,
+    required this.model,
+    required this.index,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +58,7 @@ class TrendingCouponItem extends StatelessWidget {
         ShowCouponButton(
           couponId: int.parse(model.couponId),
           index: index,
+          couponModel: model,
         ),
       ],
     );

@@ -14,7 +14,7 @@ class TrendingCouponsRemoteDataSourceImpl
   @override
   Future<List<CouponModel>> getTrendingCoupons() async {
     var response = await Dio().get(
-      ApiConstants.couponsPath,
+      ApiConstants.popularCouponsPath,
       options: Options(
         headers: {
           'Authorization': 'mp0aSI6ImFhN2Y4ZDBhOTVjIiwic2Nvc',

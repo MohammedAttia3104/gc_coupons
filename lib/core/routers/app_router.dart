@@ -7,7 +7,7 @@ import 'package:gc_coupons/features/categories/presentation/category_screen.dart
 import 'package:gc_coupons/features/home/models/store_model.dart';
 import 'package:gc_coupons/features/home/presentation/home_screen.dart';
 import 'package:gc_coupons/features/store/presentation/store_screen.dart';
-import 'package:gc_coupons/features/store/presentation/controllers/store_cubit.dart';
+import 'package:gc_coupons/features/store/presentation/controllers/store_data_cubit/store_cubit.dart';
 
 class AppRouter {
   static Route? generateRoute(RouteSettings settings) {

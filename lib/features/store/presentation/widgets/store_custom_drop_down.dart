@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gc_coupons/core/constants/app_styles.dart';
-import 'package:gc_coupons/features/store/presentation/controllers/store_cubit.dart';
+import 'package:gc_coupons/features/store/presentation/controllers/store_data_cubit/store_cubit.dart';
 
 class StoreCustomDropDown extends StatelessWidget {
   const StoreCustomDropDown({

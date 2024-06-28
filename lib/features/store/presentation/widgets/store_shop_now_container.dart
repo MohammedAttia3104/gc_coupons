@@ -6,7 +6,7 @@ import 'package:gc_coupons/core/constants/app_strings.dart';
 import 'package:gc_coupons/core/widgets/custom_fancy_shimmer_image.dart';
 import 'package:gc_coupons/core/widgets/section_rounded_button.dart';
 import 'package:gc_coupons/features/store/models/store_data_model.dart';
-import 'package:gc_coupons/features/store/presentation/controllers/store_cubit.dart';
+import 'package:gc_coupons/features/store/presentation/controllers/store_data_cubit/store_cubit.dart';
 import 'package:gc_coupons/features/store/presentation/widgets/store_bar.dart';
 
 class StoreShopNowContainer extends StatelessWidget {
