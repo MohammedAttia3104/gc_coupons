@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gc_coupons/features/home/presentation/widgets/home_view_builder.dart';
+import 'package:gc_coupons/features/home/presentation/widgets/home_page_view_builder.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/app_drawer_view.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/home_layout.dart';
 
@@ -25,7 +25,7 @@ class _HomeScreenPageViewState extends State<HomeScreenPageView> {
         onPressed: () => _scaffoldKey.currentState?.openDrawer(),
       ),
       drawer: const AppDrawerView(),
-      body: const HomeViewBuilder(),
+      body: const HomePageViewBuilder(),
       bottomNavigationBar: const HomeLayOut(),
     );
   }

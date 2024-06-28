@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gc_coupons/core/constants/app_strings.dart';
 import 'package:gc_coupons/core/constants/app_styles.dart';
+import 'package:gc_coupons/core/routers/routes.dart';
 import 'package:gc_coupons/core/widgets/section_rounded_button.dart';
 
 class PopularStoresBar extends StatelessWidget {
@@ -23,7 +24,9 @@ class PopularStoresBar extends StatelessWidget {
               icon: const Icon(
                 Icons.search,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, Routes.searchScreen);
+              },
             ),
       ],
     );
