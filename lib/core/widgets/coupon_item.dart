@@ -7,11 +7,11 @@ import 'package:gc_coupons/features/home/models/coupon_model.dart';
 import 'package:gc_coupons/core/widgets/show_coupon_button.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/trending_coupon_item_body.dart';
 
-class TrendingCouponItem extends StatelessWidget {
+class CouponItem extends StatelessWidget {
   final CouponModel model;
   final int index;
 
-  const TrendingCouponItem({
+  const CouponItem({
     super.key,
     required this.model,
     required this.index,

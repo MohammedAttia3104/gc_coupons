@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gc_coupons/core/constants/size_config.dart';
 import 'package:gc_coupons/features/home/presentation/controllers/trending_coupons_cubit/trending_coupons_cubit.dart';
-import 'package:gc_coupons/features/home/presentation/widgets/trending_coupon_item.dart';
+import 'package:gc_coupons/core/widgets/coupon_item.dart';
 
 class TrendingCouponsListView extends StatelessWidget {
   const TrendingCouponsListView({
@@ -24,7 +24,7 @@ class TrendingCouponsListView extends StatelessWidget {
             scrollDirection: Axis.vertical,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (BuildContext context, int index) {
-              return TrendingCouponItem(
+              return CouponItem(
                 model: state.trendingCoupons[index],
                 index: index,
               );
