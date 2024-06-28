@@ -5,12 +5,12 @@ import 'package:gc_coupons/core/constants/app_colors.dart';
 
 class CustomFancyShimmerImage extends StatelessWidget {
   final String imageUrl;
-  final Function() onTap;
+  final Function()? onTap;
 
   const CustomFancyShimmerImage({
     super.key,
     required this.imageUrl,
-    required this.onTap,
+    this.onTap,
   });
 
   @override

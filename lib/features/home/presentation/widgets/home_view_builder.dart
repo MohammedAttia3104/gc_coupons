@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gc_coupons/features/home/presentation/controllers/bottom_nav_bar_cubit/bottom_nav_bar_cubit.dart';
 import 'package:gc_coupons/features/home/presentation/home_view.dart';
-import 'package:gc_coupons/features/stores/presentation/all_stores_screen.dart';
-
+import 'package:gc_coupons/features/store/presentation/store_screen.dart';
 import '../../../favourites/presentation/favourites_screen.dart';
 
 class HomeViewBuilder extends StatelessWidget {
@@ -25,6 +24,19 @@ class HomeViewBuilder extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+}
+
+class AllStoresScreen extends StatelessWidget {
+  const AllStoresScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: const Center(
+        child: Text('All Stores Screen'),
+      ),
     );
   }
 }

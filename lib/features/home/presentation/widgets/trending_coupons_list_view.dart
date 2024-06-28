@@ -26,6 +26,7 @@ class TrendingCouponsListView extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return TrendingCouponItem(
                 model: state.trendingCoupons[index],
+                index: index,
               );
             },
             separatorBuilder: (BuildContext context, int index) {

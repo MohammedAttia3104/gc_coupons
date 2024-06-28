@@ -13,8 +13,13 @@ import 'package:gc_coupons/features/home/presentation/widgets/coupon_code_style_
 import '../../../../core/widgets/html_content.dart';
 
 class ShowCouponButton extends StatelessWidget {
+  final int couponId;
+  final int index;
+
   const ShowCouponButton({
     super.key,
+    required this.couponId,
+    required this.index,
   });
 
   @override
@@ -26,7 +31,9 @@ class ShowCouponButton extends StatelessWidget {
             title: AppStrings.showCoupon,
             backgroundColor: AppColors.showDealBtnColor,
             borderRadius: 10.0.r,
-            buttonWidth: MediaQuery.sizeOf(context).width,
+            buttonWidth: MediaQuery
+                .sizeOf(context)
+                .width,
             titleColor: AppColors.kWhiteColor,
             buttonHight: 40.h,
             titleSize: 24.sp,
@@ -34,10 +41,21 @@ class ShowCouponButton extends StatelessWidget {
               showDialog(
                 context: context,
                 builder: (context) {
+                  debugPrint('dialog width :  ${MediaQuery
+                      .sizeOf(context)
+                      .width
+                      .toString()}');
+                  debugPrint('dialog height :  ${(0.7 * MediaQuery
+                      .sizeOf(context)
+                      .height).toString()}');
                   return Dialog(
                     child: Container(
-                      height: MediaQuery.sizeOf(context).height * 0.65,
-                      width: MediaQuery.sizeOf(context).width,
+                      height: MediaQuery
+                          .sizeOf(context)
+                          .height * 0.7,
+                      width: MediaQuery
+                          .sizeOf(context)
+                          .width,
                       padding: EdgeInsets.symmetric(
                         horizontal: 10.w,
                         vertical: 10.h,
@@ -61,7 +79,7 @@ class ShowCouponButton extends StatelessWidget {
                           Row(
                             children: [
                               CustomFancyShimmerImage(
-                                imageUrl: state.trendingCoupons[0].imageUrl,
+                                imageUrl: state.trendingCoupons[index].imageUrl,
                                 onTap: () {},
                               ),
                               SizedBox(
@@ -69,7 +87,7 @@ class ShowCouponButton extends StatelessWidget {
                               ),
                               Expanded(
                                 child: Text(
-                                  state.trendingCoupons[0].title,
+                                  state.trendingCoupons[index].title,
                                   style: TextStyle(
                                     color: AppColors.kBlackColor,
                                     fontSize: 14.sp,
@@ -95,27 +113,32 @@ class ShowCouponButton extends StatelessWidget {
                             thickness: 1,
                           ),
                           HtmlContent(
-                            htmlData: state.trendingCoupons[0].couponDesc,
+                            htmlData: state.trendingCoupons[index].couponDesc,
                           ),
+
                           SizedBox(
-                            height: 8.h,
+                            height: 14.h,
                           ),
                           SectionRoundedButton(
                             title: '',
                             onTap: () {},
                             backgroundColor: Colors.cyanAccent[400],
                             buttonHight: 50.0.h,
-                            buttonWidth: MediaQuery.sizeOf(context).width,
+                            buttonWidth: MediaQuery
+                                .sizeOf(context)
+                                .width,
                             borderRadius: 10.0.r,
                             customWidget: SizedBox(
                               height: 50.h,
                               child: Row(
                                 children: [
                                   CouponCodeStyleWidget(
-                                    code: state.trendingCoupons[0].couponCode,
+                                    code: state
+                                        .trendingCoupons[index].couponCode,
                                   ),
                                   CopyCouponCodeWidget(
-                                    code: state.trendingCoupons[0].couponCode,
+                                      code: state
+                                          .trendingCoupons[index].couponCode,
                                   ),
                                 ],
                               ),
@@ -126,15 +149,18 @@ class ShowCouponButton extends StatelessWidget {
                           ),
                           SectionRoundedButton(
                             title:
-                                'Visit ${state.trendingCoupons[0].storeName}',
+                            'Visit ${state.trendingCoupons[index].storeName}',
                             backgroundColor: AppColors.appNameColor,
                             borderRadius: 10.0.r,
-                            buttonHight: 30.h,
-                            buttonWidth: MediaQuery.sizeOf(context).width,
+                            buttonHight: 40.h,
+                            buttonWidth: MediaQuery
+                                .sizeOf(context)
+                                .width,
                             titleColor: AppColors.kBlackColor,
                             titleSize: 20.0.sp,
-                            onTap: () async => await navigateToLaunchedUrl(
-                              link: state.trendingCoupons[0].storeUrl,
+                            onTap: () async =>
+                            await navigateToLaunchedUrl(
+                              link: state.trendingCoupons[index].storeUrl,
                             ),
                           ),
                         ],

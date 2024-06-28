@@ -30,35 +30,36 @@ class CopyCouponCodeWidget extends StatelessWidget {
         await copyCodeToClipboard(code: code);
 
         ///Todo : Refactor Later
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              'Code Copied to Clipboard',
-              style: AppStyles.style12Nor,
-            ),
-          ),
-        );
-        // AlertDialog(
-        //   actions: <Widget>[
-        //     TextButton(
-        //       child: Text('OK'),
-        //       onPressed: () {
-        //         Navigator.of(context).pop();
-        //       },
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   SnackBar(
+        //     content: Text(
+        //       'Code Copied to Clipboard',
+        //       style: AppStyles.style12Nor,
         //     ),
-        //   ],
-        //   title: Text(
-        //     'Code Copied to Clipboard',
-        //     style: AppStyles.style12Nor,
         //   ),
-        //   shape: RoundedRectangleBorder(
-        //     borderRadius:
-        //         BorderRadius.circular(10.r),
-        //   ),
-        //   backgroundColor: AppColors.kWhiteColor,
-        //   actionsAlignment:
-        //       MainAxisAlignment.center,
         // );
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            Future.delayed(const Duration(seconds: 1), () {
+              Navigator.of(context).pop();
+            });
+            return AlertDialog(
+              alignment: Alignment.bottomCenter,
+
+              title: Center(
+                child: Text(
+                  'Code Copied to Clipboard',
+                  style: AppStyles.style12Nor,
+                ),
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25.r),
+              ),
+              backgroundColor: AppColors.kWhiteColor,
+            );
+          },
+        );
       },
       child: Row(
         children: [
@@ -84,6 +85,4 @@ class CopyCouponCodeWidget extends StatelessWidget {
       ),
     );
   }
-
-
 }

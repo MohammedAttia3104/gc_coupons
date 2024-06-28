@@ -8,7 +8,7 @@ final class TrendingCouponsInitial extends TrendingCouponsState {}
 final class TrendingCouponsLoading extends TrendingCouponsState {}
 
 final class TrendingCouponsLoaded extends TrendingCouponsState {
-  final List<TrendingCouponsModel> trendingCoupons;
+  final List<CouponModel> trendingCoupons;
 
   TrendingCouponsLoaded(this.trendingCoupons);
 }

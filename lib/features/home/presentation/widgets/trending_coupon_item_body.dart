@@ -6,16 +6,19 @@ import 'package:gc_coupons/core/constants/app_styles.dart';
 import 'package:gc_coupons/core/constants/size_config.dart';
 import 'package:gc_coupons/core/widgets/custom_fancy_shimmer_image.dart';
 import 'package:gc_coupons/core/widgets/section_rounded_button.dart';
-import 'package:gc_coupons/features/home/models/trending_model.dart';
+import 'package:gc_coupons/features/home/models/coupon_model.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/quick_share_button.dart';
 
 class TrendingCouponItemBody extends StatelessWidget {
+  final int index;
+
   const TrendingCouponItemBody({
     super.key,
     required this.model,
+    required this.index,
   });
 
-  final TrendingCouponsModel model;
+  final CouponModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +56,9 @@ class TrendingCouponItemBody extends StatelessWidget {
                     onTap: () {},
                   ),
                   const Spacer(),
-                  const QuickShareButton(),
+                  QuickShareButton(
+                    index: index,
+                  ),
                 ],
               ),
             ],

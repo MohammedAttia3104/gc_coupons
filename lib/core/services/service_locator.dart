@@ -8,6 +8,9 @@ import 'package:gc_coupons/features/home/data/repositories/popular_stores_reposi
 import 'package:gc_coupons/features/home/data/repositories/trending_coupons_repository.dart';
 import 'package:gc_coupons/features/home/presentation/controllers/popular_stores_cubit/popular_stores_cubit.dart';
 import 'package:gc_coupons/features/home/presentation/controllers/trending_coupons_cubit/trending_coupons_cubit.dart';
+import 'package:gc_coupons/features/store/data/data_source/store_remote_data_source.dart';
+import 'package:gc_coupons/features/store/data/repository/store_data_repository.dart';
+import 'package:gc_coupons/features/store/presentation/controllers/store_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../features/home/data/data_sources/trending_coupons/trending_coupons_remote_data_source.dart';
@@ -40,7 +43,6 @@ class ServiceLocator {
 
     sl.registerFactory<TrendingCouponsCubit>(() => TrendingCouponsCubit(sl()));
 
-
     //Categories
     sl.registerLazySingleton<CategoryRemoteDataSource>(
         () => CategoryRemoteDataSourceImpl());
@@ -48,5 +50,12 @@ class ServiceLocator {
     sl.registerLazySingleton<CategoryRepository>(
         () => CategoryRepositoryImpl(sl()));
     sl.registerFactory<CategoryCubit>(() => CategoryCubit(sl()));
+
+    //store data
+    sl.registerLazySingleton<StoreRemoteDataSource>(
+        () => StoreRemoteDataSourceImpl());
+    sl.registerLazySingleton<StoreDataRepository>(
+        () => StoreDataRepositoryImpl(sl()));
+    sl.registerFactory<StoreCubit>(() => StoreCubit(sl()));
   }
 }

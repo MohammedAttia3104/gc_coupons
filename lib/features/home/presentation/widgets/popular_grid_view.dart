@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gc_coupons/core/routers/routes.dart';
 import 'package:gc_coupons/features/home/presentation/controllers/popular_stores_cubit/popular_stores_cubit.dart';
 
-import 'grid_item.dart';
+import 'popular_store_grid_item.dart';
 
 class PopularGridView extends StatelessWidget {
   const PopularGridView({super.key});
@@ -29,9 +30,11 @@ class PopularGridView extends StatelessWidget {
               children: List.generate(
                 state.stores.length,
                 (index) {
-                  return GridItem(
+                  return PopularStoreGridItem(
                     imageUrl: state.stores[index].storeImage,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.storeData, arguments: state.stores[index].storeId);
+                    },
                   );
                 },
               ),

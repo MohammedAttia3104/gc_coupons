@@ -7,12 +7,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gc_coupons/core/functions/extract_html_body.dart';
 import 'package:gc_coupons/features/home/presentation/controllers/trending_coupons_cubit/trending_coupons_cubit.dart';
+import 'package:gc_coupons/generated/assets.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart';
 
 class QuickShareButton extends StatelessWidget {
+  final int index;
+
   const QuickShareButton({
     super.key,
+    required this.index,
   });
 
   @override
@@ -35,12 +39,12 @@ class QuickShareButton extends StatelessWidget {
               final List<XFile> files = [XFile(imagePath)];
               final result = await Share.shareXFiles(files,
                   text: '''Hey! Check out this coupon on GC Coupons.\n
-                      Store: ${state.trendingCoupons[0].storeName}\n
-                      Description: ${extractHtmlBody(state.trendingCoupons[0].couponDesc)}\n
-                      Discount Code: ${state.trendingCoupons[0].couponCode}\n
+                      Store: ${state.trendingCoupons[index].storeName}\n
+                      Description: ${extractHtmlBody(state.trendingCoupons[index].couponDesc)}\n
+                      Discount Code: ${state.trendingCoupons[index].couponCode}\n
                       Download the App: $appUrl
                       ''');
-              print(result);
+              debugPrint(result.toString());
               if (result.status == ShareResultStatus.success) {
                 debugPrint('Thank you for sharing the picture!');
               }
@@ -50,7 +54,7 @@ class QuickShareButton extends StatelessWidget {
               height: 50.h,
               padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
               child: SvgPicture.asset(
-                'assets/icons/share-nodes-solid.svg',
+                Assets.assetsIconsShareNodesSolid,
                 fit: BoxFit.contain,
                 height: 20.h,
                 width: 20.w,

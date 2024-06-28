@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gc_coupons/features/home/data/repositories/trending_coupons_repository.dart';
-import 'package:gc_coupons/features/home/models/trending_model.dart';
+import 'package:gc_coupons/features/home/models/coupon_model.dart';
 
 part 'trending_coupons_state.dart';
 
@@ -13,7 +13,7 @@ class TrendingCouponsCubit extends Cubit<TrendingCouponsState> {
 
   static TrendingCouponsCubit get(context) => BlocProvider.of(context);
 
-  List<TrendingCouponsModel>? trendingCoupons;
+  List<CouponModel>? trendingCoupons;
 
   void getTrendingCoupons() async {
     emit(TrendingCouponsLoading());

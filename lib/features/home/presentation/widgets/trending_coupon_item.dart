@@ -3,14 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gc_coupons/core/constants/app_colors.dart';
 import 'package:gc_coupons/core/constants/size_config.dart';
 import 'package:gc_coupons/core/routers/routes.dart';
-import 'package:gc_coupons/features/home/models/trending_model.dart';
+import 'package:gc_coupons/features/home/models/coupon_model.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/show_coupon_button.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/trending_coupon_item_body.dart';
 
 class TrendingCouponItem extends StatelessWidget {
-  final TrendingCouponsModel model;
+  final CouponModel model;
+  final int index;
 
-  const TrendingCouponItem({super.key, required this.model});
+  const TrendingCouponItem(
+      {super.key, required this.model, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class TrendingCouponItem extends StatelessWidget {
             Navigator.pushNamed(
               context,
               Routes.showCouponDialog,
-              arguments: model,
+              arguments: model.couponId,
             );
           },
           child: Container(
@@ -41,13 +43,19 @@ class TrendingCouponItem extends StatelessWidget {
                 ),
               ],
             ),
-            child: TrendingCouponItemBody(model: model),
+            child: TrendingCouponItemBody(
+              model: model,
+              index: index,
+            ),
           ),
         ),
         SizedBox(
           height: AppPadding.padding8h,
         ),
-        const ShowCouponButton(),
+        ShowCouponButton(
+          couponId: int.parse(model.couponId),
+          index: index,
+        ),
       ],
     );
   }

@@ -2,10 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:gc_coupons/core/errors/failure.dart';
 import 'package:gc_coupons/features/home/data/data_sources/trending_coupons/trending_coupons_local_data_source.dart';
 import 'package:gc_coupons/features/home/data/data_sources/trending_coupons/trending_coupons_remote_data_source.dart';
-import 'package:gc_coupons/features/home/models/trending_model.dart';
+import 'package:gc_coupons/features/home/models/coupon_model.dart';
 
 abstract class TrendingCouponsRepository {
-  Future<Either<Failure, List<TrendingCouponsModel>>> getTrendingCoupons();
+  Future<Either<Failure, List<CouponModel>>> getTrendingCoupons();
 }
 
 class TrendingCouponsRepositoryImpl implements TrendingCouponsRepository {
@@ -16,10 +16,10 @@ class TrendingCouponsRepositoryImpl implements TrendingCouponsRepository {
       this.trendingCouponsDataSource, this.trendingCouponsLocalDataSource);
 
   @override
-  Future<Either<Failure, List<TrendingCouponsModel>>>
+  Future<Either<Failure, List<CouponModel>>>
       getTrendingCoupons() async {
     try {
-      List<TrendingCouponsModel> trendingCoupons;
+      List<CouponModel> trendingCoupons;
       trendingCoupons =
           trendingCouponsLocalDataSource.getCachedTrendingCoupons();
       if (trendingCoupons.isNotEmpty) {

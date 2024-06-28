@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gc_coupons/core/constants/app_colors.dart';
 import 'package:gc_coupons/core/constants/app_strings.dart';
 import 'package:gc_coupons/core/constants/size_config.dart';
 
-AppBar buildAppBar({required VoidCallback onPressed}) {
+AppBar buildAppBar({
+  required VoidCallback onPressed,
+}) {
   return AppBar(
     backgroundColor: AppColors.appBarColor,
     leading: IconButton(
@@ -15,7 +18,7 @@ AppBar buildAppBar({required VoidCallback onPressed}) {
       onPressed: onPressed,
     ),
     shadowColor: AppColors.kBlackColor,
-    elevation: 5,
+    elevation: 5.h,
     title: Text(
       AppStrings.appName,
       style: TextStyle(

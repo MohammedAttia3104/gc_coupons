@@ -1,9 +1,9 @@
 import 'package:hive/hive.dart';
 
-part 'trending_model.g.dart';
+part 'coupon_model.g.dart';
 
 @HiveType(typeId: 1)
-class TrendingCouponsModel {
+class CouponModel {
   @HiveField(0)
   final String couponId;
   @HiveField(1)
@@ -33,7 +33,7 @@ class TrendingCouponsModel {
   @HiveField(13)
   final String couponCode;
 
-  TrendingCouponsModel({
+  CouponModel({
     required this.couponId,
     required this.title,
     required this.couponDesc,
@@ -50,8 +50,7 @@ class TrendingCouponsModel {
     required this.couponCode,
   });
 
-  factory TrendingCouponsModel.fromJson(Map<String, dynamic> json) {
-    print('JSON data: $json');
+  factory CouponModel.fromJson(Map<String, dynamic> json) {
     dynamic categoryId;
     if (json["category_id"] is List) {
       categoryId = json["category_id"].join(",");
@@ -62,7 +61,7 @@ class TrendingCouponsModel {
           "default_value"; // replace "default_value" with your desired default value
     }
 
-    return TrendingCouponsModel(
+    return CouponModel(
       couponId: json["coupon_id"] as String,
       title: json["title"] as String,
       couponDesc: json["coupon_desc"] as String,
@@ -71,12 +70,12 @@ class TrendingCouponsModel {
       imageUrl: json["image_url"] as String,
       storeName: json["store_name"] as String,
       storeUrl: json["store_url"] as String,
-       categoryId: categoryId,
+      categoryId: categoryId,
       expire: json["expire"] as String,
       ctype: json["ctype"] as String,
       exclusive: json["exclusive"] ?? '0' as String?,
       used: json["used"] as String,
-      couponCode: json["coupon_code"] as String,
+      couponCode: json["coupon_code"] ?? '0',
     );
   }
 }

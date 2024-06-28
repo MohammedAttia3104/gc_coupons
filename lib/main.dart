@@ -13,7 +13,7 @@ import 'package:hive_flutter/adapters.dart';
 
 import 'core/utils/constants.dart';
 import 'features/home/models/store_model.dart';
-import 'features/home/models/trending_model.dart';
+import 'features/home/models/coupon_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,8 +21,8 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter<StoreModel>(StoreModelAdapter());
   await Hive.openBox<StoreModel>(kPopularStoresBox);
-  Hive.registerAdapter<TrendingCouponsModel>(TrendingCouponsModelAdapter());
-  await Hive.openBox<TrendingCouponsModel>(kTrendingCouponsBox);
+  Hive.registerAdapter<CouponModel>(CouponModelAdapter());
+  await Hive.openBox<CouponModel>(kTrendingCouponsBox);
   ServiceLocator().init();
   runApp(const MyApp());
 }
