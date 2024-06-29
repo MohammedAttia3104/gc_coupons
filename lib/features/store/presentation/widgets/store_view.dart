@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gc_coupons/core/constants/app_strings.dart';
 import 'package:gc_coupons/core/constants/app_styles.dart';
-import 'package:gc_coupons/core/widgets/coupon_item.dart';
 import 'package:gc_coupons/core/widgets/custom_fancy_shimmer_image.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/popular_grid_view.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/popular_stores_bar.dart';

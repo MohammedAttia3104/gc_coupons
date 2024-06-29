@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:gc_coupons/core/networks/api_constants.dart';
 import 'package:gc_coupons/features/home/models/coupon_model.dart';
 import 'package:html_unescape/html_unescape.dart';

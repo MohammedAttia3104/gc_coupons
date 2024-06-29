@@ -4,7 +4,6 @@ import 'package:gc_coupons/core/services/service_locator.dart';
 import 'package:gc_coupons/features/search/presentation/controllers/search_cubit.dart';
 import 'package:gc_coupons/features/search/presentation/widgets/search_item.dart';
 import 'package:gc_coupons/features/search/presentation/widgets/search_text_form_field.dart';
-import 'package:gc_coupons/features/store/models/store_data_model.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({

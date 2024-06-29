@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gc_coupons/features/home/models/coupon_model.dart';
 import 'package:gc_coupons/features/store/data/repository/store_coupon_repository.dart';
-import 'package:meta/meta.dart';
 
 part 'store_coupons_state.dart';
 

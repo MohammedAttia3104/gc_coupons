@@ -1,11 +1,9 @@
-import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gc_coupons/core/errors/failure.dart';
 import 'package:gc_coupons/features/store/data/repository/store_data_repository.dart';
 import 'package:gc_coupons/features/store/models/store_data_model.dart';
-import 'package:meta/meta.dart';
 
 part 'store_state.dart';
 

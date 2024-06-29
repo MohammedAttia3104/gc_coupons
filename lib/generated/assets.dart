@@ -8,6 +8,8 @@ class Assets {
   static const String assetsStoreCoupon = 'assets/store_coupon.json';
   static const String iconsBook = 'assets/icons/book.png';
   static const String iconsShareNodesSolid = 'assets/icons/share-nodes-solid.svg';
+  static const String lottieBlackLoaddingIndicator = 'assets/lottie/black_loadding_indicator.json';
+  static const String lottieLoadingAnimation = 'assets/lottie/loading_animation.json';
   static const String lottieNoConnection = 'assets/lottie/no_connection.json';
 
 }

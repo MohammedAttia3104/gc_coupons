@@ -1,11 +1,9 @@
-import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gc_coupons/core/errors/failure.dart';
 import 'package:gc_coupons/features/search/data/repository/search_repository.dart';
 import 'package:gc_coupons/features/store/models/store_data_model.dart';
-import 'package:meta/meta.dart';
 
 part 'search_state.dart';
 
