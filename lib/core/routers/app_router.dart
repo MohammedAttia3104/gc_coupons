@@ -6,6 +6,7 @@ import 'package:gc_coupons/core/widgets/slide_up_transition.dart';
 import 'package:gc_coupons/features/categories/presentation/category_screen.dart';
 import 'package:gc_coupons/features/home/models/store_model.dart';
 import 'package:gc_coupons/features/home/presentation/home_screen.dart';
+import 'package:gc_coupons/features/search/presentation/controllers/search_cubit.dart';
 import 'package:gc_coupons/features/search/presentation/search_screen.dart';
 import 'package:gc_coupons/features/store/presentation/controllers/store_coupons_cubit/store_coupons_cubit.dart';
 import 'package:gc_coupons/features/store/presentation/store_screen.dart';
@@ -53,7 +54,7 @@ class AppRouter {
             );
           },
         );
-      case Routes.searchScreen :
+      case Routes.searchScreen:
         return MaterialPageRoute(
           settings: const RouteSettings(name: Routes.searchScreen),
           builder: (_) {

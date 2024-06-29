@@ -1,30 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gc_coupons/core/constants/app_colors.dart';
+import 'package:gc_coupons/features/search/presentation/controllers/search_cubit.dart';
+import 'package:gc_coupons/features/store/models/store_data_model.dart';
 
-class SearchTextFormField extends StatefulWidget {
+class SearchTextFormField extends StatelessWidget {
+  final void Function(String)? onChanged;
+  final TextEditingController searchController;
+
   const SearchTextFormField({
     super.key,
+    required this.onChanged,
+    required this.searchController,
   });
-
-  @override
-  State<SearchTextFormField> createState() => _SearchTextFormFieldState();
-}
-
-late TextEditingController searchController;
-
-class _SearchTextFormFieldState extends State<SearchTextFormField> {
-  @override
-  void initState() {
-    super.initState();
-    searchController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    searchController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +40,8 @@ class _SearchTextFormFieldState extends State<SearchTextFormField> {
               decoration: InputDecoration(
                 fillColor: AppColors.offWhiteColor,
                 hintText: 'Search',
-                prefixIcon: const Icon(Icons.search, color: AppColors.kGreyColor),
+                prefixIcon:
+                    const Icon(Icons.search, color: AppColors.kGreyColor),
                 suffixIcon: IconButton(
                   onPressed: () {
                     Navigator.pop(context);
@@ -88,6 +78,7 @@ class _SearchTextFormFieldState extends State<SearchTextFormField> {
                 ),
               ),
               controller: searchController,
+              onChanged: onChanged,
               cursorColor: AppColors.showCouponBtnColor,
               cursorHeight: 15.h,
               textAlign: TextAlign.start,

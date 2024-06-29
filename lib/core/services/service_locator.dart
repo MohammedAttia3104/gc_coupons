@@ -8,6 +8,9 @@ import 'package:gc_coupons/features/home/data/repositories/popular_stores_reposi
 import 'package:gc_coupons/features/home/data/repositories/trending_coupons_repository.dart';
 import 'package:gc_coupons/features/home/presentation/controllers/popular_stores_cubit/popular_stores_cubit.dart';
 import 'package:gc_coupons/features/home/presentation/controllers/trending_coupons_cubit/trending_coupons_cubit.dart';
+import 'package:gc_coupons/features/search/data/data_source/search_remote_data_source.dart';
+import 'package:gc_coupons/features/search/data/repository/search_repository.dart';
+import 'package:gc_coupons/features/search/presentation/controllers/search_cubit.dart';
 import 'package:gc_coupons/features/store/data/data_source/store_coupons_remote_data_source.dart';
 import 'package:gc_coupons/features/store/data/data_source/store_remote_data_source.dart';
 import 'package:gc_coupons/features/store/data/repository/store_coupon_repository.dart';
@@ -68,5 +71,10 @@ class ServiceLocator {
       () => StoreCouponsRepositoryImpl(sl()),
     );
     sl.registerFactory<StoreCouponsCubit>(() => StoreCouponsCubit(sl()));
+
+    //search
+    sl.registerLazySingleton<SearchRemoteDataSource>( () => SearchRemoteDataSourceImpl());
+    sl.registerLazySingleton<SearchRepository>( () => SearchRepositoryImpl(sl()));
+    sl.registerFactory<SearchCubit>(() => SearchCubit(sl()));
   }
 }

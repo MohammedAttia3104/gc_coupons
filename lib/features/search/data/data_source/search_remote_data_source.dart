@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:gc_coupons/core/networks/api_constants.dart';
 import 'package:gc_coupons/features/store/models/store_data_model.dart';
 
@@ -27,8 +28,15 @@ class SearchRemoteDataSourceImpl implements SearchRemoteDataSource {
 
       if (data is List) {
         for (var item in data) {
-          storeDataModels.add(StoreDataModel.fromJson(item));
+          if (item['store_id'] != null) {
+            item['store_id'] = int.parse(item['store_id']);
+            storeDataModels.add(StoreDataModel.fromJson(item));
+          }else{
+            throw Exception('Unexpected store data format*****: $data');
+          }
         }
+
+        debugPrint('storeDataModels: $storeDataModels');
       } else {
         throw Exception('Unexpected store data format: $data');
       }

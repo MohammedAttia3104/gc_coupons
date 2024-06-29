@@ -3,11 +3,13 @@ import 'package:gc_coupons/core/constants/app_strings.dart';
 import 'package:gc_coupons/core/constants/app_styles.dart';
 import 'package:gc_coupons/core/routers/routes.dart';
 import 'package:gc_coupons/core/widgets/section_rounded_button.dart';
+import 'package:gc_coupons/features/home/models/coupon_model.dart';
 
 class PopularStoresBar extends StatelessWidget {
   final Widget? hideSearchButton;
+  final CouponModel? couponModel;
 
-  const PopularStoresBar({super.key, this.hideSearchButton});
+  const PopularStoresBar({super.key, this.hideSearchButton, this.couponModel});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,10 @@ class PopularStoresBar extends StatelessWidget {
                 Icons.search,
               ),
               onTap: () {
-                Navigator.pushNamed(context, Routes.searchScreen);
+                Navigator.pushNamed(
+                  context,
+                  Routes.searchScreen,
+                );
               },
             ),
       ],
