@@ -3,6 +3,9 @@ import 'package:gc_coupons/core/constants/app_colors.dart';
 import 'package:gc_coupons/core/constants/app_strings.dart';
 import 'package:gc_coupons/core/constants/app_styles.dart';
 import 'package:gc_coupons/core/constants/size_config.dart';
+import 'package:gc_coupons/core/functions/navigate_to_launched_url.dart';
+import 'package:gc_coupons/core/routers/routes.dart';
+import 'package:gc_coupons/core/utils/constants.dart';
 
 class AppDrawerView extends StatelessWidget {
   const AppDrawerView({super.key});
@@ -33,7 +36,9 @@ class AppDrawerView extends StatelessWidget {
                 AppStrings.homeTab,
                 style: AppStyles.drawerTabStyle,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+              },
             ),
             Divider(
               color: AppColors.shadowColor,
@@ -48,7 +53,12 @@ class AppDrawerView extends StatelessWidget {
                 AppStrings.browseCategoriesTab,
                 style: AppStyles.drawerTabStyle,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  Routes.allCategories,
+                );
+              },
             ),
             Divider(
               color: AppColors.shadowColor,
@@ -63,7 +73,9 @@ class AppDrawerView extends StatelessWidget {
                 AppStrings.advertiseWithUsTab,
                 style: AppStyles.drawerTabStyle,
               ),
-              onTap: () {},
+              onTap: () async {
+                await navigateToLaunchedUrl(link: kAdvertiseWithUsUrl);
+              },
             ),
             Divider(
               color: AppColors.shadowColor,
@@ -78,7 +90,9 @@ class AppDrawerView extends StatelessWidget {
                 AppStrings.contactUsTab,
                 style: AppStyles.drawerTabStyle,
               ),
-              onTap: () {},
+              onTap: () async {
+                await navigateToLaunchedUrl(link: kContactUsUrl);
+              },
             ),
             Divider(
               color: AppColors.shadowColor,
@@ -93,7 +107,9 @@ class AppDrawerView extends StatelessWidget {
                 AppStrings.privacyPolicyTab,
                 style: AppStyles.drawerTabStyle,
               ),
-              onTap: () {},
+              onTap: () async {
+                await navigateToLaunchedUrl(link: kPrivacyPolicyUrl);
+              },
             ),
           ],
         ),
