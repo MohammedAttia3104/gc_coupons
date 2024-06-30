@@ -104,8 +104,10 @@ class ShowCouponButton extends StatelessWidget {
                       color: AppColors.kGreyColor,
                       thickness: 1,
                     ),
-                    HtmlContent(
-                      htmlData: couponModel.couponDesc,
+                    FittedBox(
+                      child: HtmlContent(
+                        htmlData: couponModel.couponDesc,
+                      ),
                     ),
                     SizedBox(
                       height: 14.h,
@@ -151,10 +153,25 @@ String showCouponTitle(CouponModel couponModel) {
 Widget ifDealThenShowCheck(CouponModel couponModel, BuildContext context) {
   if (couponModel.ctype == '3') {
     return Center(
-      child: Icon(
-        FontAwesomeIcons.checkCircle,
-        color: Colors.cyan[600],
-        size: 40.r,
+      child: Column(
+        children: [
+          Icon(
+            FontAwesomeIcons.checkCircle,
+            color: Colors.cyan[600],
+            size: 40.r,
+          ),
+          SizedBox(
+            height: 8.h,
+          ),
+          Text(
+            'Deal Activated',
+            style: TextStyle(
+              color: AppColors.kBlackColor,
+              fontSize: 18.sp,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
       ),
     );
   } else if (couponModel.ctype == '1') {
@@ -200,69 +217,52 @@ Widget isDealVisitStore(CouponModel couponModel, BuildContext context) {
         ),
       );
     case '3':
-      return Column(
-        children: [
-          Text(
-            'Deal Activated',
-            style: TextStyle(
-              color: AppColors.kBlackColor,
-              fontSize: 18.sp,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(
-            height: 6.h,
-          ),
-          Container(
-            width: MediaQuery.sizeOf(context).width,
-            height: 30.h,
-            decoration: BoxDecoration(
-              color: Colors.lightGreen,
-              borderRadius: BorderRadius.circular(10.r),
-            ),
-            child: Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0).w,
-                child: Row(
-                  //mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'Redirecting to ${couponModel.storeName}',
-                        style: const TextStyle(
-                          color: AppColors.kBlackColor,
-                        ),
-                        maxLines: 1,
-                      ),
-                    ),
-                    Lottie.asset(
-                      Assets.lottieBlackLoaddingIndicator,
-                      width: 30.w,
-                      fit: BoxFit.cover,
-                    ),
-                    FutureBuilder(
-                      future: Future.delayed(
-                        const Duration(milliseconds: 500),
-                        () async {
-                          return await navigateToLaunchedUrl(
-                            link: couponModel.storeUrl,
-                          );
-                        },
-                      ),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          return const SizedBox();
-                        } else {
-                          return const SizedBox();
-                        }
-                      },
-                    ),
-                  ],
+      return Container(
+        width: MediaQuery.sizeOf(context).width,
+        height: 30.h,
+        decoration: BoxDecoration(
+          color: Colors.lightGreen,
+          borderRadius: BorderRadius.circular(10.r),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0).w,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Text(
+                  'Redirecting to ${couponModel.storeName}',
+                  style: const TextStyle(
+                    color: AppColors.kBlackColor,
+                  ),
+                  maxLines: 1,
                 ),
               ),
-            ),
+              Lottie.asset(
+                Assets.lottieBlackLoaddingIndicator,
+                width: 30.w,
+                fit: BoxFit.cover,
+              ),
+              FutureBuilder(
+                future: Future.delayed(
+                  const Duration(milliseconds: 500),
+                  () async {
+                    return await navigateToLaunchedUrl(
+                      link: couponModel.storeUrl,
+                    );
+                  },
+                ),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return const SizedBox();
+                  } else {
+                    return const SizedBox();
+                  }
+                },
+              ),
+            ],
           ),
-        ],
+        ),
       );
     default:
       return const SizedBox();

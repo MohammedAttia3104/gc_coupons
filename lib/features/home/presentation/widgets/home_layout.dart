@@ -43,6 +43,8 @@ class HomeLayOut extends StatelessWidget {
                       fontSize: 14.sp,
                       fontWeight: FontWeight.bold,
                     ),
+                    overflow: TextOverflow.clip,
+                    maxLines: 1,
                   ),
                 ),
                 backgroundColor: cubit.items[index].backgroundColor,

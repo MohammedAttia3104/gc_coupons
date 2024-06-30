@@ -37,6 +37,7 @@ dependencies:
   flutter_screenutil: ^5.9.3
   # for image caching
   fancy_shimmer_image: ^2.0.3
+  shimmer: ^3.0.0
   # check internet connection
   connectivity_plus: ^6.0.3
   # lottie animations

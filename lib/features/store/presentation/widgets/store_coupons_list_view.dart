@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gc_coupons/core/widgets/coupon_item.dart';
 import 'package:gc_coupons/features/store/presentation/controllers/store_coupons_cubit/store_coupons_cubit.dart';
 
+import '../../../../core/shimmer/coupons_shimmer.dart';
+
 class StoreCouponsListView extends StatelessWidget {
   const StoreCouponsListView({super.key});
 
@@ -12,9 +14,7 @@ class StoreCouponsListView extends StatelessWidget {
     return BlocBuilder<StoreCouponsCubit, StoreCouponsState>(
       builder: (context, state) {
         if (state is StoreCouponsLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const CouponsShimmer();
         } else if (state is StoreCouponsLoaded) {
           return ListView.separated(
             padding: EdgeInsets.zero,

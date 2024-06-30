@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gc_coupons/core/constants/size_config.dart';
+import 'package:gc_coupons/core/shimmer/coupons_shimmer.dart';
 import 'package:gc_coupons/features/home/presentation/controllers/trending_coupons_cubit/trending_coupons_cubit.dart';
 import 'package:gc_coupons/core/widgets/coupon_item.dart';
+import 'package:shimmer/shimmer.dart';
 
 class TrendingCouponsListView extends StatelessWidget {
   const TrendingCouponsListView({
@@ -14,9 +16,7 @@ class TrendingCouponsListView extends StatelessWidget {
     return BlocBuilder<TrendingCouponsCubit, TrendingCouponsState>(
       builder: (context, state) {
         if (state is TrendingCouponsLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const CouponsShimmer();
         } else if (state is TrendingCouponsLoaded) {
           return ListView.separated(
             shrinkWrap: true,

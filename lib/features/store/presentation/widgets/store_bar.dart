@@ -25,27 +25,27 @@ class StoreBar extends StatelessWidget {
           color: AppColors.kWhiteColor,
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            //leading
             IconButton(
               onPressed: () {
                 Navigator.pop(context);
               },
               icon: const Icon(Icons.arrow_back_sharp),
             ),
-            SizedBox(
-              width: 10.w,
-            ),
-            Text(
-              storeModel.storeName,
-              style: TextStyle(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
+
+              Expanded(
+              child: Text(
+                storeModel.storeName,
+                style: TextStyle(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w500,
+                ),
+                overflow: TextOverflow.clip,
+                maxLines: 1,
               ),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
             ),
-            const Spacer(),
+           // const Spacer(),
             //trailing
             IconButton(
               onPressed: () {},

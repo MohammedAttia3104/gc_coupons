@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gc_coupons/core/routers/routes.dart';
+import 'package:gc_coupons/core/shimmer/popular_stores_shimmer.dart';
 import 'package:gc_coupons/features/home/presentation/controllers/popular_stores_cubit/popular_stores_cubit.dart';
 
 import 'popular_store_grid_item.dart';
@@ -16,7 +17,9 @@ class PopularGridView extends StatelessWidget {
         return current is PopularStoresLoaded;
       },
       builder: (context, state) {
-        if (state is PopularStoresLoaded) {
+        if (state is PopularStoresLoading) {
+          return const PopularStoresShimmer();
+        } else if (state is PopularStoresLoaded) {
           return SizedBox(
             height: 200.h,
             child: GridView.count(
@@ -45,12 +48,8 @@ class PopularGridView extends StatelessWidget {
             ),
           );
         } else {
-          ///Todo : Needed to Handel
           return SizedBox(
             height: 200.h,
-            child: const Center(
-              child: CircularProgressIndicator(),
-            ),
           );
         }
       },
