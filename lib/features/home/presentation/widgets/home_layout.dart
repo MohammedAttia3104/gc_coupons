@@ -20,8 +20,8 @@ class HomeLayOut extends StatelessWidget {
             padding: EdgeInsets.only(
               top: 10.h,
               bottom: 10.h,
-              left: 10.w,
-              right: 10.w,
+              left: 5.w,
+              right: 5.w,
             ),
           ),
           //iconSpace: 10,
@@ -33,11 +33,12 @@ class HomeLayOut extends StatelessWidget {
                 icon: Icon(
                   cubit.items[index].icon,
                   color: cubit.items[index].notSelectedIconColor,
+                  size: 30.r,
                 ),
                 title: FittedBox(
                   child: Text(
                     cubit.items[index].title,
-                    //textAlign: TextAlign.start,
+                    // textAlign: TextAlign.start,
                     style: TextStyle(
                       color: cubit.items[index].selectedIconColor,
                       fontSize: 14.sp,
@@ -51,10 +52,11 @@ class HomeLayOut extends StatelessWidget {
                 selectedIcon: Icon(
                   cubit.items[index].icon,
                   color: cubit.items[index].selectedIconColor,
+                  size: 30.r,
+
                 ),
               );
             },
-
           ),
           currentIndex: cubit.selectedIndex,
           onTap: cubit.updateIndex,

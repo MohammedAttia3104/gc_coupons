@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gc_coupons/core/constants/app_colors.dart';
 import 'package:gc_coupons/core/constants/app_strings.dart';
 import 'package:gc_coupons/core/constants/app_styles.dart';
 import 'package:gc_coupons/core/widgets/custom_fancy_shimmer_image.dart';
@@ -64,7 +65,57 @@ class StoreView extends StatelessWidget {
                             ],
                           ),
                           SizedBox(
-                            height: 15.h,
+                            height: 40.h,
+                            child: ListView.separated(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              physics: const AlwaysScrollableScrollPhysics(),
+                              itemBuilder: (BuildContext context, int index) {
+                                return FilterChip(
+                                  label: Text(
+                                    'Books',
+                                    style: AppStyles.style14Bold.copyWith(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  onSelected: (bool value) {},
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25.0.r),
+                                  ),
+                                  shadowColor: AppColors.shadowColor,
+                                  //color for the chip
+                                  backgroundColor: AppColors.kWhiteColor,
+                                  selectedShadowColor: AppColors.kBlackColor,
+                                  color: WidgetStateProperty.all(
+                                      AppColors.kWhiteColor),
+                                  // surfaceTintColor: AppColors.kGreyColor,
+                                  // selectedColor: AppColors.kBlackColor,
+                                  side: const BorderSide(
+                                    color: AppColors.kGreyColor,
+                                    width: 0.4,
+                                  ),
+
+                                  selected: true,
+                                  showCheckmark: false,
+                                  avatar: Icon(
+                                    Icons.close,
+                                    color: AppColors.kBlackColor,
+                                    size: 18.0.r,
+                                  ),
+                                );
+                              },
+                              separatorBuilder:
+                                  (BuildContext context, int index) {
+                                return SizedBox(
+                                  width: 5.w,
+                                );
+                              },
+                              itemCount: 20,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 8.0.h,
                           ),
                           const StoreCouponsListView(),
                           SizedBox(

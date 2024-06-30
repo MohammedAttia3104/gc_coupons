@@ -9,81 +9,94 @@ class AppDrawerView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        children: <Widget>[
-          ListTile(
-            leading: const Icon(
-              Icons.home,
-              size: AppConstantSizes.kDrawerIconSize,
-            ),
-            title: Text(
-              AppStrings.homeTab,
-              style: AppStyles.drawerTabStyle,
-            ),
-            onTap: () {},
+    return SafeArea(
+      child: Drawer(
+        elevation: 0,
+        clipBehavior: Clip.none,
+        width: MediaQuery.sizeOf(context).width * 0.7,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(0),
+            bottomRight: Radius.circular(0),
           ),
-          Divider(
-            color: AppColors.shadowColor,
-            thickness: 0.5,
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.search,
-              size: AppConstantSizes.kDrawerIconSize,
+        ),
+        child: ListView(
+          padding: EdgeInsets.zero,
+          physics: const NeverScrollableScrollPhysics(),
+          children: <Widget>[
+            ListTile(
+              leading: const Icon(
+                Icons.home,
+                size: AppConstantSizes.kDrawerIconSize,
+              ),
+              title: Text(
+                AppStrings.homeTab,
+                style: AppStyles.drawerTabStyle,
+              ),
+              onTap: () {},
             ),
-            title: Text(
-              AppStrings.browseCategoriesTab,
-              style: AppStyles.drawerTabStyle,
+            Divider(
+              color: AppColors.shadowColor,
+              thickness: 0.5,
             ),
-            onTap: () {},
-          ),
-          Divider(
-            color: AppColors.shadowColor,
-            thickness: 0.5,
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.contact_page_rounded,
-              size: AppConstantSizes.kDrawerIconSize,
+            ListTile(
+              leading: const Icon(
+                Icons.search,
+                size: AppConstantSizes.kDrawerIconSize,
+              ),
+              title: Text(
+                AppStrings.browseCategoriesTab,
+                style: AppStyles.drawerTabStyle,
+              ),
+              onTap: () {},
             ),
-            title: Text(
-              AppStrings.advertiseWithUsTab,
-              style: AppStyles.drawerTabStyle,
+            Divider(
+              color: AppColors.shadowColor,
+              thickness: 0.5,
             ),
-            onTap: () {},
-          ),
-          Divider(
-            color: AppColors.shadowColor,
-            thickness: 0.5,
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.phone,
-              size: AppConstantSizes.kDrawerIconSize,
+            ListTile(
+              leading: const Icon(
+                Icons.contact_page_rounded,
+                size: AppConstantSizes.kDrawerIconSize,
+              ),
+              title: Text(
+                AppStrings.advertiseWithUsTab,
+                style: AppStyles.drawerTabStyle,
+              ),
+              onTap: () {},
             ),
-            title: Text(
-              AppStrings.contactUsTab,
-              style: AppStyles.drawerTabStyle,
+            Divider(
+              color: AppColors.shadowColor,
+              thickness: 0.5,
             ),
-            onTap: () {},
-          ),
-          Divider(
-            color: AppColors.shadowColor,
-            thickness: 0.5,
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.lock,
-              size: AppConstantSizes.kDrawerIconSize,
+            ListTile(
+              leading: const Icon(
+                Icons.phone,
+                size: AppConstantSizes.kDrawerIconSize,
+              ),
+              title: Text(
+                AppStrings.contactUsTab,
+                style: AppStyles.drawerTabStyle,
+              ),
+              onTap: () {},
             ),
-            title: Text(
-              AppStrings.privacyPolicyTab,
-              style: AppStyles.drawerTabStyle,
+            Divider(
+              color: AppColors.shadowColor,
+              thickness: 0.5,
             ),
-            onTap: () {},
-          ),
-        ],
+            ListTile(
+              leading: const Icon(
+                Icons.lock,
+                size: AppConstantSizes.kDrawerIconSize,
+              ),
+              title: Text(
+                AppStrings.privacyPolicyTab,
+                style: AppStyles.drawerTabStyle,
+              ),
+              onTap: () {},
+            ),
+          ],
+        ),
       ),
     );
   }
