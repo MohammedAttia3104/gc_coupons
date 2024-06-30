@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gc_coupons/core/constants/app_colors.dart';
 import 'package:gc_coupons/core/constants/app_strings.dart';
 import 'package:gc_coupons/core/constants/app_styles.dart';
+import 'package:gc_coupons/core/shimmer/store_shimmer.dart';
 import 'package:gc_coupons/core/widgets/custom_fancy_shimmer_image.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/popular_grid_view.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/popular_stores_bar.dart';
@@ -23,9 +24,7 @@ class StoreView extends StatelessWidget {
     return BlocBuilder<StoreCubit, StoreState>(
       builder: (context, state) {
         if (state is StoreLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const StoreShimmer();
         } else if (state is StoreLoaded) {
           return SingleChildScrollView(
             child: Column(
