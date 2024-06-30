@@ -1,9 +1,21 @@
-class StoreDataModel {
+import 'package:hive/hive.dart';
+
+
+part 'store_data_model.g.dart';
+
+@HiveType(typeId: 2)
+class StoreDataModel extends HiveObject {
+  @HiveField(0)
   final int storeId;
+  @HiveField(1)
   final String storeImage;
+  @HiveField(2)
   final String storeUrl;
+  @HiveField(3)
   final String storeName;
+  @HiveField(4)
   final String slug;
+  @HiveField(5)
   final String count;
 
   StoreDataModel({

@@ -19,18 +19,6 @@ final class StoreError extends StoreState {
   StoreError(this.message);
 }
 
-final class AddFavouriteStore extends StoreState {
-  final bool isFavourite;
-
-  AddFavouriteStore(this.isFavourite);
-}
-
-final class RemoveFavouriteStore extends StoreState {
-  final bool isFavourite;
-
-  RemoveFavouriteStore(this.isFavourite);
-}
-
 final class ChangeDropDownValue extends StoreState {
   final String value;
 

@@ -10,6 +10,7 @@ import 'package:gc_coupons/core/services/service_locator.dart';
 import 'package:gc_coupons/features/categories/presentation/controllers/category_cubit.dart';
 import 'package:gc_coupons/features/home/presentation/controllers/popular_stores_cubit/popular_stores_cubit.dart';
 import 'package:gc_coupons/features/home/presentation/home_screen.dart';
+import 'package:gc_coupons/features/store/models/store_data_model.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import 'core/utils/constants.dart';
@@ -24,6 +25,8 @@ void main() async {
   await Hive.openBox<StoreModel>(kPopularStoresBox);
   Hive.registerAdapter<CouponModel>(CouponModelAdapter());
   await Hive.openBox<CouponModel>(kTrendingCouponsBox);
+  Hive.registerAdapter<StoreDataModel>(StoreDataModelAdapter());
+  await Hive.openBox<StoreDataModel>(kStoreBox);
   ServiceLocator().init();
   runApp(const MyApp());
 }

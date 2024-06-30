@@ -29,13 +29,7 @@ class StoreCubit extends Cubit<StoreState> {
     );
   }
 
-  void changeFavouriteIconColor(bool isFavourite) {
-    if (isFavourite) {
-      emit(AddFavouriteStore(true));
-    } else {
-      emit(RemoveFavouriteStore(false));
-    }
-  }
+
 
   //selected value of drop down button
   String selectedValue = 'All';
