@@ -38,7 +38,7 @@ class StoreView extends StatelessWidget {
                       height: 15.h,
                     ),
                     CustomFancyShimmerImage(
-                      imageUrl: state.storeDataModel.storeImage,
+                      imageUrl: state.storeDataModel.storeImage ?? '',
                     ),
                     SizedBox(
                       height: 15.h,
@@ -55,7 +55,7 @@ class StoreView extends StatelessWidget {
                             children: [
                               Text(
                                 AppStrings.couponsAndDealsNumber(
-                                  state.storeDataModel.count,
+                                  state.storeDataModel.count ?? '0',
                                 ),
                                 style: AppStyles.style18Bold,
                               ),

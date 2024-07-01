@@ -35,7 +35,7 @@ class StoreShopNowContainer extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            storeDataModel.storeName,
+            storeDataModel.storeName ?? '',
             style: TextStyle(
               fontSize: 18.sp,
               fontWeight: FontWeight.bold,
@@ -63,7 +63,7 @@ class StoreShopNowContainer extends StatelessWidget {
             titleColor: AppColors.kWhiteColor,
             borderRadius: 10.r,
             onTap: () async {
-              return await navigateToLaunchedUrl(link: storeDataModel.storeUrl);
+              return await navigateToLaunchedUrl(link: storeDataModel.storeUrl ?? '');
             },
           ),
         ],

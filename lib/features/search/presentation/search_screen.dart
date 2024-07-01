@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gc_coupons/core/constants/app_styles.dart';
+import 'package:gc_coupons/core/routers/routes.dart';
 import 'package:gc_coupons/core/services/service_locator.dart';
+import 'package:gc_coupons/core/shimmer/search_shimmer.dart';
 import 'package:gc_coupons/features/search/presentation/controllers/search_cubit.dart';
+import 'package:gc_coupons/features/search/presentation/widgets/is_empty_search_widget.dart';
 import 'package:gc_coupons/features/search/presentation/widgets/search_item.dart';
 import 'package:gc_coupons/features/search/presentation/widgets/search_text_form_field.dart';
 
@@ -31,7 +36,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<SearchCubit>(
+    return BlocProvider(
       create: (_) =>
           sl<SearchCubit>()..getSearchData(searchQuery: searchController.text),
       child: Scaffold(
@@ -39,36 +44,71 @@ class _SearchScreenState extends State<SearchScreen> {
           builder: (context, state) {
             var searchCubit = SearchCubit.of(context);
             if (state is SearchLoading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return const SearchShimmer();
             } else if (state is SearchSuccess) {
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SearchTextFormField(
-                      onChanged: (value) {
+              return Column(
+                children: [
+                  SearchTextFormField(
+                    onChanged: (value) {
+                      if (value!.isNotEmpty) {
                         searchCubit.getSearchData(searchQuery: value);
-                      },
-                      searchController: searchController,
+                      }
+                    },
+                    onSaved: (value) {
+                      if (value != null && value.isNotEmpty) {
+                        searchCubit.getSearchData(searchQuery: value);
+                      }
+                    },
+                    searchController: searchController,
+                  ),
+                  searchController.text.isEmpty
+                      ? const IsEmptySearchWidget()
+                      : Expanded(
+                          child: ListView.separated(
+                            shrinkWrap: true,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 20.w,
+                              vertical: 10.h,
+                            ),
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            itemCount: state.storeData.length,
+                            itemBuilder: (context, index) {
+                              return SearchItem(
+                                storeDataModel: state.storeData[index],
+                              );
+                            },
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return SizedBox(height: 10.h);
+                            },
+                          ),
+                        ),
+                ],
+              );
+            } else if (state is SearchError) {
+              debugPrint('SearchError: ${state.message}');
+              return Column(
+                children: [
+                  SearchTextFormField(
+                    onChanged: (value) {},
+                    searchController: searchController,
+                  ),
+                  SizedBox(
+                    height: 350.h,
+                    child: Center(
+                      child: Text(
+                        'No Stores Found.\nPlease Try Again!',
+                        style: AppStyles.style18Bold,
+                      ),
                     ),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: state.storeData.length,
-                      itemBuilder: (context, index) {
-                        return SearchItem(
-                          storeDataModel: state.storeData[index],
-                        );
-                      },
-                    ),
-                  ],
-                ),
+                  ),
+                ],
+              );
+            } else {
+              return const Center(
+                child: Text('No data found'),
               );
             }
-            return const Center(
-              child: Text('Search for a store'),
-            );
           },
         ),
       ),

@@ -25,18 +25,22 @@ class SearchRemoteDataSourceImpl implements SearchRemoteDataSource {
     if (response.statusCode == 200) {
       var data = jsonDecode(response.data);
       List<StoreDataModel> storeDataModels = [];
-
       if (data is List) {
-        for (var item in data) {
-          if (item['store_id'] != null) {
-            item['store_id'] = int.parse(item['store_id']);
-            storeDataModels.add(StoreDataModel.fromJson(item));
-          }else{
-            throw Exception('Unexpected store data format*****: $data');
+        for (var element in data) {
+          int storeId;
+          if (element['store_id'] is String) {
+            try {
+              storeId = int.parse(element['store_id']);
+            } catch (e) {
+              storeId = -1; // Or any other suitable default
+              print("Error parsing store_id: $e");
+            }
+          } else {
+            storeId = element['store_id'];
           }
+          storeDataModels
+              .add(StoreDataModel.fromJson({...element, 'store_id': storeId}));
         }
-
-        debugPrint('storeDataModels: $storeDataModels');
       } else {
         throw Exception('Unexpected store data format: $data');
       }

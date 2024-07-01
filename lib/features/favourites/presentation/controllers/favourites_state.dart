@@ -9,22 +9,32 @@ final class FavouritesInitial extends FavouritesState {
   List<Object> get props => [];
 }
 
-//add to favourites
+//add to favourite  by store Id
 final class FavouritesAdded extends FavouritesState {
-  final StoreDataModel addedStore;
+  final int storeId;
 
-  const FavouritesAdded(this.addedStore);
+  const FavouritesAdded(this.storeId);
 
   @override
-  List<Object> get props => [addedStore];
+  List<Object> get props => [storeId];
 }
 
-//remove from favourites
+//remove from favourite by store Id
 final class FavouritesRemoved extends FavouritesState {
-  final StoreDataModel deleteStore;
+  final int storeId;
 
-  const FavouritesRemoved(this.deleteStore);
+  const FavouritesRemoved(this.storeId);
 
   @override
-  List<Object> get props => [deleteStore];
+  List<Object> get props => [storeId];
+}
+
+//get all favourite stores
+final class FavouritesLoaded extends FavouritesState {
+  final List<StoreDataModel> store;
+
+  const FavouritesLoaded(this.store);
+
+  @override
+  List<Object> get props => [store];
 }

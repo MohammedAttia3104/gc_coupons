@@ -8,15 +8,15 @@ class StoreDataModel extends HiveObject {
   @HiveField(0)
   final int storeId;
   @HiveField(1)
-  final String storeImage;
+  final String? storeImage;
   @HiveField(2)
-  final String storeUrl;
+  final String? storeUrl;
   @HiveField(3)
-  final String storeName;
+  final String? storeName;
   @HiveField(4)
-  final String slug;
+  final String? slug;
   @HiveField(5)
-  final String count;
+  final String? count;
 
   StoreDataModel({
     required this.storeId,
@@ -30,11 +30,11 @@ class StoreDataModel extends HiveObject {
   factory StoreDataModel.fromJson(Map<String, dynamic> json) {
     return StoreDataModel(
       storeId: json["store_id"],
-      storeImage: json["store_image"],
-      storeUrl: json["store_url"],
-      storeName: json["store_name"],
-      slug: json["slug"],
-      count: json["count"],
+      storeImage: json["store_image"] as String?,
+      storeUrl: json["store_url"] as String?,
+      storeName: json["store_name"] as String?,
+      slug: json["slug"] as String?,
+      count: json["count"] as String?,
     );
   }
 }

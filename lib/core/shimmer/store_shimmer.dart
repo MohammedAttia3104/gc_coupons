@@ -5,6 +5,7 @@ import 'package:gc_coupons/core/constants/app_colors.dart';
 import 'package:gc_coupons/core/shimmer/coupons_shimmer.dart';
 import 'package:gc_coupons/core/shimmer/empty_image_shimmer.dart';
 import 'package:gc_coupons/core/shimmer/shimmer_effect.dart';
+import 'package:gc_coupons/features/store/presentation/widgets/store_custom_drop_down.dart';
 import 'package:gc_coupons/generated/assets.dart';
 
 class StoreShimmer extends StatelessWidget {
@@ -68,7 +69,8 @@ class StoreShimmer extends StatelessWidget {
                 widget: Container(
                   height: 120.h,
                   width: MediaQuery.sizeOf(context).width * 0.6,
-                  padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
                   decoration: BoxDecoration(
                     color: AppColors.kGreyColor,
                     borderRadius: BorderRadius.circular(10.r),
@@ -76,23 +78,35 @@ class StoreShimmer extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 15.h,
+                height: 10.h,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 14.0).w,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
+                        Text(
+                          'Coupons & Deals',
+                          style: TextStyle(
+                            color: AppColors.kBlackColor,
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         ShimmerEffect(
                           widget: SizedBox(
-                            width: 100.w,
+                            width: 50.w,
                             height: 20.h,
                           ),
                         ),
                         const Spacer(),
+                        const StoreCustomDropDown(),
                       ],
                     ),
+
+                    //chips
                     SizedBox(
                       height: 40.h,
                       child: ListView.separated(
@@ -103,6 +117,8 @@ class StoreShimmer extends StatelessWidget {
                         itemBuilder: (BuildContext context, int index) {
                           return ShimmerEffect(
                             widget: Container(
+                              width: 100.w,
+                              height: 30.h,
                               decoration: BoxDecoration(
                                 color: AppColors.kGreyColor,
                                 borderRadius: BorderRadius.circular(25.r),

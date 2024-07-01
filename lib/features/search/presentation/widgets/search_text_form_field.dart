@@ -3,13 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gc_coupons/core/constants/app_colors.dart';
 
 class SearchTextFormField extends StatelessWidget {
-  final void Function(String)? onChanged;
+  final void Function(String?)? onSaved;
+  final void Function(String?)? onChanged;
   final TextEditingController searchController;
 
   const SearchTextFormField({
     super.key,
-    required this.onChanged,
+    this.onSaved,
     required this.searchController,
+    required this.onChanged,
   });
 
   @override
@@ -76,6 +78,7 @@ class SearchTextFormField extends StatelessWidget {
               ),
               controller: searchController,
               onChanged: onChanged,
+              onSaved: onSaved,
               cursorColor: AppColors.showCouponBtnColor,
               cursorHeight: 15.h,
               textAlign: TextAlign.start,

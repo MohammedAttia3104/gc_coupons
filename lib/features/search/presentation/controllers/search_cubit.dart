@@ -16,33 +16,23 @@ class SearchCubit extends Cubit<SearchState> {
   static SearchCubit of(BuildContext context) =>
       BlocProvider.of<SearchCubit>(context);
 
-  // List<StoreDataModel> storeData = [];
-  // List<StoreDataModel> filteredData = [];
-  // TextEditingController searchController = TextEditingController();
-  //
-  // @override
-  // Future<void> close() {
-  //   searchController.dispose();
-  //   return super.close();
-  // }
+  List<StoreDataModel> storeData = [];
 
   void getSearchData({required String searchQuery}) async {
-    emit(SearchLoading());
-
+    // if (searchQuery.isEmpty) return;
     try {
-      Either<Failure, List<StoreDataModel>> storeData =
+      emit(SearchLoading());
+      final Either<Failure, List<StoreDataModel>> response =
           await searchRepository.getLiveSearch(searchQuery);
-      debugPrint('storeData: $storeData');
-      emit(SearchSuccess(storeData as List<StoreDataModel>));
+      response.fold(
+        (failure) => emit(SearchError(failure.message)),
+        (storeData) {
+          this.storeData = storeData;
+          emit(SearchSuccess(storeData));
+        },
+      );
     } catch (e) {
-      debugPrint('Search Error: $e');
       emit(SearchError(e.toString()));
     }
   }
-
-// List<StoreDataModel> getFilteredData(String storeName) {
-//   return storeData.where((element) {
-//     return element.storeName.toLowerCase().startsWith(storeName);
-//   }).toList();
-// }
 }

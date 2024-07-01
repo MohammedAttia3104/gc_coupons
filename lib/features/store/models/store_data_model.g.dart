@@ -18,11 +18,11 @@ class StoreDataModelAdapter extends TypeAdapter<StoreDataModel> {
     };
     return StoreDataModel(
       storeId: fields[0] as int,
-      storeImage: fields[1] as String,
-      storeUrl: fields[2] as String,
-      storeName: fields[3] as String,
-      slug: fields[4] as String,
-      count: fields[5] as String,
+      storeImage: fields[1] as String?,
+      storeUrl: fields[2] as String?,
+      storeName: fields[3] as String?,
+      slug: fields[4] as String?,
+      count: fields[5] as String?,
     );
   }
 

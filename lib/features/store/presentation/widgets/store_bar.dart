@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gc_coupons/core/constants/app_colors.dart';
+import 'package:gc_coupons/features/favourites/presentation/controllers/favourites_cubit.dart';
 import 'package:gc_coupons/features/store/models/store_data_model.dart';
 import 'package:gc_coupons/generated/assets.dart';
 
@@ -33,10 +35,9 @@ class StoreBar extends StatelessWidget {
               },
               icon: const Icon(Icons.arrow_back_sharp),
             ),
-
-              Expanded(
+            Expanded(
               child: Text(
-                storeModel.storeName,
+                storeModel.storeName ?? '',
                 style: TextStyle(
                   fontSize: 18.sp,
                   fontWeight: FontWeight.w500,
@@ -45,15 +46,31 @@ class StoreBar extends StatelessWidget {
                 maxLines: 1,
               ),
             ),
-           // const Spacer(),
+            // const Spacer(),
             //trailing
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.favorite,
-                color: AppColors.kBlackColor,
-                size: 24.r,
-              ),
+            BlocBuilder<FavouritesCubit, FavouritesState>(
+              builder: (context, state) {
+                if (state is FavouritesLoaded) {
+                  return IconButton(
+                    onPressed: () {
+                      BlocProvider.of<FavouritesCubit>(context)
+                          .addFavourite(storeModel);
+                    },
+                    icon: Icon(
+                      Icons.favorite,
+                      color:
+                          BlocProvider.of<FavouritesCubit>(context).isFavourite
+                              ? Colors.red
+                              : AppColors.kBlackColor,
+                      size: 24.r,
+                    ),
+                  );
+                } else {
+                  return const Center(
+                    child: Text('Nooooooooo'),
+                  );
+                }
+              },
             ),
             IconButton(
               onPressed: () {},
