@@ -41,6 +41,9 @@ class _SearchScreenState extends State<SearchScreen> {
           sl<SearchCubit>()..getSearchData(searchQuery: searchController.text),
       child: Scaffold(
         body: BlocBuilder<SearchCubit, SearchState>(
+          buildWhen: (previous, current) {
+            return previous != current;
+          },
           builder: (context, state) {
             var searchCubit = SearchCubit.of(context);
             if (state is SearchLoading) {
@@ -51,11 +54,6 @@ class _SearchScreenState extends State<SearchScreen> {
                   SearchTextFormField(
                     onChanged: (value) {
                       if (value!.isNotEmpty) {
-                        searchCubit.getSearchData(searchQuery: value);
-                      }
-                    },
-                    onSaved: (value) {
-                      if (value != null && value.isNotEmpty) {
                         searchCubit.getSearchData(searchQuery: value);
                       }
                     },

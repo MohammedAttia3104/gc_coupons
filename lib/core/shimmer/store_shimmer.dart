@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gc_coupons/core/constants/app_colors.dart';
+import 'package:gc_coupons/core/shimmer/chips_shimmer.dart';
 import 'package:gc_coupons/core/shimmer/coupons_shimmer.dart';
 import 'package:gc_coupons/core/shimmer/empty_image_shimmer.dart';
 import 'package:gc_coupons/core/shimmer/shimmer_effect.dart';
@@ -107,33 +108,7 @@ class StoreShimmer extends StatelessWidget {
                     ),
 
                     //chips
-                    SizedBox(
-                      height: 40.h,
-                      child: ListView.separated(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (BuildContext context, int index) {
-                          return ShimmerEffect(
-                            widget: Container(
-                              width: 100.w,
-                              height: 30.h,
-                              decoration: BoxDecoration(
-                                color: AppColors.kGreyColor,
-                                borderRadius: BorderRadius.circular(25.r),
-                              ),
-                            ),
-                          );
-                        },
-                        separatorBuilder: (BuildContext context, int index) {
-                          return SizedBox(
-                            width: 5.w,
-                          );
-                        },
-                        itemCount: 2,
-                      ),
-                    ),
+                    const ChipsShimmer(),
                     SizedBox(
                       height: 8.0.h,
                     ),

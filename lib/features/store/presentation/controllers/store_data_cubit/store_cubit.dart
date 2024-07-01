@@ -32,12 +32,12 @@ class StoreCubit extends Cubit<StoreState> {
 
 
   //selected value of drop down button
-  String selectedValue = 'All';
-
-  List<String> dropDownValues = ['All', 'Coupons', 'Deals'];
-
-  void changeDropDownValue(String value) {
-    selectedValue = value;
-    emit(ChangeDropDownValue(value));
-  }
+  // String selectedValue = 'All';
+  //
+  // List<String> dropDownValues = ['All', 'Coupons', 'Deals'];
+  //
+  // void changeDropDownValue(String value) {
+  //   selectedValue = value;
+  //   emit(ChangeDropDownValue(value));
+  // }
 }

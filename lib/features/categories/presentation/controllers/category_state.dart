@@ -18,3 +18,4 @@ final class CategoryError extends CategoryState {
 
   CategoryError(this.message);
 }
+

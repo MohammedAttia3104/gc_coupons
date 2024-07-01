@@ -26,14 +26,14 @@ class SearchCubit extends Cubit<SearchState> {
           await searchRepository.getLiveSearch(searchQuery);
       response.fold(
         (failure) {
-          debugPrint('Search Failure: ${failure.message}');
+          // debugPrint('Search Failure: ${failure.message}');
           emit(SearchError(failure.message));
         },
         (storeData) {
           this.storeData = storeData;
-          for (var store in storeData) {
-            debugPrint('StoreDataModelImage: ${store.storeImage}');
-          }
+          // for (var store in storeData) {
+          //   debugPrint('StoreDataModelImage: ${store.storeImage}');
+          // }
           emit(SearchSuccess(storeData));
         },
       );

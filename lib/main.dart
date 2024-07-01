@@ -15,6 +15,7 @@ import 'package:gc_coupons/features/home/presentation/controllers/popular_stores
 import 'package:gc_coupons/features/home/presentation/home_screen.dart';
 import 'package:gc_coupons/features/search/presentation/controllers/search_cubit.dart';
 import 'package:gc_coupons/features/store/models/store_data_model.dart';
+import 'package:gc_coupons/features/store/presentation/controllers/store_coupons_cubit/store_coupons_cubit.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'core/utils/constants.dart';
 import 'features/home/models/store_model.dart';
@@ -56,6 +57,16 @@ class MyApp extends StatelessWidget {
             BlocProvider<InternetConnectionCubit>(
               create: (_) =>
                   InternetConnectionCubit()..monitorInternetConnection(),
+            ),
+            BlocProvider<StoreCouponsCubit>(
+              create: (_) => sl<StoreCouponsCubit>()
+                // ..filterCoupons(
+                //   coupons: context.read<StoreCouponsCubit>().storeCoupons,
+                //   dropDownValue:
+                //       context.read<StoreCouponsCubit>().selectedValue,
+                //   selectedCategories:
+                //       context.read<StoreCouponsCubit>().selectedCategories,
+                // ),
             ),
             BlocProvider<CategoryCubit>(
               create: (_) => sl<CategoryCubit>()..getCategories(),

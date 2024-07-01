@@ -19,3 +19,37 @@ final class StoreCouponsError extends StoreCouponsState {
 
   StoreCouponsError(this.message);
 }
+
+final class ChangeDropDownValue extends StoreCouponsState {
+  final String value;
+
+  ChangeDropDownValue(this.value);
+}
+
+//filter states
+final class FilterCoupons extends StoreCouponsState {
+  final List<CouponModel> filteredCoupons;
+
+  FilterCoupons(this.filteredCoupons);
+}
+
+final class FilterCouponsError extends StoreCouponsState {
+  final String message;
+
+  FilterCouponsError(this.message);
+}
+
+final class FilterCouponsLoading extends StoreCouponsState {}
+
+//category
+final class SelectCategory extends StoreCouponsState {
+  final List<String> selectedCategories;
+
+  SelectCategory(this.selectedCategories);
+}
+
+final class DeselectCategory extends StoreCouponsState {
+  final List<String> selectedCategories;
+
+  DeselectCategory(this.selectedCategories);
+}

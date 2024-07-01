@@ -19,8 +19,8 @@ final class StoreError extends StoreState {
   StoreError(this.message);
 }
 
-final class ChangeDropDownValue extends StoreState {
-  final String value;
-
-  ChangeDropDownValue(this.value);
-}
+// final class ChangeDropDownValue extends StoreState {
+//   final String value;
+//
+//   ChangeDropDownValue(this.value);
+// }
