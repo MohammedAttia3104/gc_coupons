@@ -25,9 +25,15 @@ class SearchCubit extends Cubit<SearchState> {
       final Either<Failure, List<StoreDataModel>> response =
           await searchRepository.getLiveSearch(searchQuery);
       response.fold(
-        (failure) => emit(SearchError(failure.message)),
+        (failure) {
+          debugPrint('Search Failure: ${failure.message}');
+          emit(SearchError(failure.message));
+        },
         (storeData) {
           this.storeData = storeData;
+          for (var store in storeData) {
+            debugPrint('StoreDataModelImage: ${store.storeImage}');
+          }
           emit(SearchSuccess(storeData));
         },
       );

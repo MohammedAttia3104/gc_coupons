@@ -30,7 +30,7 @@ class StoreDataModel extends HiveObject {
   factory StoreDataModel.fromJson(Map<String, dynamic> json) {
     return StoreDataModel(
       storeId: json["store_id"],
-      storeImage: json["store_image"] as String?,
+      storeImage: json["store_image"] as String? ?? json["image_url"] as String?,
       storeUrl: json["store_url"] as String?,
       storeName: json["store_name"] as String?,
       slug: json["slug"] as String?,

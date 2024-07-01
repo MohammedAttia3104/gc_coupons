@@ -38,8 +38,11 @@ class SearchRemoteDataSourceImpl implements SearchRemoteDataSource {
           } else {
             storeId = element['store_id'];
           }
-          storeDataModels
-              .add(StoreDataModel.fromJson({...element, 'store_id': storeId}));
+          storeDataModels.add(StoreDataModel.fromJson({
+            ...element,
+            'store_id': storeId,
+            'image_url': element['image_url'] ?? '',
+          }));
         }
       } else {
         throw Exception('Unexpected store data format: $data');
