@@ -28,12 +28,32 @@ class StoreCouponsCubit extends Cubit<StoreCouponsState> {
     );
   }
 
+//selected value of drop down button
+  String dropDownValue = 'All';
+  List<String> dropDownValues = ['All', 'Coupons', 'Deals'];
+
+  //change value of drop down button and return current value
+  //update DropDown value
+  void changeDropDownValue(String value) {
+    dropDownValue = value;
+    emit(ChangeDropDownValue(value));
+  }
+
+  List<String> selectedCategories = [];
+
+  void selectCategory(CategoryModel category) {
+    selectedCategories.add(category.id);
+    emit(SelectCategory(selectedCategories));
+  }
+
+  void deselectCategory(CategoryModel category) {
+    selectedCategories.remove(category.id);
+    emit(DeselectCategory(selectedCategories));
+  }
+
   //filter list of coupons according to dropDown value [All, Coupons, Deals] and also  category chose from filterChip
-  List<CouponModel> filterCoupons({
-    required List<CouponModel> coupons,
-    required String dropDownValue,
-    required List<String> selectedCategories,
-  }) {
+  List<CouponModel> coupons = [];
+  List<CouponModel> filterCoupons() {
     emit(FilterCouponsLoading());
     try {
       if (dropDownValue == 'All') {
@@ -59,29 +79,5 @@ class StoreCouponsCubit extends Cubit<StoreCouponsState> {
       emit(FilterCouponsError(e.toString()));
       return [];
     }
-  }
-
-  //selected value of drop down button
-  String selectedValue = 'All';
-  List<String> dropDownValues = ['All', 'Coupons', 'Deals'];
-
-  //change value of drop down button and return current value
-  //update DropDown value
-  void changeDropDownValue(String value) {
-    selectedValue = value;
-    emit(ChangeDropDownValue(value));
-  }
-
-
-  List<String> selectedCategories = [];
-
-  void selectCategory(CategoryModel category) {
-    selectedCategories.add(category.id);
-    emit(SelectCategory(selectedCategories));
-  }
-
-  void deselectCategory(CategoryModel category) {
-    selectedCategories.remove(category.id);
-    emit(DeselectCategory(selectedCategories));
   }
 }

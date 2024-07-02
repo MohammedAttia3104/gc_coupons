@@ -20,7 +20,7 @@ class StoreCustomDropDown extends StatelessWidget {
           fontWeight: FontWeight.normal,
         ),
         dropdownColor: Colors.white,
-        value: cubit.selectedValue,
+        value: cubit.dropDownValue,
         //alignment: Alignment.center
         items: List.generate(
             cubit.dropDownValues.length,
@@ -35,7 +35,7 @@ class StoreCustomDropDown extends StatelessWidget {
           cubit.changeDropDownValue(value!);
         },
         onTap: () {
-          cubit.changeDropDownValue(cubit.selectedValue);
+          cubit.changeDropDownValue(cubit.dropDownValue);
           debugPrint('Tapped on dropdown');
         },
         borderRadius: BorderRadius.circular(10).r,

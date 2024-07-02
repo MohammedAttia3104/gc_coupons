@@ -60,13 +60,9 @@ class MyApp extends StatelessWidget {
             ),
             BlocProvider<StoreCouponsCubit>(
               create: (_) => sl<StoreCouponsCubit>()
-                // ..filterCoupons(
-                //   coupons: context.read<StoreCouponsCubit>().storeCoupons,
-                //   dropDownValue:
-                //       context.read<StoreCouponsCubit>().selectedValue,
-                //   selectedCategories:
-                //       context.read<StoreCouponsCubit>().selectedCategories,
-                // ),
+                 ..filterCoupons(
+            
+                ),
             ),
             BlocProvider<CategoryCubit>(
               create: (_) => sl<CategoryCubit>()..getCategories(),

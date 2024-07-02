@@ -8,11 +8,17 @@ import 'package:gc_coupons/features/categories/presentation/controllers/category
 
 import '../controllers/store_coupons_cubit/store_coupons_cubit.dart';
 
-class FilterChipListView extends StatelessWidget {
+class FilterChipListView extends StatefulWidget {
   const FilterChipListView({
     super.key,
   });
 
+  @override
+  State<FilterChipListView> createState() => _FilterChipListViewState();
+}
+
+class _FilterChipListViewState extends State<FilterChipListView> {
+  bool isSelected = false;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CategoryCubit, CategoryState>(
@@ -38,28 +44,45 @@ class FilterChipListView extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
-                  onSelected: (bool value) {},
+                  onSelected: (bool value) {
+                    var cubit = context.read<StoreCouponsCubit>();
+                    if (value) {
+                      cubit.selectCategory(state.categories[index]);
+                      setState(() {
+                        isSelected = true;
+                      });
+                    } else {
+                      cubit.deselectCategory(state.categories[index]);
+                      setState(() {
+                        isSelected = false;
+                      });
+                    }
+                  },
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25.0.r),
+                    side: isSelected
+                      ? BorderSide(
+                          color: AppColors.kBlackColor,
+                          width: 0.6,
+                        )
+                      : BorderSide(
+                          color: AppColors.kGreyColor,
+                          width: 0.4,
+                        ),
                   ),
                   shadowColor: AppColors.shadowColor,
                   backgroundColor: AppColors.kWhiteColor,
                   selectedShadowColor: AppColors.kBlackColor,
                   color: WidgetStateProperty.all(AppColors.kWhiteColor),
 
-                  side: const BorderSide(
-                    color: AppColors.kGreyColor,
-                    width: 0.4,
+                  //selected: true,
+                  //showCheckmark: true,
+                  //selectedColor: Colors.red,
+                  avatar: Icon(
+                    Icons.close,
+                    color: AppColors.kBlackColor,
+                    size: 18.0.r,
                   ),
-
-                  selected: true,
-                  showCheckmark: true,
-                  selectedColor: Colors.red,
-                  // avatar: Icon(
-                  //   Icons.close,
-                  //   color: AppColors.kBlackColor,
-                  //   size: 18.0.r,
-                  // ),
                 );
               },
               separatorBuilder: (BuildContext context, int index) {
