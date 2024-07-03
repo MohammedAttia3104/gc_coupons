@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gc_coupons/core/widgets/search_container.dart';
-import 'package:gc_coupons/core/shimmer/all_s_atores_item_shimmer.dart';
+import 'package:gc_coupons/core/shimmer/all_stores_item_shimmer.dart';
 
 class AllStoresScreen extends StatelessWidget {
   const AllStoresScreen({super.key});

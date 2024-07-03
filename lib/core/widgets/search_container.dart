@@ -21,7 +21,6 @@ class SearchContainer extends StatelessWidget {
         height: 40.h,
         padding: EdgeInsets.symmetric(
           horizontal: 20.w,
-          vertical: 10.h,
         ),
         decoration: BoxDecoration(
           color: AppColors.offWhiteColor,
