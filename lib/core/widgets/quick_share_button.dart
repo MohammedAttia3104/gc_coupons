@@ -36,7 +36,7 @@ class QuickShareButton extends StatelessWidget {
         final List<XFile> files = [XFile(imagePath)];
         final result = await Share.shareXFiles(files,
             text:
-                ('Hey! Check out this coupon on GC Coupons.\nStore: ${couponModel.storeName}\nDescription: ${extractHtmlBody(couponModel.couponDesc )}\nDiscount Code: ${couponModel.couponCode}\nDownload the App: $appUrl'));
+                ('Hey! Check out this coupon on GC Coupons.\nStore: ${couponModel.storeName}\nDescription: ${extractHtmlBody(couponModel.couponDesc)}\nDiscount Code: ${couponModel.couponCode}\nDownload the App: $appUrl'));
         debugPrint(result.toString());
         if (result.status == ShareResultStatus.success) {
           debugPrint('Thank you for sharing the picture!');

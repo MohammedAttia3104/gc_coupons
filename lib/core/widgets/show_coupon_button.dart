@@ -239,7 +239,7 @@ Widget isDealVisitStore(CouponModel couponModel, BuildContext context) {
                 ),
               ),
               Lottie.asset(
-                Assets.lottieBlackLoaddingIndicator,
+                Assets.lottieBlackLoadingIndicator,
                 width: 30.w,
                 fit: BoxFit.cover,
               ),
