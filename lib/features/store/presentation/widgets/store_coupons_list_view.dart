@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gc_coupons/core/services/service_locator.dart';
 import 'package:gc_coupons/core/widgets/coupon_item.dart';
-import 'package:gc_coupons/features/categories/presentation/controllers/category_cubit.dart';
 import 'package:gc_coupons/features/store/presentation/controllers/store_coupons_cubit/store_coupons_cubit.dart';
 
 import '../../../../core/shimmer/coupons_shimmer.dart';
@@ -17,16 +15,20 @@ class StoreCouponsListView extends StatelessWidget {
       builder: (context, state) {
         if (state is FilterCouponsLoading) {
           return const CouponsShimmer();
-        } else if (state is FilterCoupons) {
+        } else if (state is FilterCouponsSuccess) {
           return ListView.separated(
             padding: EdgeInsets.zero,
             shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
+            physics: const AlwaysScrollableScrollPhysics(),
             scrollDirection: Axis.vertical,
             itemBuilder: (BuildContext context, int index) {
-              return CouponItem(
-                model: state.filteredCoupons[index],
-                index: index,
+              return Column(
+                children: [
+                  CouponItem(
+                    model: state.filteredCoupons[index],
+                    index: index,
+                  ),
+                ],
               );
             },
             separatorBuilder: (BuildContext context, int index) {

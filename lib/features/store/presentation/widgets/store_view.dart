@@ -5,10 +5,8 @@ import 'package:gc_coupons/core/constants/app_strings.dart';
 import 'package:gc_coupons/core/constants/app_styles.dart';
 import 'package:gc_coupons/core/shimmer/store_shimmer.dart';
 import 'package:gc_coupons/core/widgets/custom_fancy_shimmer_image.dart';
-import 'package:gc_coupons/features/categories/presentation/controllers/category_cubit.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/popular_grid_view.dart';
 import 'package:gc_coupons/features/home/presentation/widgets/popular_stores_bar.dart';
-import 'package:gc_coupons/features/store/presentation/controllers/store_coupons_cubit/store_coupons_cubit.dart';
 import 'package:gc_coupons/features/store/presentation/controllers/store_data_cubit/store_cubit.dart';
 import 'package:gc_coupons/features/store/presentation/widgets/filter_chip_list_view.dart';
 import 'package:gc_coupons/features/store/presentation/widgets/store_bar.dart';
@@ -16,7 +14,6 @@ import 'package:gc_coupons/features/store/presentation/widgets/store_coupons_lis
 import 'package:gc_coupons/features/store/presentation/widgets/store_custom_drop_down.dart';
 import 'package:gc_coupons/features/store/presentation/widgets/store_shop_now_container.dart';
 
-import '../../../../core/services/service_locator.dart';
 
 class StoreView extends StatelessWidget {
   const StoreView({

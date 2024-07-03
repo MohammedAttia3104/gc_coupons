@@ -4,7 +4,6 @@ import 'package:gc_coupons/core/constants/app_colors.dart';
 import 'package:gc_coupons/core/constants/app_strings.dart';
 import 'package:gc_coupons/core/constants/app_styles.dart';
 import 'package:gc_coupons/core/shimmer/shimmer_effect.dart';
-import 'package:gc_coupons/features/search/presentation/widgets/search_text_form_field.dart';
 
 class SearchShimmer extends StatelessWidget {
   const SearchShimmer({super.key});

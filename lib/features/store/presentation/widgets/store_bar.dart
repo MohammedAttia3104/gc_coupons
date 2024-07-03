@@ -1,9 +1,8 @@
+import 'package:gc_coupons/features/store/presentation/widgets/favourite_store_icon_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gc_coupons/core/constants/app_colors.dart';
-import 'package:gc_coupons/features/favourites/presentation/controllers/favourites_cubit.dart';
 import 'package:gc_coupons/features/store/models/store_data_model.dart';
 import 'package:gc_coupons/generated/assets.dart';
 
@@ -48,30 +47,7 @@ class StoreBar extends StatelessWidget {
             ),
             // const Spacer(),
             //trailing
-            BlocBuilder<FavouritesCubit, FavouritesState>(
-              builder: (context, state) {
-                if (state is FavouritesLoaded) {
-                  return IconButton(
-                    onPressed: () {
-                      BlocProvider.of<FavouritesCubit>(context)
-                          .addFavourite(storeModel);
-                    },
-                    icon: Icon(
-                      Icons.favorite,
-                      color:
-                          BlocProvider.of<FavouritesCubit>(context).isFavourite
-                              ? Colors.red
-                              : AppColors.kBlackColor,
-                      size: 24.r,
-                    ),
-                  );
-                } else {
-                  return const Center(
-                    child: Text('Nooooooooo'),
-                  );
-                }
-              },
-            ),
+            FavouriteStoreIconWidget(storeModel: storeModel),
             IconButton(
               onPressed: () {},
               icon: SvgPicture.asset(

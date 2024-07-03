@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:gc_coupons/core/networks/api_constants.dart';
 import 'package:gc_coupons/features/store/models/store_data_model.dart';
 

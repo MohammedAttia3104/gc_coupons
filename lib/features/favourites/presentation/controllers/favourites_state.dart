@@ -9,7 +9,7 @@ final class FavouritesInitial extends FavouritesState {
   List<Object> get props => [];
 }
 
-//add to favourite  by store Id
+// State for when a store is added to favorites by storeId
 final class FavouritesAdded extends FavouritesState {
   final int storeId;
 
@@ -19,7 +19,7 @@ final class FavouritesAdded extends FavouritesState {
   List<Object> get props => [storeId];
 }
 
-//remove from favourite by store Id
+// State for when a store is removed from favorites by storeId
 final class FavouritesRemoved extends FavouritesState {
   final int storeId;
 
@@ -29,7 +29,7 @@ final class FavouritesRemoved extends FavouritesState {
   List<Object> get props => [storeId];
 }
 
-//get all favourite stores
+// State for when the list of favorite stores is loaded or updated
 final class FavouritesLoaded extends FavouritesState {
   final List<StoreDataModel> store;
 
@@ -38,3 +38,4 @@ final class FavouritesLoaded extends FavouritesState {
   @override
   List<Object> get props => [store];
 }
+

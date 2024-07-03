@@ -1,6 +1,5 @@
 import 'package:hive/hive.dart';
 
-
 part 'store_data_model.g.dart';
 
 @HiveType(typeId: 2)
@@ -30,11 +29,33 @@ class StoreDataModel extends HiveObject {
   factory StoreDataModel.fromJson(Map<String, dynamic> json) {
     return StoreDataModel(
       storeId: json["store_id"],
-      storeImage: json["store_image"] as String? ?? json["image_url"] as String?,
+      storeImage:
+          json["store_image"] as String? ?? json["image_url"] as String?,
       storeUrl: json["store_url"] as String?,
       storeName: json["store_name"] as String?,
       slug: json["slug"] as String?,
       count: json["count"] as String?,
     );
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is StoreDataModel &&
+          runtimeType == other.runtimeType &&
+          storeId == other.storeId &&
+          storeImage == other.storeImage &&
+          storeUrl == other.storeUrl &&
+          storeName == other.storeName &&
+          slug == other.slug &&
+          count == other.count;
+
+  @override
+  int get hashCode =>
+      storeId.hashCode ^
+      storeImage.hashCode ^
+      storeUrl.hashCode ^
+      storeName.hashCode ^
+      slug.hashCode ^
+      count.hashCode;
 }

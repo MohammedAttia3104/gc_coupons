@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gc_coupons/core/constants/app_colors.dart';
 import 'package:gc_coupons/core/constants/size_config.dart';
 import 'package:gc_coupons/core/shimmer/shimmer_effect.dart';
-import 'empty_image_shimmer.dart';
 
 class CouponsShimmer extends StatelessWidget {
   const CouponsShimmer({super.key});

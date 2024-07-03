@@ -18,3 +18,6 @@ final class SearchError extends SearchState {
 
   SearchError(this.message);
 }
+
+//No Matched Stores Found
+final class NoMatchedStoresFound extends SearchState {}

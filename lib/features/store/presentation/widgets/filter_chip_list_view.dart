@@ -18,7 +18,8 @@ class FilterChipListView extends StatefulWidget {
 }
 
 class _FilterChipListViewState extends State<FilterChipListView> {
-  bool isSelected = false;
+  List<bool> selectedStates = [];
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CategoryCubit, CategoryState>(
@@ -29,6 +30,9 @@ class _FilterChipListViewState extends State<FilterChipListView> {
         if (state is CategoryLoading) {
           return const ChipsShimmer();
         } else if (state is CategoryLoaded) {
+          if (selectedStates.isEmpty) {
+            selectedStates = List<bool>.filled(state.categories.length, false);
+          }
           return SizedBox(
             height: 40.h,
             child: ListView.separated(
@@ -45,39 +49,30 @@ class _FilterChipListViewState extends State<FilterChipListView> {
                     ),
                   ),
                   onSelected: (bool value) {
+                    setState(() {
+                      selectedStates[index] = value;
+                    });
                     var cubit = context.read<StoreCouponsCubit>();
                     if (value) {
                       cubit.selectCategory(state.categories[index]);
-                      setState(() {
-                        isSelected = true;
-                      });
                     } else {
                       cubit.deselectCategory(state.categories[index]);
-                      setState(() {
-                        isSelected = false;
-                      });
                     }
                   },
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25.0.r),
-                    side: isSelected
-                      ? BorderSide(
-                          color: AppColors.kBlackColor,
-                          width: 0.6,
-                        )
-                      : BorderSide(
-                          color: AppColors.kGreyColor,
-                          width: 0.4,
-                        ),
+                    side: BorderSide(
+                      color: selectedStates[index]
+                          ? Colors.red
+                          : AppColors.kGreyColor,
+                      width: selectedStates[index] ? 0.6 : 0.4,
+                    ),
                   ),
+                  selected: selectedStates[index],
                   shadowColor: AppColors.shadowColor,
                   backgroundColor: AppColors.kWhiteColor,
                   selectedShadowColor: AppColors.kBlackColor,
                   color: WidgetStateProperty.all(AppColors.kWhiteColor),
-
-                  //selected: true,
-                  //showCheckmark: true,
-                  //selectedColor: Colors.red,
                   avatar: Icon(
                     Icons.close,
                     color: AppColors.kBlackColor,

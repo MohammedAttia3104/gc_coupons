@@ -39,20 +39,11 @@ class AppRouter {
                   create: (_) => sl<StoreCubit>()
                     ..getStoreData(int.parse(settings.arguments as String)),
                 ),
-                // BlocProvider<StoreCouponsCubit>(
-                //   create: (_) => sl<StoreCouponsCubit>()
-                //     ..getStoreCoupons(int.parse(settings.arguments as String)),
-                // ),
-                // BlocProvider<StoreCouponsCubit>(
-                //   create: (_) => sl<StoreCouponsCubit>()
-                //     ..filterCoupons(
-                //       coupons: context.read<StoreCouponsCubit>().storeCoupons,
-                //       dropDownValue:
-                //           context.read<StoreCouponsCubit>().selectedValue,
-                //       selectedCategories:
-                //           context.read<StoreCouponsCubit>().selectedCategories,
-                //     ),
-                // ),
+                BlocProvider<StoreCouponsCubit>(
+                  create: (_) => sl<StoreCouponsCubit>()
+                    ..filterCoupons(int.parse(settings.arguments as String))
+                    ..getStoreCoupons(int.parse(settings.arguments as String)),
+                ),
               ],
               child: const SlideUpTransition(
                 curve: Curves.easeInOut,

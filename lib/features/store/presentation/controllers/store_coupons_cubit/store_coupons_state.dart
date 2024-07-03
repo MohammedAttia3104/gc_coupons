@@ -27,10 +27,10 @@ final class ChangeDropDownValue extends StoreCouponsState {
 }
 
 //filter states
-final class FilterCoupons extends StoreCouponsState {
+final class FilterCouponsSuccess extends StoreCouponsState {
   final List<CouponModel> filteredCoupons;
 
-  FilterCoupons(this.filteredCoupons);
+  FilterCouponsSuccess(this.filteredCoupons);
 }
 
 final class FilterCouponsError extends StoreCouponsState {

@@ -19,21 +19,19 @@ class SearchCubit extends Cubit<SearchState> {
   List<StoreDataModel> storeData = [];
 
   void getSearchData({required String searchQuery}) async {
-    // if (searchQuery.isEmpty) return;
     try {
       emit(SearchLoading());
       final Either<Failure, List<StoreDataModel>> response =
           await searchRepository.getLiveSearch(searchQuery);
       response.fold(
         (failure) {
-          // debugPrint('Search Failure: ${failure.message}');
           emit(SearchError(failure.message));
         },
         (storeData) {
           this.storeData = storeData;
-          // for (var store in storeData) {
-          //   debugPrint('StoreDataModelImage: ${store.storeImage}');
-          // }
+          if (storeData.isEmpty) {
+            emit(NoMatchedStoresFound());
+          }
           emit(SearchSuccess(storeData));
         },
       );
