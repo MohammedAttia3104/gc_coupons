@@ -22,6 +22,4 @@ class CategoryCubit extends Cubit<CategoryState> {
       (categories) => emit(CategoryLoaded(categories)),
     );
   }
-
-
 }

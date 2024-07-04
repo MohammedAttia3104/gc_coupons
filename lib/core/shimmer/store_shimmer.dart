@@ -103,7 +103,7 @@ class StoreShimmer extends StatelessWidget {
                           ),
                         ),
                         const Spacer(),
-                        const StoreCustomDropDown(),
+                        //const StoreCustomDropDown(),
                       ],
                     ),
 

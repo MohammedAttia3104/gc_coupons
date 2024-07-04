@@ -5,12 +5,16 @@ import 'package:gc_coupons/core/constants/app_colors.dart';
 import 'package:gc_coupons/core/constants/app_styles.dart';
 import 'package:gc_coupons/core/shimmer/chips_shimmer.dart';
 import 'package:gc_coupons/features/categories/presentation/controllers/category_cubit.dart';
+import 'package:gc_coupons/features/store/models/store_data_model.dart';
 
 import '../controllers/store_coupons_cubit/store_coupons_cubit.dart';
 
 class FilterChipListView extends StatefulWidget {
+  final StoreDataModel storeDataModel;
+
   const FilterChipListView({
     super.key,
+    required this.storeDataModel,
   });
 
   @override
@@ -50,14 +54,12 @@ class _FilterChipListViewState extends State<FilterChipListView> {
                   ),
                   onSelected: (bool value) {
                     setState(() {
-                      selectedStates[index] = value;
+                      selectedStates[index] = !selectedStates[index];
                     });
+
                     var cubit = context.read<StoreCouponsCubit>();
-                    if (value) {
-                      cubit.selectCategory(state.categories[index]);
-                    } else {
-                      cubit.deselectCategory(state.categories[index]);
-                    }
+                    cubit.toggleCategorySelection(state.categories[index]);
+                    cubit.filterCoupons(widget.storeDataModel.storeId);
                   },
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25.0.r),
@@ -65,10 +67,10 @@ class _FilterChipListViewState extends State<FilterChipListView> {
                       color: selectedStates[index]
                           ? Colors.red
                           : AppColors.kGreyColor,
-                      width: selectedStates[index] ? 0.6 : 0.4,
+                      width: selectedStates[index] ? 1 : 0.4,
                     ),
                   ),
-                  selected: selectedStates[index],
+                  //selected: selectedStates[index],
                   shadowColor: AppColors.shadowColor,
                   backgroundColor: AppColors.kWhiteColor,
                   selectedShadowColor: AppColors.kBlackColor,

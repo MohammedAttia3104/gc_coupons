@@ -37,11 +37,11 @@ class FavouritesScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  Routes.storeData,
-                                  arguments: state.store[index],
-                                );
+                                // Navigator.pushNamed(
+                                //   context,
+                                //   Routes.storeData,
+                                //   arguments: state.store,
+                                // );
                               },
                               child: Container(
                                 height: 70.h,
@@ -135,8 +135,11 @@ class FavouritesScreen extends StatelessWidget {
                             final store = stores[index];
                             return GestureDetector(
                               onTap: () {
-                                Navigator.pushNamed(context, Routes.storeData,
-                                    arguments: store);
+                                // Navigator.pushNamed(
+                                //   context,
+                                //   Routes.storeData,
+                                //   arguments: store,
+                                // );
                               },
                               child: Container(
                                 height: 70.h,

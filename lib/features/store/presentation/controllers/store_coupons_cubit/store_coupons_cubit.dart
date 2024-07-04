@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:gc_coupons/features/categories/data/respository/category_repository.dart';
 import 'package:gc_coupons/features/categories/models/category_model.dart';
 import 'package:gc_coupons/features/home/models/coupon_model.dart';
 import 'package:gc_coupons/features/store/data/repository/store_coupon_repository.dart';
@@ -8,6 +9,8 @@ part 'store_coupons_state.dart';
 
 class StoreCouponsCubit extends Cubit<StoreCouponsState> {
   StoreCouponsRepository storeCouponsRepository;
+
+  // CategoryRepository categoryRepository;
 
   StoreCouponsCubit(this.storeCouponsRepository) : super(StoreCouponsInitial());
 
@@ -56,66 +59,97 @@ class StoreCouponsCubit extends Cubit<StoreCouponsState> {
     emit(DeselectCategory(selectedCategories));
   }
 
+  void toggleCategorySelection(CategoryModel category) {
+    if (selectedCategories.contains(category.id)) {
+      selectedCategories.remove(category.id);
+      debugPrint('Removed From SelectedCategories: $selectedCategories');
+    } else {
+      selectedCategories.add(category.id);
+      debugPrint('Added to SelectedCategories: $selectedCategories');
+    }
+    emit(CategorySelectionChanged(selectedCategories));
+  }
+
+  Future<List<String>?>getStoreCategories(int storeId) async {
+    final storeCategories =
+        await storeCouponsRepository.getStoreCategories(storeId);
+    storeCategories.fold(
+      (failure) {
+        debugPrint('StoreCategoriesError: ${failure.message}');
+        emit(StoreCouponsError(failure.message));
+        return [];
+      },
+      (categories) {
+        debugPrint('StoreCategories: $categories');
+        emit(StoreCategoriesLoaded(categories));
+        return  categories;
+      },
+    );
+    return null;
+  }
+
+  // get store categories filtered by store id from all  categories
+  // match with filtered states
+  // Future<void> getFilteredStoreCategories(int storeId) async {
+  //   emit(StoreCategoriesLoading());
+  //   try {
+  //     final result = await categoryRepository.getCategories();
+  //     result.fold(
+  //       (failure) {
+  //         debugPrint('StoreCategoriesError: ${failure.message}');
+  //         emit(StoreCategoriesFilteredError(failure.toString()));
+  //       },
+  //       (categories) {
+  //         final filteredCategories = categories
+  //             .where((category) => category.id.contains(storeId.toString()))
+  //             .toList();
+  //         debugPrint('Filtered Store Categories: $filteredCategories');
+  //         emit(StoreCategoriesLoaded(filteredCategories));
+  //       },
+  //     );
+  //   } catch (e) {
+  //     debugPrint('GetFilteredStoreCategoriesError: $e');
+  //     emit(StoreCategoriesError(e.toString()));
+  //   }
+  // }
+
   //filter coupons based on selected categories and drop down value and return filtered coupons by store id
-  Future<List<CouponModel>> filterCoupons(int storeId) async {
+  Future<void> filterCoupons(int storeId) async {
     emit(FilterCouponsLoading());
     try {
-      if (dropDownValue == 'All') {
-        emit(FilterCouponsSuccess(storeCoupons));
-        return storeCoupons;
-      } else if (dropDownValue == 'Coupons') {
-        storeCoupons = storeCoupons.where((element) {
-          return element.ctype == '1' &&
-              selectedCategories.contains(element.categoryId);
-        }).toList();
-        debugPrint('FilterCouponsSuccessX: $storeCoupons');
-        emit(FilterCouponsSuccess(storeCoupons));
-        return storeCoupons;
-      } else {
-        emit(FilterCouponsSuccess(storeCoupons));
-        storeCoupons = storeCoupons.where((element) {
-          return element.ctype == '3' &&
-              selectedCategories.contains(element.categoryId);
-        }).toList();
-        debugPrint('FilterCouponsSuccessY: $storeCoupons');
-        emit(FilterCouponsSuccess(storeCoupons));
-        return storeCoupons;
-      }
+      // Always fetch the latest coupons from the repository
+      final result = await storeCouponsRepository.getStoreCoupons(storeId);
+      result.fold(
+        (failure) {
+          debugPrint('StoreCouponsError: ${failure.message}');
+          emit(StoreCouponsError(failure.message));
+        },
+        (coupons) {
+          storeCoupons =
+              coupons; // Update the storeCoupons list with the latest data
+          List<CouponModel> filteredCoupons =
+              List.from(storeCoupons); // Start with all coupons
+          debugPrint('StoreCoupons: $storeCoupons');
+          // Apply dropDownValue filter
+          if (dropDownValue != 'All') {
+            final isCoupon = dropDownValue == 'Coupons';
+            filteredCoupons = filteredCoupons.where((coupon) {
+              return (isCoupon ? coupon.ctype == '1' : coupon.ctype == '3');
+            }).toList();
+          }
+
+          // Apply selectedCategories filter
+          if (selectedCategories.isNotEmpty) {
+            filteredCoupons = filteredCoupons.where((coupon) {
+              return selectedCategories.contains(coupon.categoryId);
+            }).toList();
+          }
+          emit(FilterCouponsSuccess(filteredCoupons));
+        },
+      );
     } catch (e) {
       debugPrint('FilterCouponsError: $e');
       emit(FilterCouponsError(e.toString()));
-      return [];
     }
   }
-
-// List<CouponModel> coupons = [];
-// Future<Object> filterCoupons( ) async{
-//   emit(FilterCouponsLoading());
-//   try {
-//     if (dropDownValue == 'All') {
-//       emit(FilterCouponsSuccess(coupons));
-//       return await storeCouponsRepository.getStoreCoupons();
-//       // return coupons
-//       //     .where((element) => selectedCategories.contains(element.categoryId))
-//       //     .toList();
-//     } else if (dropDownValue == 'Coupons') {
-//       debugPrint('FilterCouponsSuccess: $coupons');
-//       emit(FilterCouponsSuccess(coupons));
-//       return coupons.where((element) {
-//         return element.ctype == '1' &&
-//             selectedCategories.contains(element.categoryId);
-//       }).toList();
-//     } else {
-//       emit(FilterCouponsSuccess(coupons));
-//       return coupons.where((element) {
-//         return element.ctype == '3' &&
-//             selectedCategories.contains(element.categoryId);
-//       }).toList();
-//     }
-//   } catch (e) {
-//     debugPrint('FilterCouponsError: $e');
-//     emit(FilterCouponsError(e.toString()));
-//     return [];
-//   }
-// }
 }

@@ -14,7 +14,6 @@ import 'package:gc_coupons/features/store/presentation/widgets/store_coupons_lis
 import 'package:gc_coupons/features/store/presentation/widgets/store_custom_drop_down.dart';
 import 'package:gc_coupons/features/store/presentation/widgets/store_shop_now_container.dart';
 
-
 class StoreView extends StatelessWidget {
   const StoreView({
     super.key,
@@ -44,8 +43,7 @@ class StoreView extends StatelessWidget {
                     SizedBox(
                       height: 15.h,
                     ),
-                    StoreShopNowContainer(
-                        storeDataModel: state.storeDataModel),
+                    StoreShopNowContainer(storeDataModel: state.storeDataModel),
                     SizedBox(
                       height: 15.h,
                     ),
@@ -63,14 +61,18 @@ class StoreView extends StatelessWidget {
                                 style: AppStyles.style18Bold,
                               ),
                               const Spacer(),
-                              const StoreCustomDropDown(),
+                              StoreCustomDropDown(
+                                storeDataModel: state.storeDataModel,
+                              ),
                             ],
                           ),
-                          const FilterChipListView(),
+                          FilterChipListView(
+                            storeDataModel: state.storeDataModel,
+                          ),
                           SizedBox(
                             height: 8.0.h,
                           ),
-                          const StoreCouponsListView(),
+                           const StoreCouponsListView(),
                           SizedBox(
                             height: 15.h,
                           ),

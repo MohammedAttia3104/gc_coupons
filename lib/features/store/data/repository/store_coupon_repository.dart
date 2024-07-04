@@ -5,6 +5,8 @@ import 'package:gc_coupons/features/store/data/data_source/store_coupons_remote_
 
 abstract class StoreCouponsRepository {
   Future<Either<Failure, List<CouponModel>>> getStoreCoupons(int storeId);
+
+  Future<Either<Failure, List<String>>> getStoreCategories(int storeId);
 }
 
 class StoreCouponsRepositoryImpl implements StoreCouponsRepository {
@@ -19,6 +21,17 @@ class StoreCouponsRepositoryImpl implements StoreCouponsRepository {
       final storeCoupons =
           await storeCouponsRemoteDataSource.getStoreCoupons(storeId);
       return Right(storeCoupons);
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<String>>> getStoreCategories(int storeId) async {
+    try {
+      final storeCategories =
+          await storeCouponsRemoteDataSource.getStoreCategories(storeId);
+      return Right(storeCategories);
     } catch (e) {
       return Left(ServerFailure(e.toString()));
     }
