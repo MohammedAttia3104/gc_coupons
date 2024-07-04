@@ -42,7 +42,11 @@ class AppRouter {
                 BlocProvider<StoreCouponsCubit>(
                   create: (_) => sl<StoreCouponsCubit>()
                     ..filterCoupons(int.parse(settings.arguments as String))
-                    ..getStoreCoupons(int.parse(settings.arguments as String)),
+                    ..getStoreCoupons(int.parse(settings.arguments as String))
+                    ..getStoreCategories(
+                        int.parse(settings.arguments as String))
+                    ..getFilteredStoreCategories(
+                        int.parse(settings.arguments as String)),
                 ),
               ],
               child: const SlideUpTransition(

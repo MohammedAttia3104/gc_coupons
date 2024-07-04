@@ -86,3 +86,8 @@ final class StoreCategoriesFilteredError extends StoreCouponsState {
 
   StoreCategoriesFilteredError(this.message);
 }
+
+class StoreSpecificCategoriesLoaded extends StoreCouponsState {
+  final List<CategoryModel> categories;
+  StoreSpecificCategoriesLoaded(this.categories);
+}

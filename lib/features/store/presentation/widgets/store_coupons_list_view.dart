@@ -73,7 +73,7 @@ class StoreCouponsListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<StoreCouponsCubit, StoreCouponsState>(
       buildWhen: (previous, current) =>
-      current is FilterCouponsSuccess ||
+          current is FilterCouponsSuccess ||
           current is StoreCouponsLoaded ||
           current is ChangeDropDownValue ||
           current is CategorySelectionChanged,
@@ -85,25 +85,30 @@ class StoreCouponsListView extends StatelessWidget {
           coupons = state.storeCoupons;
         }
 
-        return ListView.separated(
-          key: ValueKey<int>(coupons.length), // Dynamic key based on coupons length
-          padding: EdgeInsets.zero,
-          shrinkWrap: true,
-          physics: const BouncingScrollPhysics(),
-          scrollDirection: Axis.vertical,
-          itemBuilder: (BuildContext context, int index) {
-            return Column(
-              children: [
-                CouponItem(
-                  model: coupons[index],
-                  index: index,
-                ),
-              ],
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) => SizedBox(height: 10.h),
-          itemCount: coupons.length,
-        );
+        return coupons.isNotEmpty
+            ? ListView.separated(
+                key: ValueKey<int>(coupons.length),
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                itemBuilder: (BuildContext context, int index) {
+                  return Column(
+                    children: [
+                      CouponItem(
+                        model: coupons[index],
+                        index: index,
+                      ),
+                    ],
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) =>
+                    SizedBox(height: 10.h),
+                itemCount: coupons.length,
+              )
+            : const Center(
+                child: Text('No Coupons Available'),
+              );
       },
     );
   }

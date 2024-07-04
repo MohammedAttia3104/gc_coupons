@@ -75,7 +75,6 @@ class StoreCouponsRemoteDataSourceImpl implements StoreCouponsRemoteDataSource {
         if (storeCoupon is Map<String, dynamic>) {
           String categoryIds = storeCoupon['category_id'];
           categories.addAll(categoryIds.split(', '));
-          debugPrint('Store Categories: $categories');
         } else {
           throw Exception('Unexpected coupon data format: $storeCoupon');
         }

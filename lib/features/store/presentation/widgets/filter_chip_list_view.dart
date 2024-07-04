@@ -26,16 +26,19 @@ class _FilterChipListViewState extends State<FilterChipListView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CategoryCubit, CategoryState>(
+    return BlocBuilder<StoreCouponsCubit, StoreCouponsState>(
       buildWhen: (previous, current) {
         return previous != current;
       },
       builder: (context, state) {
-        if (state is CategoryLoading) {
+        if (state is StoreCategoriesLoading) {
           return const ChipsShimmer();
-        } else if (state is CategoryLoaded) {
-          if (selectedStates.isEmpty) {
+        } else if (state is StoreSpecificCategoriesLoaded) {
+          if (selectedStates.isEmpty ||
+              selectedStates.length != state.categories.length) {
             selectedStates = List<bool>.filled(state.categories.length, false);
+            debugPrint(
+                '<<<<<<<<<<<<< SelectedStates >>>>>>>>>>>>>>>>>>: $selectedStates');
           }
           return SizedBox(
             height: 40.h,
@@ -54,7 +57,7 @@ class _FilterChipListViewState extends State<FilterChipListView> {
                   ),
                   onSelected: (bool value) {
                     setState(() {
-                      selectedStates[index] = !selectedStates[index];
+                      selectedStates[index] = value;
                     });
 
                     var cubit = context.read<StoreCouponsCubit>();
@@ -87,7 +90,7 @@ class _FilterChipListViewState extends State<FilterChipListView> {
                   width: 5.w,
                 );
               },
-              itemCount: 20,
+              itemCount: state.categories.length,
             ),
           );
         } else {

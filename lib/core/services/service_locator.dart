@@ -70,7 +70,7 @@ class ServiceLocator {
     sl.registerLazySingleton<StoreCouponsRepository>(
       () => StoreCouponsRepositoryImpl(sl()),
     );
-    sl.registerFactory<StoreCouponsCubit>(() => StoreCouponsCubit(sl()));
+    sl.registerFactory<StoreCouponsCubit>(() => StoreCouponsCubit(sl(),sl()));
 
     //search
     sl.registerLazySingleton<SearchRemoteDataSource>( () => SearchRemoteDataSourceImpl());

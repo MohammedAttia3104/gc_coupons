@@ -10,9 +10,10 @@ part 'store_coupons_state.dart';
 class StoreCouponsCubit extends Cubit<StoreCouponsState> {
   StoreCouponsRepository storeCouponsRepository;
 
-  // CategoryRepository categoryRepository;
+  CategoryRepository categoryRepository;
 
-  StoreCouponsCubit(this.storeCouponsRepository) : super(StoreCouponsInitial());
+  StoreCouponsCubit(this.storeCouponsRepository, this.categoryRepository)
+      : super(StoreCouponsInitial());
 
   List<CouponModel> storeCoupons = [];
 
@@ -70,50 +71,171 @@ class StoreCouponsCubit extends Cubit<StoreCouponsState> {
     emit(CategorySelectionChanged(selectedCategories));
   }
 
-  Future<List<String>?>getStoreCategories(int storeId) async {
-    final storeCategories =
-        await storeCouponsRepository.getStoreCategories(storeId);
-    storeCategories.fold(
-      (failure) {
-        debugPrint('StoreCategoriesError: ${failure.message}');
-        emit(StoreCouponsError(failure.message));
-        return [];
-      },
-      (categories) {
-        debugPrint('StoreCategories: $categories');
-        emit(StoreCategoriesLoaded(categories));
-        return  categories;
-      },
-    );
-    return null;
+  Future<void> getStoreCategories(int storeId) async {
+    emit(StoreCategoriesLoading());
+    try {
+      final storeCategories =
+          await storeCouponsRepository.getStoreCategories(storeId);
+      storeCategories.fold(
+        (failure) {
+          debugPrint('StoreCategoriesError: ${failure.message}');
+          emit(StoreCategoriesError(failure.message));
+        },
+        (categories) {
+          final uniqueCategories = categories.toSet().toList();
+          debugPrint('Unique Store Categories: $uniqueCategories');
+          emit(StoreCategoriesLoaded(uniqueCategories));
+        },
+      );
+    } catch (e) {
+      debugPrint('get store categories error >> : ${e.toString()}');
+    }
   }
 
-  // get store categories filtered by store id from all  categories
-  // match with filtered states
+  // Delete
   // Future<void> getFilteredStoreCategories(int storeId) async {
   //   emit(StoreCategoriesLoading());
   //   try {
-  //     final result = await categoryRepository.getCategories();
-  //     result.fold(
-  //       (failure) {
-  //         debugPrint('StoreCategoriesError: ${failure.message}');
-  //         emit(StoreCategoriesFilteredError(failure.toString()));
-  //       },
+  //     // Fetch all categories
+  //     final allCategoriesResult = await categoryRepository.getCategories();
+  //     List<CategoryModel> allCategories = [];
+  //     allCategoriesResult.fold(
+  //       (failure) => throw Exception(failure.message),
+  //       (categories) => allCategories = categories,
+  //     );
+  //
+  //     // Fetch store-specific category IDs
+  //     final storeCategoriesResult =
+  //         await storeCouponsRepository.getStoreCategories(storeId);
+  //     List<String> storeCategoryIds = [];
+  //     storeCategoriesResult.fold(
+  //       (failure) => throw Exception(failure.message),
   //       (categories) {
-  //         final filteredCategories = categories
-  //             .where((category) => category.id.contains(storeId.toString()))
-  //             .toList();
-  //         debugPrint('Filtered Store Categories: $filteredCategories');
-  //         emit(StoreCategoriesLoaded(filteredCategories));
+  //         storeCategoryIds = categories.toSet().toList();
+  //         debugPrint('StoreCategoryIds >>> Unique >> : $storeCategoryIds');
+  //         debugPrint('StoreCategoryIds >>> Unique >> Len >>>> : ${storeCategoryIds.length}');
+  //         return storeCategoryIds;
   //       },
   //     );
+  //
+  //     // Filter all categories to include only those that are specific to the store
+  //     final filteredCategories = allCategories
+  //         .where((category) => storeCategoryIds.contains(category.id))
+  //         .toList();
+  //     debugPrint('Filtered Store Categories: $filteredCategories');
+  //     debugPrint('Filtered Store Categories Len >>>> : ${filteredCategories.length}');
+  //     emit(StoreSpecificCategoriesLoaded(filteredCategories));
   //   } catch (e) {
-  //     debugPrint('GetFilteredStoreCategoriesError: $e');
+  //     debugPrint('get filtered store categories error >> : ${e.toString()}');
   //     emit(StoreCategoriesError(e.toString()));
   //   }
   // }
 
-  //filter coupons based on selected categories and drop down value and return filtered coupons by store id
+  // Future<void> getFilteredStoreCategories(int storeId) async {
+  //   emit(StoreCategoriesLoading());
+  //   try {
+  //     // Fetch all categories
+  //     final allCategoriesResult = await categoryRepository.getCategories();
+  //     List<CategoryModel> allCategories = [];
+  //     allCategoriesResult.fold(
+  //       (failure) => throw Exception(failure.message),
+  //       (categories) => allCategories = categories,
+  //     );
+  //
+  //     // Fetch store-specific category IDs
+  //     final storeCategoriesResult =
+  //         await storeCouponsRepository.getStoreCategories(storeId);
+  //     List<String> storeCategoryIds = [];
+  //     storeCategoriesResult.fold(
+  //       (failure) => throw Exception(failure.message),
+  //       (categories) {
+  //         // Ensuring uniqueness of IDs for debugging
+  //         storeCategoryIds = categories.toSet().toList();
+  //         debugPrint('StoreCategoryIds >>> Unique >> : $storeCategoryIds');
+  //         debugPrint(
+  //             'StoreCategoryIds >>> Unique >> Len >>>> : ${storeCategoryIds.length}');
+  //         return storeCategoryIds;
+  //       },
+  //     );
+  //
+  //     // Debug: Print all category IDs for comparison
+  //     debugPrint(
+  //         'All Category IDs: ${allCategories.map((c) => c.id).toList()}');
+  //
+  //     // Filter all categories to include only those that are specific to the store
+  //     // loop through all categories and check if the category id is in storeCategoryIds
+  //
+  //     final filteredCategories = allCategories
+  //         .where((category) => storeCategoryIds.contains(category.id))
+  //         .toList();
+  //     debugPrint(
+  //         '[[[[[[[[[[[[[[[[[Filtered Store Categories]]]]]]]]]]]]]]]]: $filteredCategories');
+  //     debugPrint(
+  //         'Filtered Store Categories Len >>>> : ${filteredCategories.length}');
+  //
+  //     // Debug: Check for any IDs in storeCategoryIds not found in allCategories
+  //     final missingCategories = storeCategoryIds
+  //         .where((id) => !allCategories.any((category) => category.id == id))
+  //         .toList();
+  //     if (missingCategories.isNotEmpty) {
+  //       debugPrint('Missing Category IDs: $missingCategories');
+  //     }
+  //
+  //     emit(StoreSpecificCategoriesLoaded(filteredCategories));
+  //   } catch (e) {
+  //     debugPrint('get filtered store categories error >> : ${e.toString()}');
+  //     emit(StoreCategoriesError(e.toString()));
+  //   }
+  // }
+
+  Future<void> getFilteredStoreCategories(int storeId) async {
+    emit(StoreCategoriesLoading());
+    try {
+      // Fetch all categories
+      final allCategoriesResult = await categoryRepository.getCategories();
+      List<CategoryModel> allCategories = [];
+      allCategoriesResult.fold(
+        (failure) => throw Exception(failure.message),
+        (categories) => allCategories = categories,
+      );
+
+      // Fetch store-specific category IDs
+      final storeCategoriesResult =
+          await storeCouponsRepository.getStoreCategories(storeId);
+      List<String> storeCategoryIds = [];
+      storeCategoriesResult.fold(
+        (failure) => throw Exception(failure.message),
+        (categories) {
+          storeCategoryIds = categories.toSet().toList(); // Ensure uniqueness
+          debugPrint('StoreCategoryIds >>> Unique >> : $storeCategoryIds');
+          debugPrint(
+              'StoreCategoryIds >>> Unique >> Len >>>> : ${storeCategoryIds.length}');
+          return storeCategoryIds;
+        },
+      );
+
+      List<CategoryModel> filteredCategories = [];
+      for (String id in storeCategoryIds) {
+        try {
+          CategoryModel category =
+              allCategories.firstWhere((cat) => cat.id == id);
+          filteredCategories.add(category);
+        } catch (e) {
+          // If no category is found, it skips adding it to the list, thus avoiding null.
+        }
+      }
+
+      debugPrint('Filtered Store Categories: $filteredCategories');
+      debugPrint(
+          'Filtered Store Categories Len >>>> : ${filteredCategories.length}');
+
+      emit(StoreSpecificCategoriesLoaded(filteredCategories));
+    } catch (e) {
+      debugPrint('get filtered store categories error >> : ${e.toString()}');
+      emit(StoreCategoriesError(e.toString()));
+    }
+  }
+
   Future<void> filterCoupons(int storeId) async {
     emit(FilterCouponsLoading());
     try {
@@ -129,13 +251,14 @@ class StoreCouponsCubit extends Cubit<StoreCouponsState> {
               coupons; // Update the storeCoupons list with the latest data
           List<CouponModel> filteredCoupons =
               List.from(storeCoupons); // Start with all coupons
-          debugPrint('StoreCoupons: $storeCoupons');
+          debugPrint('StoreCoupons*********************: $storeCoupons');
           // Apply dropDownValue filter
           if (dropDownValue != 'All') {
             final isCoupon = dropDownValue == 'Coupons';
             filteredCoupons = filteredCoupons.where((coupon) {
               return (isCoupon ? coupon.ctype == '1' : coupon.ctype == '3');
             }).toList();
+            debugPrint('is coupon Filtered Coupons: $filteredCoupons');
           }
 
           // Apply selectedCategories filter
@@ -143,6 +266,8 @@ class StoreCouponsCubit extends Cubit<StoreCouponsState> {
             filteredCoupons = filteredCoupons.where((coupon) {
               return selectedCategories.contains(coupon.categoryId);
             }).toList();
+            debugPrint(
+                'Selected Categories Filtered Coupons: $filteredCoupons');
           }
           emit(FilterCouponsSuccess(filteredCoupons));
         },
