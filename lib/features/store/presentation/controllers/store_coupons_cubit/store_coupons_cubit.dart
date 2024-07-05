@@ -206,9 +206,9 @@ class StoreCouponsCubit extends Cubit<StoreCouponsState> {
       storeCategoriesResult.fold(
         (failure) => throw Exception(failure.message),
         (categories) {
-          storeCategoryIds = categories
-              .map((cat) => cat)
-              .toSet(); // Extract and deduplicate IDs
+          debugPrint('Original Categories >>>>> $categories');
+          debugPrint('Original Categories >>>>> Len >>>>>. ${categories.length}');
+          storeCategoryIds = categories.toSet();
           debugPrint('StoreCategoryIds >>> Unique >> : $storeCategoryIds');
           debugPrint(
               'StoreCategoryIds >>> Unique >> Len >>>> : ${storeCategoryIds.length}');
@@ -219,11 +219,14 @@ class StoreCouponsCubit extends Cubit<StoreCouponsState> {
       List<CategoryModel> filteredCategories = [];
       for (String id in storeCategoryIds) {
         try {
-          List<CategoryModel> category = allCategories
-              .where(
-                (element) => element.id == id,
-              )
-              .toList();
+          List<CategoryModel> category = allCategories.where(
+            (element) {
+              // List<String> val = id.replaceFirst(" ", "").split(',').toList();
+              // debugPrint('val string >>> $val');
+              // TODO: Problem HERE
+              return element.id == id;
+            },
+          ).toList();
           if (category.isNotEmpty) {
             filteredCategories.add(category.first);
           }
