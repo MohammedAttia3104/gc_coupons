@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gc_coupons/core/widgets/coupon_item.dart';
+import 'package:gc_coupons/features/home/models/coupon_model.dart';
 import 'package:gc_coupons/features/store/presentation/controllers/store_coupons_cubit/store_coupons_cubit.dart';
 
 import '../../../../core/shimmer/coupons_shimmer.dart';
@@ -78,7 +79,7 @@ class StoreCouponsListView extends StatelessWidget {
           current is ChangeDropDownValue ||
           current is CategorySelectionChanged,
       builder: (context, state) {
-        List<dynamic> coupons = [];
+        List<CouponModel> coupons = [];
         if (state is FilterCouponsSuccess) {
           coupons = state.filteredCoupons;
         } else if (state is StoreCouponsLoaded) {

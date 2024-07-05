@@ -34,7 +34,7 @@ class StoreCouponsCubit extends Cubit<StoreCouponsState> {
 
   /// cache store coupons , then from it filter data
 
-//selected value of drop down button
+  //selected value of drop down button
   String dropDownValue = 'All';
   List<String> dropDownValues = ['All', 'Coupons', 'Deals'];
 
@@ -48,17 +48,17 @@ class StoreCouponsCubit extends Cubit<StoreCouponsState> {
 
   List<String> selectedCategories = [];
 
-  void selectCategory(CategoryModel category) {
-    selectedCategories.add(category.id);
-    debugPrint('Added to SelectedCategories: $selectedCategories');
-    emit(SelectCategory(selectedCategories));
-  }
-
-  void deselectCategory(CategoryModel category) {
-    selectedCategories.remove(category.id);
-    debugPrint('Removed From SelectedCategories: $selectedCategories');
-    emit(DeselectCategory(selectedCategories));
-  }
+  // void selectCategory(CategoryModel category) {
+  //   selectedCategories.add(category.id);
+  //   debugPrint('Added to SelectedCategories: $selectedCategories');
+  //   emit(SelectCategory(selectedCategories));
+  // }
+  //
+  // void deselectCategory(CategoryModel category) {
+  //   selectedCategories.remove(category.id);
+  //   debugPrint('Removed From SelectedCategories: $selectedCategories');
+  //   emit(DeselectCategory(selectedCategories));
+  // }
 
   void toggleCategorySelection(CategoryModel category) {
     if (selectedCategories.contains(category.id)) {
@@ -71,26 +71,26 @@ class StoreCouponsCubit extends Cubit<StoreCouponsState> {
     emit(CategorySelectionChanged(selectedCategories));
   }
 
-  Future<void> getStoreCategories(int storeId) async {
-    emit(StoreCategoriesLoading());
-    try {
-      final storeCategories =
-          await storeCouponsRepository.getStoreCategories(storeId);
-      storeCategories.fold(
-        (failure) {
-          debugPrint('StoreCategoriesError: ${failure.message}');
-          emit(StoreCategoriesError(failure.message));
-        },
-        (categories) {
-          final uniqueCategories = categories.toSet().toList();
-          debugPrint('Unique Store Categories: $uniqueCategories');
-          emit(StoreCategoriesLoaded(uniqueCategories));
-        },
-      );
-    } catch (e) {
-      debugPrint('get store categories error >> : ${e.toString()}');
-    }
-  }
+  // Future<void> getStoreCategories(int storeId) async {
+  //   emit(StoreCategoriesLoading());
+  //   try {
+  //     final storeCategories =
+  //         await storeCouponsRepository.getStoreCategories(storeId);
+  //     storeCategories.fold(
+  //       (failure) {
+  //         debugPrint('StoreCategoriesError: ${failure.message}');
+  //         emit(StoreCategoriesError(failure.message));
+  //       },
+  //       (categories) {
+  //         final uniqueCategories = categories.toSet().toList();
+  //         debugPrint('Unique Store Categories: $uniqueCategories');
+  //         emit(StoreCategoriesLoaded(uniqueCategories));
+  //       },
+  //     );
+  //   } catch (e) {
+  //     debugPrint('get store categories error >> : ${e.toString()}');
+  //   }
+  // }
 
   // Delete
   // Future<void> getFilteredStoreCategories(int storeId) async {
@@ -202,11 +202,13 @@ class StoreCouponsCubit extends Cubit<StoreCouponsState> {
       // Fetch store-specific category IDs
       final storeCategoriesResult =
           await storeCouponsRepository.getStoreCategories(storeId);
-      List<String> storeCategoryIds = [];
+      Set<String> storeCategoryIds = {};
       storeCategoriesResult.fold(
         (failure) => throw Exception(failure.message),
         (categories) {
-          storeCategoryIds = categories.toSet().toList(); // Ensure uniqueness
+          storeCategoryIds = categories
+              .map((cat) => cat)
+              .toSet(); // Extract and deduplicate IDs
           debugPrint('StoreCategoryIds >>> Unique >> : $storeCategoryIds');
           debugPrint(
               'StoreCategoryIds >>> Unique >> Len >>>> : ${storeCategoryIds.length}');
@@ -217,9 +219,16 @@ class StoreCouponsCubit extends Cubit<StoreCouponsState> {
       List<CategoryModel> filteredCategories = [];
       for (String id in storeCategoryIds) {
         try {
-          CategoryModel category =
-              allCategories.firstWhere((cat) => cat.id == id);
-          filteredCategories.add(category);
+          List<CategoryModel> category = allCategories
+              .where(
+                (element) => element.id == id,
+              )
+              .toList();
+          if (category.isNotEmpty) {
+            filteredCategories.add(category.first);
+          }
+          debugPrint(
+              '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<   $id >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
         } catch (e) {
           // If no category is found, it skips adding it to the list, thus avoiding null.
         }
@@ -261,6 +270,7 @@ class StoreCouponsCubit extends Cubit<StoreCouponsState> {
             debugPrint('is coupon Filtered Coupons: $filteredCoupons');
           }
 
+          ///ToDo : Here
           // Apply selectedCategories filter
           if (selectedCategories.isNotEmpty) {
             filteredCoupons = filteredCoupons.where((coupon) {

@@ -104,10 +104,8 @@ class ShowCouponButton extends StatelessWidget {
                       color: AppColors.kGreyColor,
                       thickness: 1,
                     ),
-                    FittedBox(
-                      child: HtmlContent(
-                        htmlData: couponModel.couponDesc,
-                      ),
+                    HtmlContent(
+                      htmlData: couponModel.couponDesc,
                     ),
                     SizedBox(
                       height: 14.h,

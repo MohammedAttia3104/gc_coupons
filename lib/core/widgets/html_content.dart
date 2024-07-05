@@ -9,32 +9,37 @@ class HtmlContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HtmlWidget(
-      htmlData,
-      textStyle: TextStyle(fontSize: 16.0.sp),
-      customStylesBuilder: (element) {
-        if (element.localName == 'p') {
-          return {'font-size': '16px', 'font-weight': 'bold'};
-        }
-        if (element.localName == 'ul') {
-          return {'font-size': '14px'};
-        }
-        if (element.localName == 'li') {
-          return {'font-size': '12px'};
-        }
-        // Add custom styles for table elements
-        if (element.localName == 'table') {
-          return {
-            'border': '1px solid black',
-            'border-collapse': 'collapse',
-
-          };
-        }
-        if (element.localName == 'th' || element.localName == 'td') {
-          return {'border': '1px solid black', 'padding': '10px'};
-        }
-        return null;
-      },
+    return Expanded(
+      child: FittedBox(
+        alignment: Alignment.topLeft,
+        fit: BoxFit.contain,
+        child: HtmlWidget(
+          htmlData,
+          textStyle: TextStyle(fontSize: 16.0.sp),
+          customStylesBuilder: (element) {
+            if (element.localName == 'p') {
+              return {'font-size': '16px', 'font-weight': 'bold'};
+            }
+            if (element.localName == 'ul') {
+              return {'font-size': '14px'};
+            }
+            if (element.localName == 'li') {
+              return {'font-size': '12px'};
+            }
+            //Add custom styles for table elements
+            if (element.localName == 'table') {
+              return {
+                'border': '1px solid black',
+                'border-collapse': 'collapse',
+              };
+            }
+            if (element.localName == 'th' || element.localName == 'td') {
+              return {'border': '1px solid black', 'padding': '10px'};
+            }
+            return null;
+          },
+        ),
+      ),
     );
   }
 }
