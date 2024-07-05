@@ -1,17 +1,17 @@
 import 'package:dio/dio.dart';
 
 abstract class NetworkServices {
-  Future<Response> get(String url);
+  Future<Response> get(String url, {Map<String, dynamic>? queryParameters});
 }
 
 class NetworkServicesImpl implements NetworkServices {
   final Dio dio;
-  final Map<String, dynamic>? queryParameters;
+  Map<String, dynamic>? queryParameters ;
 
-  NetworkServicesImpl(this.dio, this.queryParameters);
+  NetworkServicesImpl(this.dio, {this.queryParameters});
 
   @override
-  Future<Response> get(String url) async {
+  Future<Response> get(String url, {Map<String, dynamic>? queryParameters}) async {
     return await dio.get(
       url,
       queryParameters: queryParameters,

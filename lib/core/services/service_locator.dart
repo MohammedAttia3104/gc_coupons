@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+import 'package:gc_coupons/core/networks/network_services.dart';
 import 'package:gc_coupons/features/categories/data/data_sources/category_remote_data_source.dart';
 import 'package:gc_coupons/features/categories/data/respository/category_repository.dart';
 import 'package:gc_coupons/features/categories/presentation/controllers/category_cubit.dart';
@@ -26,7 +28,7 @@ final sl = GetIt.instance;
 class ServiceLocator {
   void init() {
     sl.registerLazySingleton<PopularStoresRemoteDataSource>(
-        () => PopularStoresRemoteDataSourceImpl());
+        () => PopularStoresRemoteDataSourceImpl(sl()));
     sl.registerLazySingleton<PopularStoresLocalDataSource>(
         () => PopularStoresLocalDataSourceImpl());
     sl.registerLazySingleton<PopularStoresRepository>(
@@ -36,7 +38,7 @@ class ServiceLocator {
 
     //Trending Coupons
     sl.registerLazySingleton<TrendingCouponsRemoteDataSource>(
-        () => TrendingCouponsRemoteDataSourceImpl());
+        () => TrendingCouponsRemoteDataSourceImpl(sl()));
 
     sl.registerLazySingleton<TrendingCouponsLocalDataSource>(
       () => TrendingCouponsLocalDataSourceImpl(),
@@ -51,7 +53,7 @@ class ServiceLocator {
 
     //Categories
     sl.registerLazySingleton<CategoryRemoteDataSource>(
-        () => CategoryRemoteDataSourceImpl());
+        () => CategoryRemoteDataSourceImpl(sl()));
 
     sl.registerLazySingleton<CategoryRepository>(
         () => CategoryRepositoryImpl(sl()));
@@ -65,16 +67,23 @@ class ServiceLocator {
     sl.registerFactory<StoreCubit>(() => StoreCubit(sl()));
 
     sl.registerLazySingleton<StoreCouponsRemoteDataSource>(
-      () => StoreCouponsRemoteDataSourceImpl(),
+      () => StoreCouponsRemoteDataSourceImpl(sl()),
     );
     sl.registerLazySingleton<StoreCouponsRepository>(
       () => StoreCouponsRepositoryImpl(sl()),
     );
-    sl.registerFactory<StoreCouponsCubit>(() => StoreCouponsCubit(sl(),sl()));
+    sl.registerFactory<StoreCouponsCubit>(() => StoreCouponsCubit(sl(), sl()));
 
     //search
-    sl.registerLazySingleton<SearchRemoteDataSource>( () => SearchRemoteDataSourceImpl());
-    sl.registerLazySingleton<SearchRepository>( () => SearchRepositoryImpl(sl()));
+    sl.registerLazySingleton<SearchRemoteDataSource>(
+        () => SearchRemoteDataSourceImpl(sl()));
+    sl.registerLazySingleton<SearchRepository>(
+        () => SearchRepositoryImpl(sl()));
     sl.registerFactory<SearchCubit>(() => SearchCubit(sl()));
+
+    //Network services
+    sl.registerLazySingleton<NetworkServices>(
+      () => NetworkServicesImpl(Dio()),
+    );
   }
 }

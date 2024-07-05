@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:gc_coupons/core/networks/api_constants.dart';
+import 'package:gc_coupons/core/networks/network_services.dart';
 import 'package:gc_coupons/features/home/models/coupon_model.dart';
 import 'package:html_unescape/html_unescape.dart';
 
@@ -11,16 +12,14 @@ abstract class TrendingCouponsRemoteDataSource {
 
 class TrendingCouponsRemoteDataSourceImpl
     implements TrendingCouponsRemoteDataSource {
+  final NetworkServices _networkServices;
+
+  TrendingCouponsRemoteDataSourceImpl(this._networkServices);
+
   @override
   Future<List<CouponModel>> getTrendingCoupons() async {
-    var response = await Dio().get(
-      ApiConstants.popularCouponsPath,
-      options: Options(
-        headers: {
-          'Authorization': 'mp0aSI6ImFhN2Y4ZDBhOTVjIiwic2Nvc',
-        },
-      ),
-    );
+    var response = await _networkServices.get(ApiConstants.popularCouponsPath);
+
     if (response.statusCode == 200) {
       List<CouponModel> trendingCoupons;
       var data = response.data;

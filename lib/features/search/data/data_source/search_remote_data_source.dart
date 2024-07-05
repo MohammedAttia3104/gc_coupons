@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:gc_coupons/core/networks/api_constants.dart';
+import 'package:gc_coupons/core/networks/network_services.dart';
 import 'package:gc_coupons/features/store/models/store_data_model.dart';
 
 abstract class SearchRemoteDataSource {
@@ -9,9 +10,17 @@ abstract class SearchRemoteDataSource {
 }
 
 class SearchRemoteDataSourceImpl implements SearchRemoteDataSource {
+  final NetworkServices _networkServices;
+
+  SearchRemoteDataSourceImpl(this._networkServices);
+
   @override
   Future<List<StoreDataModel>> getLiveSearch(String storeName) async {
-    Response response = await Dio().get(
+    Response response = await _networkServices.get(
+      ApiConstants.liveSearchPath,
+      queryParameters: {'query': storeName},
+    );
+    await Dio().get(
       ApiConstants.liveSearchPath,
       queryParameters: {'query': storeName},
       options: Options(

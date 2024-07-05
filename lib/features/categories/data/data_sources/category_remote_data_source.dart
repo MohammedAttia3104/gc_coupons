@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:gc_coupons/core/errors/exceptions.dart';
 import 'package:gc_coupons/core/networks/api_constants.dart';
 import 'package:gc_coupons/core/networks/error_message_model.dart';
+import 'package:gc_coupons/core/networks/network_services.dart';
 import 'package:gc_coupons/features/categories/models/category_model.dart';
 
 abstract class CategoryRemoteDataSource {
@@ -11,13 +12,14 @@ abstract class CategoryRemoteDataSource {
 }
 
 class CategoryRemoteDataSourceImpl implements CategoryRemoteDataSource {
+  final NetworkServices _networkServices;
+
+  CategoryRemoteDataSourceImpl(this._networkServices);
+
   @override
   Future<List<CategoryModel>> getCategories() async {
-    var response = await Dio().get(ApiConstants.categoryDataPath,
-        options: Options(headers: {
-          'Authorization': 'mp0aSI6ImFhN2Y4ZDBhOTVjIiwic2Nvc',
-        }));
-    // print(response.data);
+    var response = await _networkServices.get(ApiConstants.categoryDataPath );
+
     if (response.statusCode == 200) {
       var data = response.data;
       if (data is String) {

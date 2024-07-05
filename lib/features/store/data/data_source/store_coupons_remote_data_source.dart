@@ -3,25 +3,26 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gc_coupons/core/networks/api_constants.dart';
+import 'package:gc_coupons/core/networks/network_services.dart';
 import 'package:gc_coupons/features/home/models/coupon_model.dart';
 import 'package:html_unescape/html_unescape.dart';
 
 abstract class StoreCouponsRemoteDataSource {
   Future<List<CouponModel>> getStoreCoupons(int storeId);
+
   Future<List<String>> getStoreCategories(int storeId);
 }
 
 class StoreCouponsRemoteDataSourceImpl implements StoreCouponsRemoteDataSource {
+  final NetworkServices _networkServices;
+
+  StoreCouponsRemoteDataSourceImpl(this._networkServices);
+
   @override
   Future<List<CouponModel>> getStoreCoupons(int storeId) async {
-    Response response = await Dio().get(
+    Response response = await _networkServices.get(
       ApiConstants.storeCouponsPath,
       queryParameters: {'storeid': storeId},
-      options: Options(
-        headers: {
-          'Authorization': 'mp0aSI6ImFhN2Y4ZDBhOTVjIiwic2Nvc',
-        },
-      ),
     );
 
     if (response.statusCode == 200) {
@@ -49,15 +50,10 @@ class StoreCouponsRemoteDataSourceImpl implements StoreCouponsRemoteDataSource {
   }
 
   @override
-  Future<List<String>> getStoreCategories(int storeId) async{
-    Response response = await Dio().get(
+  Future<List<String>> getStoreCategories(int storeId) async {
+    Response response = await _networkServices.get(
       ApiConstants.storeCouponsPath,
       queryParameters: {'storeid': storeId},
-      options: Options(
-        headers: {
-          'Authorization': 'mp0aSI6ImFhN2Y4ZDBhOTVjIiwic2Nvc',
-        },
-      ),
     );
 
     if (response.statusCode == 200) {
