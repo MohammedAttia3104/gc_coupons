@@ -6,6 +6,7 @@ abstract class NetworkServices {
 
 class NetworkServicesImpl implements NetworkServices {
   final Dio dio;
+
   Map<String, dynamic>? queryParameters ;
 
   NetworkServicesImpl(this.dio, {this.queryParameters});
